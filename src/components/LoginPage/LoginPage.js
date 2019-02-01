@@ -1,7 +1,30 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+// import PropTypes from 'prop-types';
+// import classNames from 'classnames';
+import { withStyles } from '@material-ui/core/styles';
+// import MenuItem from '@material-ui/core/MenuItem';
+import TextField from '@material-ui/core/TextField';
 
-const panlogo = require('./panlogo.png')
+const panlogo = require('./panlogo.png');
+const styles = theme => ({  
+  container: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  textField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    width: 200,
+  },
+  dense: {
+    marginTop: 5,
+  },
+  menu: {
+    width: 200,
+  },
+});
+
 class LoginPage extends Component {
   state = {
     username: '',
@@ -30,10 +53,19 @@ class LoginPage extends Component {
     });
   }
 
+  handleChange = name => event => {
+    this.setState({
+      [name]: event.target.value,
+    });
+  };
+
+
   render() {
+    const { classes } = this.props;
+
     return (
       <div>
-        <div className="loginTitle"><img className="logo" src={panlogo}/></div>
+        <div className="loginTitle"><img className="logo" alt="logo" src={panlogo} /></div>
         {this.props.errors.loginMessage && (
           <h2
             className="alert"
@@ -47,9 +79,13 @@ class LoginPage extends Component {
           <div>
             <label htmlFor="username">
               Username:<br></br>
-              <input
-                type="text"
-                name="username"
+              <TextField 
+                required
+                id="login-required"
+                label="Required"
+                placeholder="Username"
+                className={classes.textField}
+                margin="none"
                 value={this.state.username}
                 onChange={this.handleInputChangeFor('username')}
               />
@@ -58,9 +94,14 @@ class LoginPage extends Component {
           <div>
             <label htmlFor="password">
               Password:<br></br>
-              <input
+              <TextField
+                required
+                id="password-required"
+                label="Required"
                 type="password"
-                name="password"
+                placeholder="Password"
+                className={classes.textField}
+                margin="none"
                 value={this.state.password}
                 onChange={this.handleInputChangeFor('password')}
               />
@@ -80,7 +121,7 @@ class LoginPage extends Component {
           <button
             type="button"
             className="link-button"
-            onClick={() => {this.props.dispatch({type: 'SET_TO_REGISTER_MODE'})}}
+            onClick={() => { this.props.dispatch({ type: 'SET_TO_REGISTER_MODE' }) }}
           >
             Register
           </button>
@@ -97,4 +138,4 @@ const mapStateToProps = state => ({
   errors: state.errors,
 });
 
-export default connect(mapStateToProps)(LoginPage);
+export default connect(mapStateToProps)(withStyles(styles)(LoginPage));
