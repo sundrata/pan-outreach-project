@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+const panlogo = require('./panlogo.png')
 class LoginPage extends Component {
   state = {
     username: '',
@@ -32,6 +33,7 @@ class LoginPage extends Component {
   render() {
     return (
       <div>
+        <div className="loginTitle"><img className="logo" src={panlogo}/></div>
         {this.props.errors.loginMessage && (
           <h2
             className="alert"
@@ -41,10 +43,10 @@ class LoginPage extends Component {
           </h2>
         )}
         <form onSubmit={this.login}>
-          <h1>Login</h1>
+          <h1 id="formTitle">Login</h1>
           <div>
             <label htmlFor="username">
-              Username:
+              Username:<br></br>
               <input
                 type="text"
                 name="username"
@@ -55,7 +57,7 @@ class LoginPage extends Component {
           </div>
           <div>
             <label htmlFor="password">
-              Password:
+              Password:<br></br>
               <input
                 type="password"
                 name="password"
@@ -74,6 +76,7 @@ class LoginPage extends Component {
           </div>
         </form>
         <center>
+          {/* this register button will be deleted but is necessary for first account setup */}
           <button
             type="button"
             className="link-button"
