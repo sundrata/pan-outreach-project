@@ -60,7 +60,7 @@ class AdminNav extends Component {
     );
     return (
       <div>
-        <Button onClick={this.toggleDrawer('left', true)}>Open Left</Button>
+        <Button size="large" onClick={this.toggleDrawer('left', true)}><i class="fas fa-bars"></i></Button>
         <Drawer open={this.state.left} onClose={this.toggleDrawer('left', false)}>
           <div
             tabIndex={0}
