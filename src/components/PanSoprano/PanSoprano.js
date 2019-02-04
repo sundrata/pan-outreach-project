@@ -1,5 +1,5 @@
 import React from 'react';
-import StudentNav from '../StudentNav';
+import StudentNav from '../StudentNav/StudentNav';
 
 const PanSoprano = () => (
   <div>

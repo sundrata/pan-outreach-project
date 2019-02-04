@@ -30,29 +30,29 @@ function* postPerson(action) {
     yield put({ type: 'FETCH_PERSON' });
 }
 
-// function* deletePerson(action) {
-//     try {
-//         yield call(axios.delete, `/api/person/${action.payload}`);
-//         yield put({type: 'FETCH_PERSON'});
-//     } catch(error) {
-//         console.log(error);
-//     }
-// } 
+function* deletePerson(action) {
+    try {
+        yield call(axios.delete, `/api/person/${action.payload}`);
+        yield put({type: 'FETCH_PERSON'});
+    } catch(error) {
+        console.log(error);
+    }
+} 
 
-// function* updatePerson(action) {
-//     try{
-//         yield call(axios.put, `/api/person/${action.payload.username}`, action.payload);
-//         yield put({type: 'FETCH_PERSON'});
-//     } catch(error){
-//         console.log(error);
-//     }
-// }
+function* updatePerson(action) {
+    try{
+        yield call(axios.put, `/api/person/${action.payload.id}`, action.payload);
+        yield put({type: 'FETCH_PERSON'});
+    } catch(error){
+        console.log(error);
+    }
+}
 
 function* personSaga() {
     yield takeEvery('FETCH_PERSON', fetchPerson);
     yield takeEvery('POST_PERSON', postPerson);
-    // yield takeEvery('DELETE_PERSON', deletePerson);
-    // yield takeEvery('UPDATE_PERSON', updatePerson);
+    yield takeEvery('DELETE_PERSON', deletePerson);
+    yield takeEvery('UPDATE_PERSON', updatePerson);
 }
 
 export default personSaga;

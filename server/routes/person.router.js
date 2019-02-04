@@ -35,32 +35,31 @@ router.post('/', (req, res) => {
     })
 });
 
-// //  delete route
-// router.delete('/:id', (req, res) => {
-//     const id = req.params.id;
-//     const queryText = 'DELETE FROM "person" WHERE id = $1;';
-//     pool.query(queryText, [id])
-//     .then(result => {
-//         res.sendStatus(202);
-//     })
-//     .catch(error => {
-//         console.log('error in delete', error);
-//         res.sendStatus(500);
-//     })
-// })
+//  delete route
+router.delete('/:id', (req, res) => {
+    const id = req.params.id;
+    const queryText = 'DELETE FROM "person" WHERE id = $1;';
+    pool.query(queryText, [id])
+    .then(result => {
+        res.sendStatus(202);
+    })
+    .catch(error => {
+        console.log('error in delete', error);
+        res.sendStatus(500);
+    })
+})
 
-// // PUT
-// router.put('/:username', function(req, res){
-//     let id = req.params.id;
-//     const person = req.body; // This the data we sent
-//     const query = `UPDATE "person" SET is_admin = $2 WHERE id = $1;`
-//     pool.query(query, [id, person.is_admin])
-//     .then((result)=>{
-//         console.log(result);
-//         res.sendStatus(201);
-//     }).catch((err)=>{
-//         console.log('hit query',err);
-//         res.sendStatus( 500);
-//     })
-// })
+// PUT
+router.put('/:username', function(req, res){
+    const person = req.body; // This the data we sent
+    const query = `UPDATE "person" SET active = $2 WHERE username = $1;`
+    pool.query(query, [person.username, person.active])
+    .then((result)=>{
+        console.log(result);
+        res.sendStatus(201);
+    }).catch((err)=>{
+        console.log('hit query',err);
+        res.sendStatus( 500);
+    })
+})
 module.exports = router;

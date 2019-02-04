@@ -4,12 +4,14 @@ import PanAlto from '../PanAlto/PanAlto';
 import PanSoprano from '../PanSoprano/PanSoprano';
 import PanBass from '../PanBass/PanBass';
 import PanTenor from '../PanTenor/PanTenor';
+import LogOutButton from '../LogOutButton/LogOutButton';
 
 const StudentDashboard = () => (
   <div>
     <div>
       <p>
-        This about page is for anyone to read!
+        Student Dashboard 
+        <LogOutButton />
       </p>
     </div>
   </div>

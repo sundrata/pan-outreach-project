@@ -7,13 +7,34 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import { withStyles } from '@material-ui/core/styles';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
+import Switch from '@material-ui/core/Switch';
+
+const styles = theme => ({
+  root: {
+    width: '100%',
+    marginTop: theme.spacing.unit * 3,
+    overflowX: 'auto',
+  },
+  table: {
+    minWidth: 700,
+  },
+});
 
 class AdminSchools extends Component {
   state = {
     username: '',
     password: '',
     school_name: '',
-    open: false
+    open: false,
+    hidden: false,
+    active: this.props.active
   }
 
   //new school handlers
@@ -36,7 +57,8 @@ class AdminSchools extends Component {
     this.props.dispatch({ type: 'POST_PERSON', payload: this.state })
     this.setState({ open: false });
   }
-
+ 
+  //dialog handlers
   handleClickOpen = () => {
     this.setState({ open: true });
   };
@@ -44,7 +66,31 @@ class AdminSchools extends Component {
   handleClose = () => {
     this.setState({ open: false });
   };
+
+  //slider handlers
+  handleHiddenChange = (event, hidden) => {
+    this.setState(state => ({
+      hidden,
+      // hidden implies !open
+      open: hidden ? false : state.open,
+    }));
+  };
+
+  handleSliderChange = () => {
+    this.setState({
+      active : false,
+    });
+    console.log('hit handleSlider:', this.state.active);
+    this.props.dispatch({ type: 'UPDATE_PERSON', payload: this.state })
+  }
+
+  //handle delete
+  deleteSchool = (row) => {
+    this.props.dispatch({ type: 'DELETE_PERSON', payload: row.id })
+  }
+  
   render() {
+    const { hidden } = this.state;
     return (
       <div>
         <div>
@@ -52,8 +98,8 @@ class AdminSchools extends Component {
             Schools
         </h1>
           <center>
-            {/* start add employee */}
-            <div className="addEmpDialog">
+            {/* start add school */}
+            <div >
               <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
                 Add New School
                         </Button>
@@ -78,7 +124,7 @@ class AdminSchools extends Component {
                     value={this.state.username}
                     fullWidth
                   />
-                  
+
                   {/* password input for new school */}
                   <TextField
                     autoFocus
@@ -112,15 +158,44 @@ class AdminSchools extends Component {
                 </DialogActions>
               </Dialog>
             </div>
-            {/* end add employee */}
+            {/* end add school */}
+            <Paper>
+              <Table className="adminTable">
+                <TableHead>
+                  <TableRow>
+                    <TableCell>School Name</TableCell>
+                    <TableCell>Date Created</TableCell>
+                    <TableCell align="center">Active?</TableCell>
+                    <TableCell align="center">Edit</TableCell>
+                    <TableCell align="center">Delete</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {this.props.reduxStore.personReducer.map((row) => {
+                    if (row.admin === false) {
+                      return (
+                        <TableRow key={row.id}>
+                          <TableCell align="left">{row.school_name}</TableCell>
+                          <TableCell align="left">{row.creation_date}</TableCell>
+                          <TableCell align="left">
+                            <Switch
+                              id={row.id}
+                              checked={row.active}
+                              onClick={() => this.handleSliderChange(row)}
+                              value={this.state.active}
+                              color="primary"
+                            />
+                          </TableCell>
+                          <TableCell align="left"><Button>Edit</Button></TableCell>
+                          <TableCell align="left"><Button onClick={() => this.deleteSchool(row)}>Delete</Button></TableCell>
+                        </TableRow>
+                      )
+                    }
+                  })}
+                </TableBody>
+              </Table>
+            </Paper>
           </center>
-          {this.props.reduxStore.personReducer.map((person) => {
-            return (
-              <ul>
-                <li key={person.id}>{person.admin ? null : <span>{person.school_name} {person.creation_date}</span>}</li>
-              </ul>
-            )
-          })}
         </div>
       </div>
     )
@@ -131,4 +206,4 @@ const mapStateToProps = reduxStore => ({
   reduxStore,
 });
 
-export default connect(mapStateToProps)(AdminSchools);
+export default withStyles(styles)(connect(mapStateToProps)(AdminSchools))

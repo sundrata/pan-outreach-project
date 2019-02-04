@@ -3,6 +3,11 @@ body {
     margin: 0px;
 }
 
+.adminTable {
+    max-width: 70%;
+    margin: 20px auto;
+}
+
 .alert {
     background-color: #ff4545;
     margin: 50px;
