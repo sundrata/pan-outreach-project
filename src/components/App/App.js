@@ -9,6 +9,7 @@ import {
 import {connect} from 'react-redux';
 import Footer from '../Footer/Footer';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
+import AdminRoute from '../AdminRoute/AdminRoute';
 import AdminSchools from '../AdminSchools/AdminSchools';
 import AdminLessons from '../AdminLessons/AdminLessons';
 import AdminMusic from '../AdminMusic/AdminMusic';
@@ -36,7 +37,7 @@ class App extends Component {
               path="/home"
               component={Split}
             />
-            <ProtectedRoute
+            <AdminRoute
               exact
               path="/adminNav"
               component={AdminNav}
@@ -47,17 +48,17 @@ class App extends Component {
             Even though it seems like they are different pages, the user is always on localhost:3000/home */}         
             {/* This works the same as the other protected route, except that if the user is logged in,
             they will see the info page instead. */}
-            <ProtectedRoute
+            <AdminRoute
               exact
               path="/schools"
               component={AdminSchools}
             />
-            <ProtectedRoute
+            <AdminRoute
               exact
               path="/lessons"
               component={AdminLessons}
             />
-            <ProtectedRoute
+            <AdminRoute
               exact
               path="/music"
               component={AdminMusic}
