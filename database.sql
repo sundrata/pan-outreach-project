@@ -8,7 +8,7 @@ CREATE TABLE "person" (
     "school_name" VARCHAR(500)
 );
 
-CREATE TYPE instrument AS ENUM ('Soprano', 'Tenor', 'Alto', 'Bass');
+CREATE TYPE instrument AS ENUM ('Tenor', 'Seconds', 'Cello', 'Bass');
 CREATE TYPE difficulty AS ENUM ('1', '2', '3', '4', '5');
 CREATE TABLE "sheet_music" (
 	"id" SERIAL PRIMARY KEY,
