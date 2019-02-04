@@ -10,6 +10,8 @@ import {connect} from 'react-redux';
 import Footer from '../Footer/Footer';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 import AdminSchools from '../AdminSchools/AdminSchools';
+import AdminLessons from '../AdminLessons/AdminLessons';
+import AdminNav from '../AdminNav/AdminNav';
 import Split from '../Split/Split';
 import './App.css';
 
@@ -33,6 +35,11 @@ class App extends Component {
               path="/home"
               component={Split}
             />
+            <ProtectedRoute
+              exact
+              path="/adminNav"
+              component={AdminNav}
+              />
             {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/home will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the 'Login' or 'Register' page.
@@ -43,6 +50,11 @@ class App extends Component {
               exact
               path="/schools"
               component={AdminSchools}
+            />
+            <ProtectedRoute
+              exact
+              path="/lessons"
+              component={AdminLessons}
             />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
