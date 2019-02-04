@@ -65,6 +65,12 @@ class AdminMusic extends Component {
       open: hidden ? false : state.open,
     }));
   };
+  handleChange = (event) => {
+  this.setState({
+    ...this.state,
+    [event.target.name]: event.target.value,
+  });
+}
 
   handleSliderChange = () => {
     this.setState({
@@ -112,8 +118,8 @@ class AdminMusic extends Component {
                   fullWidth
                 />
                 <Select
-                  value={state.age}
-                  onChange={handleChange}
+                  value={this.state.age}
+                  onChange={this.handleChange}
                   inputProps={{
                     name: 'age',
                     id: 'age-simple',
