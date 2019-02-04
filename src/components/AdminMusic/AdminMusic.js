@@ -17,6 +17,7 @@ import Paper from '@material-ui/core/Paper';
 import Switch from '@material-ui/core/Switch';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
+import InputLabel from '@material-ui/core/InputLabel';
 
 class AdminMusic extends Component {
   state = {
@@ -28,23 +29,11 @@ class AdminMusic extends Component {
     hidden: false,
     active: this.props.active
   }
-  handleName = (event) => {
-    this.setState({
-      name: event.target.value
-    })
-  }
-  handlePassword = (event) => {
-    this.setState({
-      password: event.target.value
-    })
-  }
-  handleName = (event) => {
-    this.setState({
-      school_name: event.target.value
-    })
-  }
+
+
   handleClick = () => {
-    this.props.dispatch({ type: 'POST_PERSON', payload: this.state })
+    console.log(this.state);
+    
     this.setState({ open: false });
   }
 
@@ -65,12 +54,6 @@ class AdminMusic extends Component {
       open: hidden ? false : state.open,
     }));
   };
-  handleChange = (event) => {
-  this.setState({
-    ...this.state,
-    [event.target.name]: event.target.value,
-  });
-}
 
   handleSliderChange = () => {
     this.setState({
@@ -78,6 +61,33 @@ class AdminMusic extends Component {
     });
     console.log('hit handleSlider:', this.state.active);
     this.props.dispatch({ type: 'UPDATE_PERSON', payload: this.state })
+  }
+
+  handleInstrumentChange = (event) => {
+    this.setState({
+      ...this.state,
+      [event.target.name]: event.target.value,
+    });
+
+    console.log(this.state.instrument);
+
+  }
+
+  handleDifficultyChange = (event) => {
+    this.setState({
+      ...this.state,
+      [event.target.name]: event.target.value,
+    });
+
+    console.log(this.state.difficulty);
+
+  }
+
+  handleNameChange = (event) => {
+    this.setState({
+      ...this.state,
+      name: event.target.value
+    })
   }
 
   //handle delete
@@ -104,32 +114,51 @@ class AdminMusic extends Component {
               <DialogTitle id="form-dialog-title">Add Music</DialogTitle>
               <DialogContent>
                 <DialogContentText>
-                  Add new song
-                            </DialogContentText>
+                  Add New Song
+                </DialogContentText>
                 {/* Username input for new school */}
                 <TextField
                   autoFocus
                   margin="dense"
                   id="name"
-                  label="name"
+                  label="File Name"
                   type="text"
-                  onChange={this.handleName}
+                  onChange={this.handleNameChange}
                   value={this.state.name}
                   fullWidth
                 />
+                <DialogContentText>
+                  Choose Instrument
+                </DialogContentText>
                 <Select
-                  value={this.state.age}
-                  onChange={this.handleChange}
+                  value={this.state.instrument}
+                  onChange={this.handleInstrumentChange}
                   inputProps={{
-                    name: 'age',
-                    id: 'age-simple',
+                    name: 'instrument',
+                  }}
+                > 
+                  <MenuItem value={'Tenor'}>Tenor</MenuItem>
+                  <MenuItem value={'Seconds'}>Seconds</MenuItem>
+                  <MenuItem value={'Cello'}>Cello</MenuItem>
+                  <MenuItem value={'Bass'}>Bass</MenuItem>
+                </Select>
+                <DialogContentText>
+                  Choose Difficulty
+                </DialogContentText>
+                <Select
+                  value={this.state.difficulty}
+                  onChange={this.handleDifficultyChange}
+                  inputProps={{
+                    name: 'difficulty',
                   }}
                 >
-                  <MenuItem value={10}>Ten</MenuItem>
-                  <MenuItem value={20}>Twenty</MenuItem>
-                  <MenuItem value={30}>Thirty</MenuItem>
+                  <MenuItem value={1}>1</MenuItem>
+                  <MenuItem value={2}>2</MenuItem>
+                  <MenuItem value={3}>3</MenuItem>
+                  <MenuItem value={4}>4</MenuItem>
+                  <MenuItem value={5}>5</MenuItem>
                 </Select>
-               
+
               </DialogContent>
               <DialogActions>
                 <Button onClick={this.handleClose} color="primary">
