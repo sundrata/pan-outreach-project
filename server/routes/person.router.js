@@ -53,6 +53,7 @@ router.delete('/:id', (req, res) => {
 router.put('/:username', function(req, res){
     const person = req.body; // This the data we sent
     const query = `UPDATE "person" SET active = $2 WHERE username = $1;`
+    console.log('yeahah:', req.body);
     pool.query(query, [person.username, person.active])
     .then((result)=>{
         console.log(result);
