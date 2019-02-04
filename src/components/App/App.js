@@ -11,6 +11,7 @@ import Footer from '../Footer/Footer';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 import AdminSchools from '../AdminSchools/AdminSchools';
 import AdminLessons from '../AdminLessons/AdminLessons';
+import AdminMusic from '../AdminMusic/AdminMusic';
 import AdminNav from '../AdminNav/AdminNav';
 import Split from '../Split/Split';
 import './App.css';
@@ -56,6 +57,11 @@ class App extends Component {
               path="/lessons"
               component={AdminLessons}
             />
+            <ProtectedRoute
+              exact
+              path="/music"
+              component={AdminMusic}
+              />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
 

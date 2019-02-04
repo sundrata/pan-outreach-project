@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import Button from '@material-ui/core/Button';
+import LogOutButton from '../LogOutButton/LogOutButton';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
@@ -47,10 +48,14 @@ class AdminNav extends Component {
         <Link to="/lessons">
         <p>Lesson Plans</p>
         </Link>
+        <Link to="/music">
+        <p>Sheet Music</p>
+        </Link>
         <Link to="/schools">
         <p>Schools</p>
          </Link> 
         <Divider />
+        <LogOutButton />
       </div>
     );
     return (
