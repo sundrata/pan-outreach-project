@@ -37,7 +37,7 @@ class AdminMusic extends Component {
 
 
   handleClick = () => {
-    
+
     this.setState({ open: false });
   }
 
@@ -102,6 +102,9 @@ class AdminMusic extends Component {
     event.preventDefault();
     const formData = new FormData();
     formData.append('file', this.state.file[0]);
+    formData.append('name', this.state.name);
+    formData.append('instrument', this.state.instrument);
+    formData.append('difficulty', this.state.difficulty);
     axios.post(`/api/upload/sheet-music`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
@@ -112,7 +115,7 @@ class AdminMusic extends Component {
       // handle your response;
     }).catch(error => {
       console.log('error in posting file or submitting state', error);
-      
+
     });
   };
 
@@ -163,7 +166,7 @@ class AdminMusic extends Component {
                   inputProps={{
                     name: 'instrument',
                   }}
-                > 
+                >
                   <MenuItem value={'Tenor'}>Tenor</MenuItem>
                   <MenuItem value={'Seconds'}>Seconds</MenuItem>
                   <MenuItem value={'Cello'}>Cello</MenuItem>
