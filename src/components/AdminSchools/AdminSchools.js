@@ -30,11 +30,12 @@ const styles = theme => ({
 
 class AdminSchools extends Component {
   state = {
-    username: '',
-    password: '',
-    school_name: '',
-    open: false,
-    hidden: false,
+    id: this.props.id,
+    username: this.props.username,
+    password: this.props.password,
+    school_name: this.props.school_name,
+    open: this.props.open,
+    hidden: this.props.hidden,
     active: this.props.active
   }
 
@@ -54,6 +55,18 @@ class AdminSchools extends Component {
       school_name: event.target.value
     })
   }
+  handleReady = () => {
+    this.setState({
+        state: {...this.state, active: true}
+    })
+    this.handleUpdate()
+}
+handleUpdate = () => {
+  this.props.dispatch({
+      type: 'UPDATE_PERSON',
+      payload: this.state
+  })
+}
   handleClick = () => {
     this.props.dispatch({ type: 'POST_PERSON', payload: this.state })
     this.setState({ open: false });
@@ -81,8 +94,6 @@ class AdminSchools extends Component {
     this.setState({
       active : false,
     });
-    console.log('hit handleSlider:', this.state.active);
-    this.props.dispatch({ type: 'UPDATE_PERSON', payload: this.state })
   }
 
   //handle delete
@@ -183,7 +194,7 @@ class AdminSchools extends Component {
                             <Switch
                               id={row.id}
                               checked={row.active}
-                              onClick={() => this.handleSliderChange(row)}
+                              onClick={() => this.handleReady()}
                               value={this.state.active}
                               color="primary"
                             />
