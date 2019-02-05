@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import axios from 'axios';
+
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -7,6 +9,9 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+
 import { withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -15,15 +20,14 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Switch from '@material-ui/core/Switch';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
+
 import InputLabel from '@material-ui/core/InputLabel';
 
 
 class AdminMusic extends Component {
   state = {
     name: '',
-    url: '',
+    file: null,
     instrument: null,
     difficulty: null,
     open: false,
@@ -33,7 +37,6 @@ class AdminMusic extends Component {
 
 
   handleClick = () => {
-    console.log(this.state);
     
     this.setState({ open: false });
   }
@@ -89,12 +92,35 @@ class AdminMusic extends Component {
       ...this.state,
       name: event.target.value
     })
-  }
+  };
+
+  handleFileUpload = (event) => {
+    this.setState({ file: event.target.files });
+  };
+
+  submitFile = (event) => {
+    event.preventDefault();
+    const formData = new FormData();
+    formData.append('file', this.state.file[0]);
+    axios.post(`/api/upload/sheet-music`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    }).then(response => {
+      console.log('response:', response.data.Location);
+
+      // handle your response;
+    }).catch(error => {
+      console.log('error in posting file or submitting state', error);
+      
+    });
+  };
+
 
   //handle delete
-  deleteSchool = (row) => {
-    this.props.dispatch({ type: 'DELETE_PERSON', payload: row.id })
-  }
+  // deleteSchool = (row) => {
+  //   this.props.dispatch({ type: 'DELETE_PERSON', payload: row.id })
+  // }
   render() {
     return (
       <div>
@@ -161,6 +187,10 @@ class AdminMusic extends Component {
                 </Select>
 
               </DialogContent>
+              <form onSubmit={this.submitFile}>
+                <input label='upload file' type='file' onChange={this.handleFileUpload} />
+                <button type='submit'>Send</button>
+              </form>
               <DialogActions>
                 <Button onClick={this.handleClose} color="primary">
                   Cancel
