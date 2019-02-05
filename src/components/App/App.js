@@ -14,6 +14,7 @@ import AdminSchools from '../AdminSchools/AdminSchools';
 import AdminLessons from '../AdminLessons/AdminLessons';
 import AdminMusic from '../AdminMusic/AdminMusic';
 import AdminNav from '../AdminNav/AdminNav';
+import PanTenor from '../PanTenor/PanTenor';
 import Split from '../Split/Split';
 import './App.css';
 
@@ -45,7 +46,7 @@ class App extends Component {
             {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/home will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the 'Login' or 'Register' page.
-            Even though it seems like they are different pages, the user is always on localhost:3000/home */}         
+            Even though it seems like they are different pages, the user is always on localhost:3000/home */}
             {/* This works the same as the other protected route, except that if the user is logged in,
             they will see the info page instead. */}
             <AdminRoute
@@ -63,6 +64,11 @@ class App extends Component {
               path="/music"
               component={AdminMusic}
               />
+            <Route
+              exact
+              path="/tenor"
+              component={PanTenor}
+            />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
 
