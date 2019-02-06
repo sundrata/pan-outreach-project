@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import Switches from './Switches'
 import CNotes from './CNotes';
 import FNotes from './FNotes';
 import BNotes from './BNotes';
@@ -8,6 +10,7 @@ import DNotes from './DNotes';
 import GNotes from './GNotes';
 import './PanTenor.css'
 
+
 class PanTenor extends Component {
   state = {
     baseColor: '#F7E8AC',
@@ -15,13 +18,13 @@ class PanTenor extends Component {
     stroke: 'none',
   }
 
-  testTouch = () => {
-    // console.log('touched');
-  }
+  // dummy function needed to prevent double tap zoom on touch devices
+  testTouch = () => {}
 
   render() {
     return (
       <div className='disable-touch-zoom' onClick={this.testTouch}>
+        <Switches />
         <svg
           id="tenor-svg"
           x="0px"
@@ -51,4 +54,8 @@ class PanTenor extends Component {
   }
 };
 
-export default PanTenor;
+const mapStateToProps = state => ({
+  colors: state.tenor,
+});
+
+export default connect(mapStateToProps)(PanTenor);

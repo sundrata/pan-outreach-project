@@ -1,26 +1,20 @@
 import React, { Component } from 'react';
-import NOTES from './Notes';
+import NOTES from '../../constants/tenorNotes';
+import { connect } from 'react-redux';
+import COLORS from '../../constants/colors';
 
 class GNotes extends Component {
-  state = {
-    G4: '#A9D7E4',
-    GSh4: '#A9D7E4',
-    G5: '#A9D7E4',
-    GSh5: '#A9D7E4',
-    stroke: 'black'
-  }
 
   playNote = (note) => {
-    console.log('in GNotes', note);
     NOTES[note].play();
-    this.setState({
-      [note]: '#23A9C9'
-    });
-    setTimeout(() => {
-      this.setState(() => ({
-        [note]: '#A9D7E4',
-      }))
-    }, 500);
+    this.props.dispatch({
+      type: 'PLAY_NOTE',
+      payload: {
+        note: note,
+        color: this.props.displayColors ? COLORS.indigo : COLORS.colorless,
+        highlight: this.props.displayColors ? COLORS.indigoHighlight : COLORS.colorlessHighlight
+      }
+    })
   }
 
   render() {
@@ -31,7 +25,7 @@ class GNotes extends Component {
         <g id="G4">
           <ellipse
             transform="matrix(0.9498 -0.313 0.313 0.9498 -336.5971 356.7783)"
-            style={{ fill: this.state.G4, stroke: this.state.stroke }}
+            style={{ fill: this.props.colors.G4, stroke: 'black' }}
             cx="942.939"
             cy="1226.77"
             rx="105.142"
@@ -43,7 +37,7 @@ class GNotes extends Component {
         <g id="GSh4">
           <ellipse
             transform="matrix(0.6284 -0.7779 0.7779 0.6284 -182.2244 359.0121)"
-            style={{ fill: this.state.GSh4, stroke: this.state.stroke }}
+            style={{ fill: this.props.colors.GSh4, stroke: 'black' }}
             cx="284.677"
             cy="370.246"
             rx="106.013"
@@ -55,7 +49,7 @@ class GNotes extends Component {
         <g id="G5">
           <ellipse
             transform="matrix(0.7424 -0.6699 0.6699 0.7424 -395.6221 859.191)"
-            style={{ fill: this.state.G5, stroke: this.state.stroke }}
+            style={{ fill: this.props.colors.G5, stroke: 'black' }}
             cx="919.497"
             cy="944.07"
             rx="57.816"
@@ -67,7 +61,7 @@ class GNotes extends Component {
         <g id="GSh5">
           <ellipse
             transform="matrix(0.3593 -0.9332 0.9332 0.3593 -313.0156 797.0468)"
-            style={{ fill: this.state.GSh5, stroke: this.state.stroke }}
+            style={{ fill: this.props.colors.GSh5, stroke: 'black' }}
             cx="424"
             cy="626.5"
             rx="55.845"
@@ -81,4 +75,9 @@ class GNotes extends Component {
   }
 };
 
-export default GNotes;
+const mapStateToProps = state => ({
+  colors: state.tenor,
+  displayColors: state.displayColors,
+});
+
+export default connect(mapStateToProps)(GNotes);
