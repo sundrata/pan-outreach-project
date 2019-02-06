@@ -10,10 +10,12 @@ class FNotes extends Component {
     stroke: 'black'
   }
 
-  highlightNote = (note) => {
+  playNote = (note) => {
+    console.log('in FNotes', note);
+    NOTES[note].play();
     this.setState({
       [note]: '#224900'
-    })
+    });
     setTimeout(() => {
       this.setState(() => ({
         [note]: 'green',
@@ -21,12 +23,6 @@ class FNotes extends Component {
     }, 500);
   }
 
-  playNote = (note) => {
-    NOTES[note].play();
-    console.log('in FNotes', note);
-    this.highlightNote(note);
-  }
-  
   render() {
     const isTouch = (('ontouchstart' in window) || (navigator.msMaxTouchPoints > 0));
     return (

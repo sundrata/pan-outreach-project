@@ -9,10 +9,12 @@ class DNotes extends Component {
     stroke: 'black'
   }
 
-  highlightNote = (note) => {
+  playNote = (note) => {
+    console.log('in DNotes', note);
+    NOTES[note].play();
     this.setState({
       [note]: '#EA7A00'
-    })
+    });
     setTimeout(() => {
       this.setState(() => ({
         [note]: 'orange',
@@ -20,12 +22,6 @@ class DNotes extends Component {
     }, 500);
   }
 
-  playNote = (note) => {
-    NOTES[note].play();
-    console.log('in DNotes', note);
-    this.highlightNote(note);
-  }
-  
   render() {
     const isTouch = (('ontouchstart' in window) || (navigator.msMaxTouchPoints > 0));
     return (

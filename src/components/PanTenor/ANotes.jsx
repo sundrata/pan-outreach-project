@@ -25,21 +25,17 @@ class ANotes extends Component {
     stroke: 'black'
   }
 
-  highlightNote = (note) => {
+  playNote = (note) => {
+    console.log('in ANotes', note);
+    NOTES[note].play();
     this.setState({
       [note]: '#00157C'
-    })
+    });
     setTimeout(() => {
       this.setState(() => ({
         [note]: 'blue',
       }))
     }, 500);
-  }
-
-  playNote = (note) => {
-    NOTES[note].play();
-    console.log('in ANotes', note);
-    this.highlightNote(note);
   }
 
   render() {
