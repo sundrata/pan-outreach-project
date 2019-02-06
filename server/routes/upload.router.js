@@ -36,9 +36,6 @@ router.post('/sheet-music', (request, response) => {
     console.log('POST hit');
     const form = new multiparty.Form();
     form.parse(request, async (error, fields, files) => {
-        console.log('fields: ', fields);
-        console.log('files: ', files);
-
         if (error) throw new Error(error);
         try {
             const path = files.file[0].path;
@@ -53,17 +50,11 @@ router.post('/sheet-music', (request, response) => {
             const queryValues = [name, instrument, difficulty, data.Location];
             const queryText = `INSERT INTO sheet_music (name, instrument, difficulty, url)
             VALUES ($1, $2, $3, $4);`;
-            pool.query(queryText, queryValues)
-              .then((res) => {
-                res.sendStatus(201);
-              })
-              .catch((err) => {
-                console.log('POST event error: ', err);
-              });
-            // return response.status(200).send(data);
-            return
+            await pool.query(queryText, queryValues)
+            response.sendStatus(201);
+
         } catch (error) {
-            return response.status(400).send(error);
+            response.status(400).send(error);
         }
     });
 });
