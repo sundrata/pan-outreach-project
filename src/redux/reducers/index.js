@@ -3,6 +3,7 @@ import errors from './errorsReducer';
 import loginMode from './loginModeReducer';
 import user from './userReducer';
 import personReducer from './personReducer';
+import sheetMusicReducer from './sheetMusicReducer';
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
 // This is imported in index.js as rootSaga
@@ -13,7 +14,8 @@ const rootReducer = combineReducers({
   errors, // contains registrationMessage and loginMessage
   loginMode, // will have a value of 'login' or 'registration' to control which screen is shown
   user, // will have an id and username if someone is logged in
-  personReducer //seperate from user reducer. user reducer only contains logged in accounts info
+  personReducer, //seperate from user reducer. user reducer only contains logged in accounts info
+  sheetMusicReducer // has the 
 });
 
 export default rootReducer;

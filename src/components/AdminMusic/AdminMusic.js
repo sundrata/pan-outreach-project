@@ -23,6 +23,11 @@ import Switch from '@material-ui/core/Switch';
 
 import InputLabel from '@material-ui/core/InputLabel';
 
+const mapStateToProps = reduxStore => {
+  return {
+    reduxStore
+  }
+}
 
 class AdminMusic extends Component {
   state = {
@@ -34,7 +39,13 @@ class AdminMusic extends Component {
     hidden: false,
     active: this.props.active
   }
-
+  
+  componentDidMount() {
+    this.props.dispatch({
+      type: 'GET_SHEET_MUSIC'
+    })
+  
+  }
 
   handleClick = () => {
 
@@ -98,6 +109,8 @@ class AdminMusic extends Component {
     this.setState({ file: event.target.files });
   };
 
+ 
+
   submitFile = (event) => {
     event.preventDefault();
     const formData = new FormData();
@@ -120,10 +133,10 @@ class AdminMusic extends Component {
   };
 
 
-  //handle delete
-  // deleteSchool = (row) => {
-  //   this.props.dispatch({ type: 'DELETE_PERSON', payload: row.id })
-  // }
+  // handle delete
+  deleteSheetMusic= (row) => {
+    this.props.dispatch({ type: 'DELETE_SHEET_MUSIC', payload: row.id })
+  }
   render() {
     return (
       <div>
@@ -205,10 +218,39 @@ class AdminMusic extends Component {
             </Dialog>
             {/* ends add new music */}
           </div>
+          <Paper>
+            <Table className="adminTable">
+              <TableHead>
+                <TableRow>
+                  <TableCell>Name</TableCell>
+                  <TableCell>Instrument</TableCell>
+                  <TableCell align="center">Difficulty</TableCell>
+                  <TableCell align="center">URL</TableCell>
+                  <TableCell align="center">Edit</TableCell>
+                  <TableCell align="center">Delete</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {this.props.reduxStore.sheetMusicReducer.map((row) => {
+                    return (
+                      <TableRow key={row.id}>
+                        <TableCell align="left">{row.name}</TableCell>
+                        <TableCell align="left">{row.instrument}</TableCell>
+                        <TableCell align="left">{row.difficulty} </TableCell>
+                        <TableCell align="center">{row.url} </TableCell>
+                        <TableCell align="left"><Button>Edit</Button></TableCell>
+                        <TableCell align="left"><Button onClick={() => this.deleteSheetMusic(row)}>Delete</Button></TableCell>
+                      </TableRow>
+                    )
+                  }
+                )}
+              </TableBody>
+            </Table>
+          </Paper>
         </center>
       </div>
     )
   }
 }
 
-export default AdminMusic;
+export default connect(mapStateToProps)(AdminMusic);
