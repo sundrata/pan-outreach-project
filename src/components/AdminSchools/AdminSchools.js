@@ -30,13 +30,16 @@ const styles = theme => ({
 
 class AdminSchools extends Component {
   state = {
-    id: this.props.id,
-    username: this.props.username,
-    password: this.props.password,
-    school_name: this.props.school_name,
-    open: this.props.open,
-    hidden: this.props.hidden,
-    active: this.props.active
+    edit: false,
+    person: {
+      id: 0,
+      username: this.props.username,
+      password: this.props.password,
+      school_name: this.props.school_name,
+      open: this.props.open,
+      hidden: this.props.hidden,
+      active: null
+    }
   }
 
   //new school handlers
@@ -55,32 +58,17 @@ class AdminSchools extends Component {
       school_name: event.target.value
     })
   }
-  handleReady = () => {
-    this.setState({
-        state: {...this.state, active: true}
-    })
-    this.handleUpdate()
-}
-handleUpdate = () => {
-  this.props.dispatch({
-      type: 'UPDATE_PERSON',
-      payload: this.state
-  })
-}
   handleClick = () => {
     this.props.dispatch({ type: 'POST_PERSON', payload: this.state })
     this.setState({ open: false });
   }
- 
-  //dialog handlers
-  handleClickOpen = () => {
-    this.setState({ open: true });
-  };
-
-  handleClose = () => {
-    this.setState({ open: false });
-  };
-
+  //switch active handlers
+  handleReady = () => {
+    this.setState({
+      state: {...this.state, active: true}    
+    })
+    this.handleUpdate()
+  }
   //slider handlers
   handleHiddenChange = (event, hidden) => {
     this.setState(state => ({
@@ -95,15 +83,98 @@ handleUpdate = () => {
       active : false,
     });
   }
+ //dialog handlers
+  handleClickOpen = () => {
+    this.setState({ open: true });
+  };
 
+  handleClose = () => {
+    this.setState({ open: false });
+  };
   //handle delete
   deleteSchool = (row) => {
     this.props.dispatch({ type: 'DELETE_PERSON', payload: row.id })
   }
-  
+  //edit funcs
+  handleChange = (property) => (event) => {
+    this.setState ({
+        person: {...this.state.person, [property]: event.target.value }
+    })
+    // console.log(this.state.person);
+  }
+  handleUpdate = () => {
+    this.props.dispatch({
+      type: 'UPDATE_PERSON',
+      payload: {state: this.state.person}
+    })
+  }
+  editSchool = (row) => {
+     console.log('editSchool:', row.id)
+    this.setState({
+      edit: !this.state.edit
+  })
+  console.log('hit editSchool');
+  this.handleUpdate(row);
+  }
   render() {
     const { hidden } = this.state;
     return (
+      this.state.edit ? 
+      <Dialog
+      open={this.state.edit}
+      onClose={this.editSchool}
+      aria-labelledby="form-dialog-title"
+    >
+      <DialogTitle id="form-dialog-title">Edit School</DialogTitle>
+      <DialogContent>
+        <DialogContentText>
+          Edit an existing school
+                  </DialogContentText>
+        {/* Username input for new school */}
+        <TextField
+          autoFocus
+          margin="dense"
+          id="newUsername"
+          label="Username"
+          type="text"
+          onChange={this.handleChange('username')}
+          value={this.state.username}
+          fullWidth
+        />
+
+        {/* password input for new school */}
+        <TextField
+          autoFocus
+          margin="dense"
+          id="newPassword"
+          label="Password"
+          type="password"
+          onChange={this.handleChange('password')}
+          value={this.state.password}
+          fullWidth
+        />
+        {/* input for new schools name */}
+        <TextField
+          autoFocus
+          margin="dense"
+          id="newName"
+          label="School Name"
+          type="text"
+          onChange={this.handleChange('school_name')}
+          value={this.state.school_name}
+          fullWidth
+        />
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={this.editSchool} color="primary">
+          Cancel
+                  </Button>
+        <Button onClick={() => this.handleUpdate()}color="primary">
+          Submit
+                  </Button>
+      </DialogActions>
+    </Dialog>
+      :
       <div>
         <AdminNav />
         <div>
@@ -199,7 +270,7 @@ handleUpdate = () => {
                               color="primary"
                             />
                           </TableCell>
-                          <TableCell align="left"><Button>Edit</Button></TableCell>
+                          <TableCell align="left"><Button onClick={() => this.editSchool(row)}>Edit</Button></TableCell>
                           <TableCell align="left"><Button onClick={() => this.deleteSchool(row)}>Delete</Button></TableCell>
                         </TableRow>
                       )
