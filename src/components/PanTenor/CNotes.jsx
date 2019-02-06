@@ -1,28 +1,20 @@
 import React, { Component } from 'react';
-import NOTES from './Notes';
+import NOTES from '../../constants/tenorNotes';
+import COLORS from '../../constants/colors';
+import { connect } from 'react-redux';
 
 class CNotes extends Component {
-  state = {
-    CSh4: 'red',
-    C4: 'red',
-    CSh5: 'red',
-    C5: 'red',
-    CSh6: 'red',
-    C6: 'red',
-    stroke: 'black'
-  }
 
   playNote = (note) => {
-    console.log('in CNotes', note);
     NOTES[note].play();
-    this.setState({
-      [note]: '#930E00'
-    });
-    setTimeout(() => {
-      this.setState(() => ({
-        [note]: 'red',
-      }))
-    }, 500);
+    this.props.dispatch({
+      type: 'PLAY_NOTE',
+      payload: {
+        note: note,
+        color: this.props.displayColors ? COLORS.red : COLORS.colorless,
+        highlight: this.props.displayColors ? COLORS.redHighlight : COLORS.colorlessHighlight
+      }
+    })
   }
 
   render() {
@@ -33,7 +25,7 @@ class CNotes extends Component {
         <g id="CSh4">
           <ellipse
             transform="matrix(0.9374 -0.3482 0.3482 0.9374 -43.9603 199.5367)"
-            style={{ fill: this.state.CSh4, stroke: this.state.stroke }}
+            style={{ fill: this.props.colors.CSh4, stroke: 'black' }}
             cx="533.207"
             cy="222.083"
             rx="123.312"
@@ -45,7 +37,7 @@ class CNotes extends Component {
         <g id="C4">
           <ellipse
             transform="matrix(0.1611 -0.9869 0.9869 0.1611 -700.8986 1681.4668)"
-            style={{ fill: this.state.C4, stroke: this.state.stroke }}
+            style={{ fill: this.props.colors.C4, stroke: 'black' }}
             cx="638.686"
             cy="1253.042"
             rx="160.529"
@@ -57,7 +49,7 @@ class CNotes extends Component {
         <g id="CSh5">
           <ellipse
             transform="matrix(0.7732 -0.6342 0.6342 0.7732 -194.8556 450.9876)"
-            style={{ fill: this.state.CSh5, stroke: this.state.stroke }}
+            style={{ fill: this.props.colors.CSh5, stroke: 'black' }}
             cx="533.07"
             cy="497.909"
             rx="71.879"
@@ -69,7 +61,7 @@ class CNotes extends Component {
         <g id="C5">
           <ellipse
             transform="matrix(0.9865 -0.1638 0.1638 0.9865 -153.9281 139.4177)"
-            style={{ fill: this.state.C5, stroke: this.state.stroke }}
+            style={{ fill: this.props.colors.C5, stroke: 'black' }}
             cx="768.32"
             cy="1002.969"
             rx="74.869"
@@ -80,7 +72,7 @@ class CNotes extends Component {
         </g>
         <g id="CSh6">
           <ellipse
-            style={{ fill: this.state.CSh6, stroke: this.state.stroke }}
+            style={{ fill: this.props.colors.CSh6, stroke: 'black' }}
             cx="602.5"
             cy="679.5"
             rx="55"
@@ -91,7 +83,7 @@ class CNotes extends Component {
         </g>
         <g id="C6">
           <ellipse
-            style={{ fill: this.state.C6, stroke: this.state.stroke }}
+            style={{ fill: this.props.colors.C6, stroke: 'black' }}
             cx="794.5"
             cy="798.5"
             rx="55"
@@ -105,4 +97,9 @@ class CNotes extends Component {
   }
 };
 
-export default CNotes;
+const mapStateToProps = state => ({
+  colors: state.tenor,
+  displayColors: state.displayColors,
+});
+
+export default connect(mapStateToProps)(CNotes);
