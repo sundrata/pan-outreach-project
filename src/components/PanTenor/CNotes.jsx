@@ -12,21 +12,17 @@ class CNotes extends Component {
     stroke: 'black'
   }
 
-  highlightNote = (note) => {
+  playNote = (note) => {
+    console.log('in CNotes', note);
+    NOTES[note].play();
     this.setState({
       [note]: '#930E00'
-    })
+    });
     setTimeout(() => {
       this.setState(() => ({
         [note]: 'red',
       }))
     }, 500);
-  }
-
-  playNote = (note) => {
-    NOTES[note].play();
-    console.log('in CNotes', note);
-    this.highlightNote(note);
   }
 
   render() {
