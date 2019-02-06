@@ -9,7 +9,8 @@ function* getMusic() {
         const setMusic = yield axios.get('/api/music/');  // get seen art items
         console.log(`get sheet music`, setMusic.data);
 
-        yield dispatch({ type: 'SET_SHEET_MUSIC', payload: setMusic.data })
+        yield dispatch({ type: 'SET_SHEET_MUSIC', payload: setMusic.data });
+       
 
 
     } catch (error) {
