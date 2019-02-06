@@ -10,21 +10,17 @@ class GNotes extends Component {
     stroke: 'black'
   }
 
-  highlightNote = (note) => {
+  playNote = (note) => {
+    console.log('in GNotes', note);
+    NOTES[note].play();
     this.setState({
       [note]: '#23A9C9'
-    })
+    });
     setTimeout(() => {
       this.setState(() => ({
         [note]: '#A9D7E4',
       }))
     }, 500);
-  }
-
-  playNote = (note) => {
-    NOTES[note].play();
-    console.log('in GNotes', note);
-    this.highlightNote(note);
   }
 
   render() {

@@ -12,21 +12,17 @@ class ENotes extends Component {
     stroke: 'black'
   }
 
-  highlightNote = (note) => {
+  playNote = (note) => {
+    console.log('in ENotes', note);
+    NOTES[note].play();
     this.setState({
       [note]: '#D8D800'
-    })
+    });
     setTimeout(() => {
       this.setState(() => ({
         [note]: 'yellow',
       }))
     }, 500);
-  }
-
-  playNote = (note) => {
-    NOTES[note].play();
-    console.log('in ENotes', note);
-    this.highlightNote(note);
   }
 
   render() {

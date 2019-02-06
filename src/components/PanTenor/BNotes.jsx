@@ -10,21 +10,17 @@ class BNotes extends Component {
     stroke: 'black'
   }
 
-  highlightNote = (note) => {
+  playNote = (note) => {
+    console.log('in BNotes', note);
+    NOTES[note].play();
     this.setState({
       [note]: '#FF577B'
-    })
+    });
     setTimeout(() => {
       this.setState(() => ({
         [note]: '#FFBFCA',
       }))
     }, 500);
-  }
-
-  playNote = (note) => {
-    NOTES[note].play();
-    console.log('in BNotes', note);
-    this.highlightNote(note);
   }
 
   render() {
