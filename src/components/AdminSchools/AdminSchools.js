@@ -36,11 +36,15 @@ class AdminSchools extends Component {
       username: this.props.username,
       password: this.props.password,
       school_name: this.props.school_name,
-      open: this.props.open,
+      open: false,
       hidden: this.props.hidden,
       active: null
     }
   }
+
+logState = () => {
+  console.log(this.state.person)
+}
 
   //new school handlers
   handleUsername = (event) => {
@@ -110,12 +114,15 @@ class AdminSchools extends Component {
   }
   editSchool = (row) => {
      console.log('editSchool:', row.id)
+     this.setState({
+      id : row.id
+    })
     this.setState({
-      edit: !this.state.edit
-  })
+      edit: true
+      })
   console.log('hit editSchool');
-  this.handleUpdate(row);
   }
+
   render() {
     const { hidden } = this.state;
     return (
@@ -279,6 +286,7 @@ class AdminSchools extends Component {
                 </TableBody>
               </Table>
             </Paper>
+            <button onClick={() => this.logState()}>log state</button>
           </center>
         </div>
       </div>
