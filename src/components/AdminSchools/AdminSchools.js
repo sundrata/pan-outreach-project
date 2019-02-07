@@ -30,12 +30,13 @@ const styles = theme => ({
 
 class AdminSchools extends Component {
   state = {
-    id: this.props.id,
-    username: this.props.username,
-    password: this.props.password,
-    school_name: this.props.school_name,
-    open: this.props.open,
-    hidden: this.props.hidden,
+    id: 0,
+    edit: false,
+    username: null,
+    password: null,
+    school_name: null,
+    open: false,
+    hidden: null,
     active: this.props.active
   }
 
@@ -96,14 +97,102 @@ handleUpdate = () => {
     });
   }
 
+  editSchool = (row) => {
+    this.setState({ id: row.id });
+    this.setState({ edit: true });
+  }
+
+  handleNameChange = (event) => {
+    this.setState({
+      ...this.state,
+      username: event.target.value
+    })
+  };
+
+  handlePasswordChange = (event) => {
+    this.setState({
+      ...this.state,
+      password: event.target.value
+    })
+  };
+  handleSchoolChange = (event) => {
+    this.setState({
+      ...this.state,
+      school_name: event.target.value
+    })
+  };
+  editHandleClick = () => {
+    this.props.dispatch({ type: 'UPDATE_PERSON', payload: this.state })
+    this.setState({
+      edit: false
+    })
+  }
+
   //handle delete
   deleteSchool = (row) => {
     this.props.dispatch({ type: 'DELETE_PERSON', payload: row.id })
   }
   
+  seeState = () => {
+    console.log(this.state);
+    
+  }
   render() {
     const { hidden } = this.state;
     return (
+      this.state.edit ?
+      <Dialog
+          open={this.state.edit}
+          onClose={this.handleClose}
+          aria-labelledby="form-dialog-title"
+        >
+          <DialogTitle id="form-dialog-title">Edit Music</DialogTitle>
+          <DialogContent>
+            <button onClick={this.seeState}> heeeey</button>
+            <DialogContentText>
+              Edit Song
+                </DialogContentText>
+            {/* Username input for new school */}
+            <TextField
+              autoFocus
+              margin="dense"
+              id="name"
+              label="Username"
+              type="text"
+              onChange={this.handleNameChange}
+              value={this.state.username}
+              fullWidth
+            />
+            <TextField
+              autoFocus
+              margin="dense"
+              id="name"
+              label="Password"
+              type="text"
+              onChange={this.handlePasswordChange}
+              value={this.state.password}
+              fullWidth
+            />
+            <TextField
+              autoFocus
+              margin="dense"
+              id="name"
+              label="School Name"
+              type="text"
+              onChange={this.handleSchoolChange}
+              value={this.state.school_name}
+              fullWidth
+            />
+          </DialogContent>          
+          <DialogActions>
+            <Button onClick={this.editHandleClose} color="primary">
+              Cancel
+                            </Button>
+            <Button onClick={() => this.editHandleClick()} color="primary">
+              Submit
+                            </Button>
+          </DialogActions>         
+        </Dialog> :
       <div>
         <AdminNav />
         <div>
@@ -199,7 +288,7 @@ handleUpdate = () => {
                               color="primary"
                             />
                           </TableCell>
-                          <TableCell align="left"><Button>Edit</Button></TableCell>
+                          <TableCell align="left"><Button onClick={() => this.editSchool(row)}>Edit</Button></TableCell>
                           <TableCell align="left"><Button onClick={() => this.deleteSchool(row)}>Delete</Button></TableCell>
                         </TableRow>
                       )
