@@ -17,9 +17,9 @@ const rootReducer = combineReducers({
   loginMode, // will have a value of 'login' or 'registration' to control which screen is shown
   user, // will have an id and username if someone is logged in
   personReducer, //seperate from user reducer. user reducer only contains logged in accounts info
-  sheetMusicReducer // has the 
+  sheetMusicReducer, // has the 
   tenor, //sets note colors
-  displayColors, // boolean of whether to display colors or not
+  displayColors // boolean of whether to display colors or not
 });
 
 export default rootReducer;
