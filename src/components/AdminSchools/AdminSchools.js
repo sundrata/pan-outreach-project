@@ -33,12 +33,12 @@ class AdminSchools extends Component {
     edit: false,
     person: {
       id: 0,
-      username: this.props.username,
-      password: this.props.password,
-      school_name: this.props.school_name,
+      username: null,
+      password: null,
+      school_name: null,
       open: false,
-      hidden: this.props.hidden,
-      active: null
+      hidden: false,
+      active: this.props.active
     }
   }
 
