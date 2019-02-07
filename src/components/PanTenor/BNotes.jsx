@@ -1,26 +1,20 @@
 import React, { Component } from 'react';
-import NOTES from './Notes';
+import NOTES from '../../constants/tenorNotes';
+import COLORS from '../../constants/colors';
+import { connect } from 'react-redux';
 
 class BNotes extends Component {
-  state = {
-    B4: '#FFBFCA',
-    Bb4: '#FFBFCA',
-    B5: '#FFBFCA',
-    Bb5: '#FFBFCA',
-    stroke: 'black'
-  }
 
   playNote = (note) => {
-    console.log('in BNotes', note);
     NOTES[note].play();
-    this.setState({
-      [note]: '#FF577B'
-    });
-    setTimeout(() => {
-      this.setState(() => ({
-        [note]: '#FFBFCA',
-      }))
-    }, 500);
+    this.props.dispatch({
+      type: 'PLAY_NOTE',
+      payload: {
+        note: note,
+        color: this.props.displayColors ? COLORS.pink : COLORS.colorless,
+        highlight: this.props.displayColors ? COLORS.pinkHighlight : COLORS.colorlessHighlight
+      }
+    })
   }
 
   render() {
@@ -31,7 +25,7 @@ class BNotes extends Component {
         <g id="B4">
           <ellipse
             transform="matrix(0.6631 -0.7485 0.7485 0.6631 153.779 902.843)"
-            style={{ fill: this.state.B4, stroke: this.state.stroke }}
+            style={{ fill: this.props.colors.B4, stroke: 'black' }}
             cx="1079.905"
             cy="280.58"
             rx="130.591"
@@ -43,7 +37,7 @@ class BNotes extends Component {
         <g id="Bb4">
           <ellipse
             transform="matrix(0.9599 -0.2802 0.2802 0.9599 -247.888 89.9579)"
-            style={{ fill: this.state.Bb4, stroke: this.state.stroke }}
+            style={{ fill: this.props.colors.Bb4, stroke: 'black' }}
             cx="190.625"
             cy="911.805"
             rx="129.46"
@@ -54,7 +48,7 @@ class BNotes extends Component {
         </g>
         <g id="B5">
           <circle
-            style={{ fill: this.state.B5, stroke: this.state.stroke }}
+            style={{ fill: this.props.colors.B5, stroke: 'black' }}
             cx="836"
             cy="410"
             r="57.5"
@@ -64,7 +58,7 @@ class BNotes extends Component {
         </g>
         <g id="Bb5">
           <circle
-            style={{ fill: this.state.Bb5, stroke: this.state.stroke }}
+            style={{ fill: this.props.colors.Bb5, stroke: 'black' }}
             cx="468"
             cy="931"
             r="61.5"
@@ -77,4 +71,9 @@ class BNotes extends Component {
   }
 };
 
-export default BNotes;
+const mapStateToProps = state => ({
+  colors: state.tenor,
+  displayColors: state.displayColors,
+});
+
+export default connect(mapStateToProps)(BNotes);

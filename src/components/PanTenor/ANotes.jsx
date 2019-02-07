@@ -1,41 +1,20 @@
 import React, { Component } from 'react';
-import NOTES from './Notes';
-// import { connect } from 'react-redux';
-
-// let displayColors = true;
-
-// let colors = {
-//   color: 'blue',
-//   highlight: '#00157C'
-// }
-
-// let noColors = {
-//   color: 'white',
-//   highlight: 'black'
-// }
-
-// if (!displayColors) {
-//   colors = noColors
-// }
+import NOTES from '../../constants/tenorNotes';
+import COLORS from '../../constants/colors';
+import { connect } from 'react-redux';
 
 class ANotes extends Component {
-  state = {
-    A4: 'blue',
-    A5: 'blue',
-    stroke: 'black'
-  }
 
   playNote = (note) => {
-    console.log('in ANotes', note);
     NOTES[note].play();
-    this.setState({
-      [note]: '#00157C'
-    });
-    setTimeout(() => {
-      this.setState(() => ({
-        [note]: 'blue',
-      }))
-    }, 500);
+    this.props.dispatch({
+      type: 'PLAY_NOTE',
+      payload: {
+        note: note,
+        color: this.props.displayColors ? COLORS.blue : COLORS.colorless,
+        highlight: this.props.displayColors ? COLORS.blueHighlight : COLORS.colorlessHighlight
+      }
+    })
   }
 
   render() {
@@ -46,7 +25,7 @@ class ANotes extends Component {
         <g id="A4">
           <ellipse
             transform="matrix(0.1738 -0.9848 0.9848 0.1738 291.1827 1898.2921)"
-            style={{ fill: this.state.A4, stroke: this.state.stroke }}
+            style={{ fill: this.props.colors.A4, stroke: 'black' }}
             cx="1276.916"
             cy="775.61"
             rx="100.021"
@@ -57,7 +36,7 @@ class ANotes extends Component {
         </g>
         <g id="A5">
           <circle
-            style={{ fill: this.state.A5, stroke: this.state.stroke }}
+            style={{ fill: this.props.colors.A5, stroke: 'black' }}
             cx="1034"
             cy="650"
             r="61.5"
@@ -70,4 +49,9 @@ class ANotes extends Component {
   }
 };
 
-export default ANotes;
+const mapStateToProps = state => ({
+  colors: state.tenor,
+  displayColors: state.displayColors,
+});
+
+export default connect(mapStateToProps)(ANotes);

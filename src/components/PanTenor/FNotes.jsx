@@ -1,26 +1,20 @@
 import React, { Component } from 'react';
-import NOTES from './Notes';
+import NOTES from '../../constants/tenorNotes';
+import { connect } from 'react-redux';
+import COLORS from '../../constants/colors';
 
 class FNotes extends Component {
-  state = {
-    FSh4: 'green',
-    F4: 'green',
-    FSh5: 'green',
-    F5: 'green',
-    stroke: 'black'
-  }
 
   playNote = (note) => {
-    console.log('in FNotes', note);
     NOTES[note].play();
-    this.setState({
-      [note]: '#224900'
-    });
-    setTimeout(() => {
-      this.setState(() => ({
-        [note]: 'green',
-      }))
-    }, 500);
+    this.props.dispatch({
+      type: 'PLAY_NOTE',
+      payload: {
+        note: note,
+        color: this.props.displayColors ? COLORS.green : COLORS.colorless,
+        highlight: this.props.displayColors ? COLORS.greenHighlight : COLORS.colorlessHighlight
+      }
+    })
   }
 
   render() {
@@ -31,7 +25,7 @@ class FNotes extends Component {
         <g id="FSh4">
           <ellipse
             transform="matrix(0.2695 -0.963 0.963 0.2695 442.9022 930.2535)"
-            style={{ fill: this.state.FSh4, stroke: this.state.stroke }}
+            style={{ fill: this.props.colors.FSh4, stroke: 'black' }}
             cx="834.636"
             cy="173.184"
             rx="143.707"
@@ -43,7 +37,7 @@ class FNotes extends Component {
         <g id="F4">
           <ellipse
             transform="matrix(0.6584 -0.7526 0.7526 0.6584 -733.6282 650.6843)"
-            style={{ fill: this.state.F4, stroke: this.state.stroke }}
+            style={{ fill: this.props.colors.F4, stroke: 'black' }}
             cx="350.073"
             cy="1133.613"
             rx="144.589"
@@ -55,7 +49,7 @@ class FNotes extends Component {
         <g id="FSh5">
           <ellipse
             transform="matrix(0.9865 -0.1638 0.1638 0.9865 -61.0825 118.5256)"
-            style={{ fill: this.state.FSh5, stroke: this.state.stroke }}
+            style={{ fill: this.props.colors.FSh5, stroke: 'black' }}
             cx="688.075"
             cy="429.604"
             rx="61.378"
@@ -67,7 +61,7 @@ class FNotes extends Component {
         <g id="F5">
           <ellipse
             transform="matrix(0.3962 -0.9181 0.9181 0.3962 -541.6311 1145.6666)"
-            style={{ fill: this.state.F5, stroke: this.state.stroke }}
+            style={{ fill: this.props.colors.F5, stroke: 'black' }}
             cx="600.311"
             cy="984.672"
             rx="89.688"
@@ -81,4 +75,9 @@ class FNotes extends Component {
   }
 };
 
-export default FNotes;
+const mapStateToProps = state => ({
+  colors: state.tenor,
+  displayColors: state.displayColors,
+});
+
+export default connect(mapStateToProps)(FNotes);
