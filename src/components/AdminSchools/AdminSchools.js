@@ -168,7 +168,7 @@ handleUpdate = () => {
               margin="dense"
               id="name"
               label="Password"
-              type="password"
+              type="text"
               onChange={this.handlePasswordChange}
               value={this.state.password}
               fullWidth

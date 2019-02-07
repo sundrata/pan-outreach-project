@@ -51,7 +51,7 @@ router.delete('/:id', (req, res) => {
 
 // PUT
 router.put('/:id', function(req, res){
-    const id = req.pa
+    const id = req.params.id;
     console.log('hit put');
     const person = req.body; // This the data we sent
     const query = `UPDATE "person" SET "username" = $2, "password" = $3, "school_name" = $4 WHERE id = $1;`
