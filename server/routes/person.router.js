@@ -8,7 +8,7 @@ const encryptLib = require('../modules/encryption');
  * GET route template
  */
 router.get('/', (req, res) => {
-    let queryText = (`SELECT * FROM "person";`);
+    let queryText = (`SELECT * FROM "person" ORDER BY id;`);
     pool.query(queryText).then((result) => {
         console.log('result.rows:', result.rows);
         res.send(result.rows);
@@ -49,7 +49,7 @@ router.delete('/:id', (req, res) => {
     })
 })
 
-// PUT
+// Update Edit School Info
 router.put('/:id', function(req, res){
     const id = req.params.id;
     console.log('hit put');
@@ -57,6 +57,23 @@ router.put('/:id', function(req, res){
     const query = `UPDATE "person" SET "username" = $2, "password" = $3, "school_name" = $4 WHERE id = $1;`
     console.log('yeahah:', req.body);
     pool.query(query, [id, person.username, person.password, person.school_name])
+    .then((result)=>{
+        console.log(result);
+        res.sendStatus(201);
+    }).catch((err)=>{
+        console.log('hit query',err);
+        res.sendStatus( 500);
+    })
+})
+
+//Update school active
+router.put('/active/:id', function(req, res){
+    const id = req.params.id;
+    console.log('hit put');
+    const person = req.body; // This the data we sent
+    const query = `UPDATE "person" SET "active" = $2 WHERE id = $1;`
+    console.log('yeahah:', req.body);
+    pool.query(query, [id, person.active])
     .then((result)=>{
         console.log(result);
         res.sendStatus(201);

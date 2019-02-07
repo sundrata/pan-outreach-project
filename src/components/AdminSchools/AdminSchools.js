@@ -37,7 +37,7 @@ class AdminSchools extends Component {
     school_name: null,
     open: false,
     hidden: null,
-    active: this.props.active
+    active: null
   }
 
   //new school handlers
@@ -56,24 +56,33 @@ class AdminSchools extends Component {
       school_name: event.target.value
     })
   }
-  handleReady = () => {
-    this.setState({
-        state: {...this.state, active: true}
+
+  //slider toggle funcs
+  handleReady = (row) => {
+      this.setState({ id: row.id });
+      this.setState({ active: !row.active });  
+      console.log('hit handle ready', row.id) 
+      this.handleActive();
+  }
+
+  handleActive = () => {
+    this.props.dispatch({ type: 'UPDATE_ACTIVE', payload: this.state })
+    console.log('hit handle active', this.state.id)
+  }
+
+  //edit dialog funcs
+  handleUpdate = () => {
+    this.props.dispatch({
+        type: 'UPDATE_PERSON',
+        payload: this.state
     })
-    this.handleUpdate()
-}
-handleUpdate = () => {
-  this.props.dispatch({
-      type: 'UPDATE_PERSON',
-      payload: this.state
-  })
-}
+  }
+
+    // add dialog handlers
   handleClick = () => {
     this.props.dispatch({ type: 'POST_PERSON', payload: this.state })
-    this.setState({ open: false });
   }
- 
-  //dialog handlers
+
   handleClickOpen = () => {
     this.setState({ open: true });
   };
@@ -82,21 +91,7 @@ handleUpdate = () => {
     this.setState({ open: false });
   };
 
-  //slider handlers
-  handleHiddenChange = (event, hidden) => {
-    this.setState(state => ({
-      hidden,
-      // hidden implies !open
-      open: hidden ? false : state.open,
-    }));
-  };
-
-  handleSliderChange = () => {
-    this.setState({
-      active : false,
-    });
-  }
-
+  //edit school dialog funcs
   editSchool = (row) => {
     this.setState({ id: row.id });
     this.setState({ edit: true });
@@ -283,8 +278,8 @@ handleUpdate = () => {
                             <Switch
                               id={row.id}
                               checked={row.active}
-                              onClick={() => this.handleReady()}
-                              value={this.state.active}
+                              onClick={() => this.handleReady(row)}
+                              value={row.active}
                               color="primary"
                             />
                           </TableCell>
