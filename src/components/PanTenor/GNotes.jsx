@@ -33,18 +33,6 @@ class GNotes extends Component {
             onClick={this.props.isTouch ? null : () => this.playNote('G4')}
           />
         </g>
-        <g id="GSh4">
-          <ellipse
-            transform="matrix(0.6284 -0.7779 0.7779 0.6284 -182.2244 359.0121)"
-            style={{ fill: this.props.colors.GSh4, stroke: 'black' }}
-            cx="284.677"
-            cy="370.246"
-            rx="106.013"
-            ry="137.298"
-            onTouchStart={this.props.isTouch ? () => this.playNote('GSh4') : null}
-            onClick={this.props.isTouch ? null : () => this.playNote('GSh4')}
-          />
-        </g>
         <g id="G5">
           <ellipse
             transform="matrix(0.7424 -0.6699 0.6699 0.7424 -395.6221 859.191)"
@@ -55,18 +43,6 @@ class GNotes extends Component {
             ry="84.637"
             onTouchStart={this.props.isTouch ? () => this.playNote('G5') : null}
             onClick={this.props.isTouch ? null : () => this.playNote('G5')}
-          />
-        </g>
-        <g id="GSh5">
-          <ellipse
-            transform="matrix(0.3593 -0.9332 0.9332 0.3593 -313.0156 797.0468)"
-            style={{ fill: this.props.colors.GSh5, stroke: 'black' }}
-            cx="424"
-            cy="626.5"
-            rx="55.845"
-            ry="80.365"
-            onTouchStart={this.props.isTouch ? () => this.playNote('GSh5') : null}
-            onClick={this.props.isTouch ? null : () => this.playNote('GSh5')}
           />
         </g>
       </>
