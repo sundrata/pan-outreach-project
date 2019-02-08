@@ -86,23 +86,4 @@ router.put('/edit-sheet-music', (request, response) => {
     });
 });
 
-
-router.post('/', (req, res) => {
-
-  let { user_id, title, start, end } = req.body;
-  start = new Date(start);
-  end = new Date(end);
-  const queryValues = [title, start, end, user_id];
-  const queryText = `INSERT INTO event (title, start, end, user_id)
-                    VALUES ($1, $2, $3, $4);`;
-  console.log(queryValues);
-  pool.query(queryText, queryValues)
-    .then(() => {
-      res.sendStatus(201);
-    })
-    .catch((err) => {
-      console.log('POST event error: ', err);
-    });
-});
-
 module.exports = router;
