@@ -89,7 +89,10 @@ class AdminSchools extends Component {
   };
 
   handleClose = () => {
-    this.setState({ open: false });
+    this.setState({ 
+      open: false,
+      edit: false
+    });
   };
 
   //edit school dialog funcs
@@ -142,11 +145,10 @@ class AdminSchools extends Component {
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
         >
-          <DialogTitle id="form-dialog-title">Edit Music</DialogTitle>
+          <DialogTitle id="form-dialog-title">Edit School</DialogTitle>
           <DialogContent>
-            <button onClick={this.seeState}> heeeey</button>
             <DialogContentText>
-              Edit Song
+              Edit School Information
                 </DialogContentText>
             {/* Username input for new school */}
             <TextField
@@ -156,7 +158,7 @@ class AdminSchools extends Component {
               label="Username"
               type="text"
               onChange={this.handleNameChange}
-              value={this.state.username}
+              value=''
               fullWidth
             />
             <TextField
@@ -166,7 +168,7 @@ class AdminSchools extends Component {
               label="Password"
               type="text"
               onChange={this.handlePasswordChange}
-              value={this.state.password}
+              value=''
               fullWidth
             />
             <TextField
@@ -176,12 +178,12 @@ class AdminSchools extends Component {
               label="School Name"
               type="text"
               onChange={this.handleSchoolChange}
-              value={this.state.school_name}
+              value=''
               fullWidth
             />
           </DialogContent>          
           <DialogActions>
-            <Button onClick={this.editHandleClose} color="primary">
+            <Button onClick={() => this.handleClose()} color="primary">
               Cancel
                             </Button>
             <Button onClick={() => this.editHandleClick()} color="primary">
