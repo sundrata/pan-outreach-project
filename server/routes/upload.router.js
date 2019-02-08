@@ -59,6 +59,33 @@ router.post('/sheet-music', (request, response) => {
     });
 });
 
+router.put('/edit-sheet-music', (request, response) => {
+    console.log('PUT hit');
+    const form = new multiparty.Form();
+    form.parse(request, async (error, fields, files) => {
+        if (error) throw new Error(error);
+        try {
+            const path = files.file[0].path;
+            const buffer = fs.readFileSync(path);
+            const type = fileType(buffer);
+            const timestamp = Date.now().toString();
+            const fileName = `sheet-music/${timestamp}-lg`;
+            const data = await uploadFile(buffer, fileName, type);
+            const name = fields.name[0];
+            const instrument = fields.instrument[0];
+            const difficulty = parseInt(fields.difficulty[0]);
+            const id = parseInt(fields.id[0]);
+            const queryValues = [name, instrument, difficulty, data.Location, id];
+            const queryText = `UPDATE "sheet_music" SET "name" = $1, "instrument" = $2, "difficulty" = $3, "url"= $4  WHERE "id" = $5;`;
+            await pool.query(queryText, queryValues)
+            response.sendStatus(201);
+
+        } catch (error) {
+            response.status(400).send(error);
+        }
+    });
+});
+
 
 router.post('/', (req, res) => {
 

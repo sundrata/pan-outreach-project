@@ -3,6 +3,7 @@ import errors from './errorsReducer';
 import loginMode from './loginModeReducer';
 import user from './userReducer';
 import personReducer from './personReducer';
+import sheetMusicReducer from './sheetMusicReducer';
 import tenor from './tenorReducer';
 import second from './secondReducer';
 import cello from './celloReducer';
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
   loginMode, // will have a value of 'login' or 'registration' to control which screen is shown
   user, // will have an id and username if someone is logged in
   personReducer, //seperate from user reducer. user reducer only contains logged in accounts info
+  sheetMusicReducer, // has the
   tenor, //sets note colors
   second, //sets note colors
   cello, //sets note colors

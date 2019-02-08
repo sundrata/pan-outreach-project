@@ -50,11 +50,13 @@ router.delete('/:id', (req, res) => {
 })
 
 // PUT
-router.put('/:username', function(req, res){
+router.put('/:id', function(req, res){
+    const id = req.params.id;
+    console.log('hit put');
     const person = req.body; // This the data we sent
-    const query = `UPDATE "person" SET active = $2 WHERE username = $1;`
+    const query = `UPDATE "person" SET "username" = $2, "password" = $3, "school_name" = $4 WHERE id = $1;`
     console.log('yeahah:', req.body);
-    pool.query(query, [person.username, person.active])
+    pool.query(query, [id, person.username, person.password, person.school_name])
     .then((result)=>{
         console.log(result);
         res.sendStatus(201);
