@@ -33,18 +33,6 @@ class FNotes extends Component {
             onClick={this.props.isTouch ? null : () => this.playNote('F3')}
           />
         </g>
-        <g id="FSh3">
-          <ellipse
-            transform="matrix(0.5314 -0.8471 0.8471 0.5314 -390.7879 460.4152)"
-            style={{ fill: this.props.colors.FSh3, stroke: 'black' }}
-            cx="220.77"
-            cy="583.437"
-            rx="83.742"
-            ry="135.484"
-            onTouchStart={this.props.isTouch ? () => this.playNote('FSh3') : null}
-            onClick={this.props.isTouch ? null : () => this.playNote('FSh3')}
-          />
-        </g>
         <g id="F4">
           <ellipse
             transform="matrix(0.0351 -0.9994 0.9994 0.0351 391.5617 1200.5498)"
@@ -57,18 +45,6 @@ class FNotes extends Component {
             onClick={this.props.isTouch ? null : () => this.playNote('F4')}
           />
         </g>
-        <g id="FSh4">
-          <ellipse
-            transform="matrix(0.0424 -0.9991 0.9991 0.0424 -307.011 472.6154)"
-            style={{ fill: this.props.colors.FSh4, stroke: 'black' }}
-            cx="93.032"
-            cy="396.459"
-            rx="57"
-            ry="72.531"
-            onTouchStart={this.props.isTouch ? () => this.playNote('FSh4') : null}
-            onClick={this.props.isTouch ? null : () => this.playNote('FSh4')}
-          />
-        </g>
         <g id="F5">
           <circle
             style={{ fill: this.props.colors.F5, stroke: 'black' }}
@@ -77,16 +53,6 @@ class FNotes extends Component {
             r="40.5"
             onTouchStart={this.props.isTouch ? () => this.playNote('F5') : null}
             onClick={this.props.isTouch ? null : () => this.playNote('F5')}
-          />
-        </g>
-        <g id="FSh5">
-          <circle
-            style={{ fill: this.props.colors.FSh5, stroke: 'black' }}
-            cx="221.5"
-            cy="338.5"
-            r="41"
-            onTouchStart={this.props.isTouch ? () => this.playNote('FSh5') : null}
-            onClick={this.props.isTouch ? null : () => this.playNote('FSh5')}
           />
         </g>
       </>

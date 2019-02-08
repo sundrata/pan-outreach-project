@@ -21,18 +21,6 @@ class FNotes extends Component {
     return (
       <>
         {/* F NOTES */}
-        <g id="FSh4">
-          <ellipse
-            transform="matrix(0.2695 -0.963 0.963 0.2695 442.9022 930.2535)"
-            style={{ fill: this.props.colors.FSh4, stroke: 'black' }}
-            cx="834.636"
-            cy="173.184"
-            rx="143.707"
-            ry="110.209"
-            onTouchStart={this.props.isTouch ? () => this.playNote('FSh4') : null}
-            onClick={this.props.isTouch ? null : () => this.playNote('FSh4')}
-          />
-        </g>
         <g id="F4">
           <ellipse
             transform="matrix(0.6584 -0.7526 0.7526 0.6584 -733.6282 650.6843)"
@@ -43,18 +31,6 @@ class FNotes extends Component {
             ry="111.309"
             onTouchStart={this.props.isTouch ? () => this.playNote('F4') : null}
             onClick={this.props.isTouch ? null : () => this.playNote('F4')}
-          />
-        </g>
-        <g id="FSh5">
-          <ellipse
-            transform="matrix(0.9865 -0.1638 0.1638 0.9865 -61.0825 118.5256)"
-            style={{ fill: this.props.colors.FSh5, stroke: 'black' }}
-            cx="688.075"
-            cy="429.604"
-            rx="61.378"
-            ry="86.213"
-            onTouchStart={this.props.isTouch ? () => this.playNote('FSh5') : null}
-            onClick={this.props.isTouch ? null : () => this.playNote('FSh5')}
           />
         </g>
         <g id="F5">

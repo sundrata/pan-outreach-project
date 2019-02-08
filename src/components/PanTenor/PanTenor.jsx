@@ -2,12 +2,17 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Switches from './Switches'
 import CNotes from './CNotes';
+import CShNotes from './CShNotes';
 import FNotes from './FNotes';
+import FShNotes from './FShNotes';
 import BNotes from './BNotes';
+import BbNotes from './BbNotes';
 import ENotes from './ENotes';
+import EbNotes from './EbNotes';
 import ANotes from './ANotes';
 import DNotes from './DNotes';
 import GNotes from './GNotes';
+import GShNotes from './GShNotes';
 import './PanTenor.css'
 
 
@@ -42,12 +47,17 @@ class PanTenor extends Component {
             />
           </g>
           <CNotes />
+          <CShNotes />
           <FNotes />
+          <FShNotes />
           <BNotes />
+          <BbNotes />
           <ENotes />
+          <EbNotes />
           <ANotes />
           <DNotes />
           <GNotes />
+          <GShNotes />
         </svg>
       </div>
     );

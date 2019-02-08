@@ -6,11 +6,16 @@ import './PanSecond.css';
 // svg imports
 import ANotes from './ANotes';
 import BNotes from './BNotes';
+import BbNotes from './BbNotes';
 import CNotes from './CNotes';
+import CShNotes from './CShNotes';
 import DNotes from './DNotes';
 import ENotes from './ENotes';
+import EbNotes from './EbNotes';
 import FNotes from './FNotes';
+import FShNotes from './FShNotes';
 import GNotes from './GNotes';
+import GShNotes from './GShNotes';
 
 class PanSecond extends Component {
   state = {
@@ -21,7 +26,7 @@ class PanSecond extends Component {
 
   // dummy function needed to prevent double tap zoom on touch devices
   testTouch = () => { }
-  
+
   render() {
     return (
       <div className='disable-touch-zoom' onClick={this.testTouch}>
@@ -52,11 +57,16 @@ class PanSecond extends Component {
 
           <ANotes />
           <BNotes />
+          <BbNotes />
           <CNotes />
+          <CShNotes />
           <DNotes />
           <ENotes />
+          <EbNotes />
           <FNotes />
+          <FShNotes />
           <GNotes />
+          <GShNotes />
         </svg>
       </div>
     );
