@@ -30,16 +30,14 @@ const styles = theme => ({
 
 class AdminSchools extends Component {
   state = {
+    id: 0,
     edit: false,
-    person: {
-      id: 0,
-      username: null,
-      password: null,
-      school_name: null,
-      open: false,
-      hidden: false,
-      active: this.props.active
-    }
+    username: null,
+    password: null,
+    school_name: null,
+    open: false,
+    hidden: null,
+    active: null
   }
 
 logState = () => {
@@ -62,30 +60,75 @@ logState = () => {
       school_name: event.target.value
     })
   }
+
+  //slider toggle funcs
+  // handleReady = (row) => {
+  //     this.setState({ id: row.id });
+  //     this.setState({ active: !row.active });  
+  //     console.log('hit handle ready', row.id) 
+  //     this.handleActive();
+  // }
+
+  handleActive = (row) => {
+    this.props.dispatch({ type: 'UPDATE_ACTIVE', payload: row })
+    // console.log('hit handle active', row)
+  }
+
+  //edit dialog funcs
+  handleUpdate = () => {
+    this.props.dispatch({
+        type: 'UPDATE_PERSON',
+        payload: this.state
+    })
+  }
+
+    // add dialog handlers
   handleClick = () => {
     this.props.dispatch({ type: 'POST_PERSON', payload: this.state })
-    this.setState({ open: false });
+    this.handleClose();
   }
-  //switch active handlers
-  handleReady = () => {
-    this.setState({
-      state: {...this.state, active: true}    
-    })
-    this.handleUpdate()
-  }
-  //slider handlers
-  handleHiddenChange = (event, hidden) => {
-    this.setState(state => ({
-      hidden,
-      // hidden implies !open
-      open: hidden ? false : state.open,
-    }));
+
+  handleClickOpen = () => {
+    this.setState({ open: true });
   };
 
-  handleSliderChange = () => {
-    this.setState({
-      active : false,
+  handleClose = () => {
+    this.setState({ 
+      open: false,
+      edit: false
     });
+  };
+
+  //edit school dialog funcs
+  editSchool = (row) => {
+    this.setState({ id: row.id });
+    this.setState({ edit: true });
+  }
+
+  handleNameChange = (event) => {
+    this.setState({
+      ...this.state,
+      username: event.target.value
+    })
+  };
+
+  handlePasswordChange = (event) => {
+    this.setState({
+      ...this.state,
+      password: event.target.value
+    })
+  };
+  handleSchoolChange = (event) => {
+    this.setState({
+      ...this.state,
+      school_name: event.target.value
+    })
+  };
+  editHandleClick = () => {
+    this.props.dispatch({ type: 'UPDATE_PERSON', payload: this.state })
+    this.setState({
+      edit: false
+    })
   }
  //dialog handlers
   handleClickOpen = () => {
@@ -99,89 +142,66 @@ logState = () => {
   deleteSchool = (row) => {
     this.props.dispatch({ type: 'DELETE_PERSON', payload: row.id })
   }
-  //edit funcs
-  handleChange = (property) => (event) => {
-    this.setState ({
-        person: {...this.state.person, [property]: event.target.value }
-    })
-    // console.log(this.state.person);
+  
+  seeState = () => {
+    console.log(this.state);
+    
   }
-  handleUpdate = () => {
-    this.props.dispatch({
-      type: 'UPDATE_PERSON',
-      payload: {state: this.state.person}
-    })
-  }
-  editSchool = (row) => {
-     console.log('editSchool:', row.id)
-     this.setState({
-      id : row.id
-    })
-    this.setState({
-      edit: true
-      })
-  console.log('hit editSchool');
-  }
-
   render() {
     const { hidden } = this.state;
     return (
-      this.state.edit ? 
+      this.state.edit ?
       <Dialog
-      open={this.state.edit}
-      onClose={this.editSchool}
-      aria-labelledby="form-dialog-title"
-    >
-      <DialogTitle id="form-dialog-title">Edit School</DialogTitle>
-      <DialogContent>
-        <DialogContentText>
-          Edit an existing school
-                  </DialogContentText>
-        {/* Username input for new school */}
-        <TextField
-          autoFocus
-          margin="dense"
-          id="newUsername"
-          label="Username"
-          type="text"
-          onChange={this.handleChange('username')}
-          value={this.state.username}note
-          fullWidth
-        />
-
-        {/* password input for new school */}
-        <TextField
-          autoFocus
-          margin="dense"
-          id="newPassword"
-          label="Password"
-          type="password"
-          onChange={this.handleChange('password')}
-          value={this.state.password}
-          fullWidth
-        />
-        {/* input for new schools name */}
-        <TextField
-          autoFocus
-          margin="dense"
-          id="newName"
-          label="School Name"
-          type="text"
-          onChange={this.handleChange('school_name')}
-          value={this.state.school_name}
-          fullWidth
-        />
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={this.editSchool} color="primary">
-          Cancel
-                  </Button>
-        <Button onClick={() => this.handleUpdate()}color="primary">
-          Submit
-                  </Button>
-      </DialogActions>
-    </Dialog>
-      :
+          open={this.state.edit}
+          onClose={this.handleClose}
+          aria-labelledby="form-dialog-title"
+        >
+          <DialogTitle id="form-dialog-title">Edit School</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              Edit School Information
+                </DialogContentText>
+            {/* Username input for new school */}
+            <TextField
+              autoFocus
+              margin="dense"
+              id="name"
+              label="Username"
+              type="text"
+              onChange={this.handleNameChange}
+              value=''
+              fullWidth
+            />
+            <TextField
+              autoFocus
+              margin="dense"
+              id="name"
+              label="Password"
+              type="text"
+              onChange={this.handlePasswordChange}
+              value=''
+              fullWidth
+            />
+            <TextField
+              autoFocus
+              margin="dense"
+              id="name"
+              label="School Name"
+              type="text"
+              onChange={this.handleSchoolChange}
+              value=''
+              fullWidth
+            />
+          </DialogContent>          
+          <DialogActions>
+            <Button onClick={() => this.handleClose()} color="primary">
+              Cancel
+                            </Button>
+            <Button onClick={() => this.editHandleClick()} color="primary">
+              Submit
+                            </Button>
+          </DialogActions>         
+        </Dialog> :
       <div>
         <AdminNav />
         <div>
@@ -270,10 +290,10 @@ logState = () => {
                           <TableCell align="left">{row.creation_date}</TableCell>
                           <TableCell align="left">
                             <Switch
-                              id={row.id}
+                              id=''
                               checked={row.active}
-                              onClick={() => this.handleReady()}
-                              value={this.state.active}
+                              onClick={() => this.handleActive(row)}
+                              value={row.active}
                               color="primary"
                             />
                           </TableCell>

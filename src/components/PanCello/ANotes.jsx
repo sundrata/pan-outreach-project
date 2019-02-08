@@ -1,57 +1,48 @@
 import React, { Component } from 'react';
-import NOTES from './Notes';
+import NOTES from '../../constants/celloNotes';
+import COLORS from '../../constants/colors';
+import { connect } from 'react-redux';
 
 class ANotes extends Component {
-  state = {
-    A3: 'white',
-    A4: 'white',
-    stroke: 'black'
-  }
-
-  highlightNote = (note) => {
-    this.setState({
-      [note]: '#333333'
-    })
-    setTimeout(() => {
-      this.setState(() => ({
-        [note]: 'white',
-      }))
-    }, 500);
-  }
 
   playNote = (note) => {
     NOTES[note].play();
-    console.log('in ANotes', note);
-    this.highlightNote(note);
+    this.props.dispatch({
+      type: 'PLAY_CELLO_NOTE',
+      payload: {
+        note: note,
+        color: this.props.displayColors ? COLORS.blue : COLORS.colorless,
+        highlight: this.props.displayColors ? COLORS.blueHighlight : COLORS.colorlessHighlight
+      }
+    })
   }
 
   render() {
-    const isTouch = (('ontouchstart' in window) || (navigator.msMaxTouchPoints > 0));
     return (
       <>
         {/* A NOTES */}
         <g id="A3">
           <ellipse
             transform="matrix(0.4251 -0.9052 0.9052 0.4251 55.8045 597.1165)"
-            style={{ fill: this.state.A3, stroke: this.state.stroke }}
+            style={{ fill: this.props.colors.A3, stroke: 'black' }}
             cx="497.942"
             cy="254.63"
             rx="116.702"
             ry="85.248"
-            onTouchStart={isTouch ? () => this.playNote('A3') : null}
-            onClick={isTouch ? null : () => this.playNote('A3')}
+            onTouchStart={this.props.isTouch ? () => this.playNote('A3') : null}
+            onClick={this.props.isTouch ? null : () => this.playNote('A3')}
           />
         </g>
         <g id="A4">
           <ellipse
             transform="matrix(0.8284 -0.5601 0.5601 0.8284 -45.9312 420.1349)"
-            style={{ fill: this.state.A4, stroke: this.state.stroke }}
+            style={{ fill: this.props.colors.A4, stroke: 'black' }}
             cx="662.782"
             cy="285.037"
             rx="48.5"
             ry="68.799"
-            onTouchStart={isTouch ? () => this.playNote('A4') : null}
-            onClick={isTouch ? null : () => this.playNote('A4')}
+            onTouchStart={this.props.isTouch ? () => this.playNote('A4') : null}
+            onClick={this.props.isTouch ? null : () => this.playNote('A4')}
           />
         </g>
       </>
@@ -59,4 +50,10 @@ class ANotes extends Component {
   }
 };
 
-export default ANotes;
+const mapStateToProps = state => ({
+  colors: state.cello,
+  displayColors: state.displayColors,
+  isTouch: state.isTouch,
+});
+
+export default connect(mapStateToProps)(ANotes);
