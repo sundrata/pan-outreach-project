@@ -3,16 +3,56 @@ body {
     margin: 0px;
 }
 
+.adminDashDisplay{
+    margin: 50px auto;
+    text-align: center; 
+}
+
 .adminTable {
     max-width: 70%;
     margin: 20px auto;
 }
+.adminHeader{
+    background-color: #eb6505;
+    text-align: center;
+    padding: 10px auto;
+    font-size: 42px;
+    height: 52px;
+    color: white;
+    font-weight: bolder;
+    -webkit-text-stroke-width: 1.5px;
+    -webkit-text-stroke-color: rgb(0, 0, 0);
+    box-shadow: 3px 2px 5px black;
+ }
 
 .alert {
     background-color: #ff4545;
     margin: 50px;
 }
-
+.dashBox{
+    margin: 0px 10px;
+    display: inline-block;
+    background-color: rgb(233, 231, 231);
+    border-radius: 1%;
+    box-shadow: 1px 1px 2px rgb(66, 66, 66);
+}
+.dashButtons{
+    box-shadow: 1px 1px 1px rgb(185, 184, 184);
+    font-size: 34px;
+    border-radius: 1%;
+    height: 60px;
+    width: 70%;
+    cursor: pointer;
+    padding: 5px 10px;
+    margin: 10px 10px 20px 10px;
+}
+.dashImages{
+    font-size: 20px;
+    max-height: 340px;
+    max-width: 340px;
+    padding: 10px 10px;
+    margin: 20px 10px 10px 10px;
+}
 form {
     background-color: #eb6505;
     width: 30%;

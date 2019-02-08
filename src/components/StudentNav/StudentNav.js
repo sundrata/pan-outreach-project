@@ -1,7 +1,7 @@
 import React from 'react';
-import StudentMusic from '../StudentMusic/StudentMusic';
-import StudentLessons from '../StudentLessons/StudentLessons';
-import StudentDashboard from '../StudentDashboard/StudentDashboard';
+// import StudentMusic from '../StudentMusic/StudentMusic';
+// import StudentLessons from '../StudentLessons/StudentLessons';
+// import StudentDashboard from '../StudentDashboard/StudentDashboard';
 
 const StudentNav = () => (
   <div>
