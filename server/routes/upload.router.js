@@ -87,22 +87,32 @@ router.put('/edit-sheet-music', (request, response) => {
     });
 });
 
+//post lesson plan
+router.post('/lesson-plan', rejectUnauthenticated, (request, response) => {
+    console.log('POST hit:', request.body);
 
-router.post('/', rejectUnauthenticated, (req, res) => {
+    const form = new multiparty.Form();
+    form.parse(request, async (error, fields, files) => {
+        if (error) throw new Error(error);
+        try {
+            const path = files.file[0].path;
+            const buffer = fs.readFileSync(path);
+            const type = fileType(buffer);
+            const timestamp = Date.now().toString();
+            const fileName = `lesson-plan/${timestamp}-lg`; // change
+            const data = await uploadFile(buffer, fileName, type);
+            const name = fields.name[0];
+            const category_id = fields.category_id[0];
+            const queryValues = [name, category_id, data.Location];
+            const queryText = `INSERT INTO lesson_plan (name, category_id, url)
+            VALUES ($1, $2, $3);`;
+            await pool.query(queryText, queryValues)
+            response.sendStatus(201);
 
-  let { user_id, title, start, end } = req.body;
-  start = new Date(start);
-  end = new Date(end);
-  const queryValues = [title, start, end, user_id];
-  const queryText = `INSERT INTO event (title, start, end, user_id)
-                    VALUES ($1, $2, $3, $4);`;
-  console.log(queryValues);
-  pool.query(queryText, queryValues)
-    .then(() => {
-      res.sendStatus(201);
-    })
-    .catch((err) => {
-      console.log('POST event error: ', err);
+        } catch (error) {
+            response.sendStatus(500);
+            console.log(error)
+        }
     });
 });
 
