@@ -145,7 +145,7 @@ logState = () => {
           label="Username"
           type="text"
           onChange={this.handleChange('username')}
-          value={this.state.username}
+          value={this.state.username}note
           fullWidth
         />
 

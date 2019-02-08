@@ -6,6 +6,7 @@ const fs = require('fs');
 const fileType = require('file-type');
 const bluebird = require('bluebird');
 const multiparty = require('multiparty');
+const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
 // configure the keys for accessing AWS
 AWS.config.update({
@@ -32,7 +33,7 @@ const uploadFile = (buffer, name, type) => {
 };
 
 // Define POST route
-router.post('/sheet-music', (request, response) => {
+router.post('/sheet-music', rejectUnauthenticated, (request, response) => {
     console.log('POST hit');
     const form = new multiparty.Form();
     form.parse(request, async (error, fields, files) => {
@@ -60,7 +61,7 @@ router.post('/sheet-music', (request, response) => {
 });
 
 
-router.post('/', (req, res) => {
+router.post('/', rejectUnauthenticated, (req, res) => {
 
   let { user_id, title, start, end } = req.body;
   start = new Date(start);

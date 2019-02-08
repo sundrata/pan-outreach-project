@@ -2,12 +2,13 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 const encryptLib = require('../modules/encryption');
+const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
 
 /**
  * GET route template
  */
-router.get('/', (req, res) => {
+router.get('/', rejectUnauthenticated, (req, res) => {
     let queryText = (`SELECT * FROM "person";`);
     pool.query(queryText).then((result) => {
         console.log('result.rows:', result.rows);
@@ -21,7 +22,7 @@ router.get('/', (req, res) => {
 /**
  * POST route template
  */
-router.post('/', (req, res) => {
+router.post('/', rejectUnauthenticated, (req, res) => {
     const person = req.body;
     const password = encryptLib.encryptPassword(req.body.password);
     const queryText = `INSERT INTO "person" ("username", "password", "school_name", "creation_date") VALUES ($1, $2, $3, current_date);`;
@@ -36,7 +37,7 @@ router.post('/', (req, res) => {
 });
 
 //  delete route
-router.delete('/:id', (req, res) => {
+router.delete('/:id', rejectUnauthenticated, (req, res) => {
     const id = req.params.id;
     const queryText = 'DELETE FROM "person" WHERE id = $1;';
     pool.query(queryText, [id])
@@ -50,7 +51,7 @@ router.delete('/:id', (req, res) => {
 })
 
 // PUT
-router.put('/:id', function(req, res){
+router.put('/:id', rejectUnauthenticated, function(req, res){
     const person = req.body; // This the data we sent
     const query = `UPDATE "person" SET "username" = $2, "password" = $3, "school_name" = $4` + ` WHERE id = $1;`
     console.log('yeahah:', req.params);
