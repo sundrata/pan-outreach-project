@@ -116,4 +116,32 @@ router.post('/lesson-plan', rejectUnauthenticated, (request, response) => {
     });
 });
 
+//update lesson plan
+router.put('/edit-lesson-plan', (request, response) => {
+    console.log('PUT hit');
+    const form = new multiparty.Form();
+    form.parse(request, async (error, fields, files) => {
+        if (error) throw new Error(error);
+        try {
+            const path = files.file[0].path;
+            const buffer = fs.readFileSync(path);
+            const type = fileType(buffer);
+            const timestamp = Date.now().toString();
+            const fileName = `lesson-name/${timestamp}-lg`;
+            const data = await uploadFile(buffer, fileName, type);
+            const name = fields.name[0];
+            const category_id = fields.category_id[0];
+            const id = parseInt(fields.id[0]);
+            const queryValues = [name, category_id, data.Location, id];
+            const queryText = `UPDATE "lesson_plan" SET "name" = $1, "category_id" = $2, "url"= $3 WHERE "id" = $4;`;
+            await pool.query(queryText, queryValues)
+            response.sendStatus(201);
+
+        } catch (error) {
+            response.sendStatus(500);
+            console.log(error)
+        }
+    });
+});
+
 module.exports = router;

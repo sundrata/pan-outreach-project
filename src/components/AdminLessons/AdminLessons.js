@@ -113,8 +113,27 @@ class AdminLessons extends Component {
 
   //edit lesson plan handlers
   editHandleClick = () => {
-    this.props.dispatch({ type: 'UPDATE_LESSON', payload: this.state })
-    this.handleClose();
+    this.setState({ edit: false });
+    // event.preventDefault();
+    const formData = new FormData();
+    formData.append('file', this.state.file[0]);
+    formData.append('id', this.state.id);
+    formData.append('name', this.state.name);
+    formData.append('category_id', this.state.category_id);
+    axios.put(`/api/upload/edit-lesson-plan`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    }).then(response => {
+      console.log('response:', response.data.Location);
+      this.props.dispatch({
+        type: 'FETCH_LESSON'
+      });
+      // handle your response;
+    }).catch(error => {
+      console.log('error in editing file or submitting state', error);
+
+    });
   }
   render() {
     return (
@@ -154,6 +173,9 @@ class AdminLessons extends Component {
                 )
               })}
             </Select></span></DialogContentText>
+            <form onSubmit={this.submitFile}>
+            <input label='upload file' type='file' onChange={this.handleFileUpload} />
+          </form>
           </DialogContent>
           <DialogActions>
             <Button onClick={this.handleClose} color="primary">
