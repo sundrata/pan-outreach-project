@@ -6,7 +6,7 @@ function* getMusic() {
     try {
 
 
-        const setMusic = yield axios.get('/api/music/');  // get seen art items
+        const setMusic = yield axios.get('/api/music/');  // get sheet music
         console.log(`get sheet music`, setMusic.data);
 
         yield dispatch({ type: 'SET_SHEET_MUSIC', payload: setMusic.data });
@@ -22,8 +22,10 @@ function* searchMusic(action) {
     try {
 
         console.log(`our action going to our saga`, action.payload);
-        
-        const setMusic = yield axios.get(`/api/music/search/`, action.payload);  // get seen art items
+        let instrument = action.payload.instrument || '*';
+        let difficulty = action.payload.difficulty || '*';
+        let name = action.payload.name || '*';
+        const setMusic = yield axios.get(`/api/music/search/${instrument}/${difficulty}/${name}`);  // get searched sheet music
         console.log(`get search music`, setMusic.data);
 
         yield dispatch({ type: 'SET_SHEET_MUSIC', payload: setMusic.data });

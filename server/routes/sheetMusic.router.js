@@ -5,7 +5,7 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 
 router.get('/', rejectUnauthenticated, (req, res) => {
     console.log('sheet music get hit');
-    const queryString =`SELECT * from "sheet_music" ORDER BY "name" ASC;`;
+    const queryString =`SELECT * from "sheet_music" ORDER BY "id" ASC;`;
     pool.query(queryString)
         .then((result) => {
             console.log(result.rows);
@@ -16,11 +16,16 @@ router.get('/', rejectUnauthenticated, (req, res) => {
         });
 });
 
-router.get('/search/', rejectUnauthenticated, (req, res) => {
-    console.log('sheet music search hit');
-    console.log(req.body);
+router.get('/search/:instrument/:difficulty/:name', rejectUnauthenticated, (req, res) => {
+    console.log(`search feature`, req.params.instrument, req.params.difficulty, req.params.name);
+    const instrument = req.params.instrument;
+    const difficulty = req.params.difficulty;
+    const name = req.params.name;
+    console.log(typeof name);
     
-    const queryString = `SELECT * from "sheet_music" ORDER BY "name" ASC;`;
+    const queryString = `SELECT * from "sheet_music" WHERE name = '${name}' ;`;
+    console.log(queryString);
+    
     pool.query(queryString)
         .then((result) => {
             console.log(result.rows);
