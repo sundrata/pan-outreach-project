@@ -40,6 +40,10 @@ class AdminSchools extends Component {
     active: null
   }
 
+logState = () => {
+  console.log(this.state.person)
+}
+
   //new school handlers
   handleUsername = (event) => {
     this.setState({
@@ -126,7 +130,14 @@ class AdminSchools extends Component {
       edit: false
     })
   }
+ //dialog handlers
+  handleClickOpen = () => {
+    this.setState({ open: true });
+  };
 
+  handleClose = () => {
+    this.setState({ open: false });
+  };
   //handle delete
   deleteSchool = (row) => {
     this.props.dispatch({ type: 'DELETE_PERSON', payload: row.id })
@@ -295,6 +306,7 @@ class AdminSchools extends Component {
                 </TableBody>
               </Table>
             </Paper>
+            <button onClick={() => this.logState()}>log state</button>
           </center>
         </div>
       </div>

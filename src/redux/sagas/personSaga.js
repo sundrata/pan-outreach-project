@@ -42,6 +42,7 @@ function* deletePerson(action) {
 function* updatePerson(action) {
     try{
         yield call(axios.put, `/api/person/${action.payload.id}`, action.payload);
+        console.log('the payload is:', action.payload)
         yield put({type: 'FETCH_PERSON'});
     } catch(error){
         console.log(error);
