@@ -17,16 +17,18 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 });
 
 router.get('/search/:instrument/:difficulty/:name', rejectUnauthenticated, (req, res) => {
-    console.log(`search feature`, req.params.instrument, req.params.difficulty, req.params.name);
-    const instrument = req.params.instrument;
-    const difficulty = req.params.difficulty;
-    const name = req.params.name;
-    console.log(typeof name);
-    
-    const queryString = `SELECT * from "sheet_music" WHERE name = '${name}' ;`;
-    console.log(queryString);
-    
-    pool.query(queryString)
+    let name = req.params.name;
+    let difficulty = req.params.difficulty;
+    let instrument = req.params.instrument;
+    if (name === '*') { name = null }
+    if (difficulty === '*') { difficulty = null }
+    if (instrument === '*') { instrument = null }
+    const queryString = `SELECT * from sheet_music where
+                        ($1::text is NULL or "name" = $1) and
+                        ($2::difficulty is NULL or "difficulty" = $2) and
+                        ($3::instrument is NULL or "instrument" = $3);`;
+    const queryValues = [ name, difficulty, instrument]
+    pool.query(queryString, queryValues)
         .then((result) => {
             console.log(result.rows);
             res.send(result.rows);
