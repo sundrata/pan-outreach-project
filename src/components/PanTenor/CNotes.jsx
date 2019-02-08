@@ -8,7 +8,7 @@ class CNotes extends Component {
   playNote = (note) => {
     NOTES[note].play();
     this.props.dispatch({
-      type: 'PLAY_NOTE',
+      type: 'PLAY_TENOR_NOTE',
       payload: {
         note: note,
         color: this.props.displayColors ? COLORS.red : COLORS.colorless,
@@ -18,7 +18,6 @@ class CNotes extends Component {
   }
 
   render() {
-    const isTouch = (('ontouchstart' in window) || (navigator.msMaxTouchPoints > 0));
     return (
       <>
         {/* C NOTES */}
@@ -30,8 +29,8 @@ class CNotes extends Component {
             cy="222.083"
             rx="123.312"
             ry="160.529"
-            onTouchStart={isTouch ? () => this.playNote('CSh4') : null}
-            onClick={isTouch ? null : () => this.playNote('CSh4')}
+            onTouchStart={this.props.isTouch ? () => this.playNote('CSh4') : null}
+            onClick={this.props.isTouch ? null : () => this.playNote('CSh4')}
           />
         </g>
         <g id="C4">
@@ -42,8 +41,8 @@ class CNotes extends Component {
             cy="1253.042"
             rx="160.529"
             ry="123.312"
-            onTouchStart={isTouch ? () => this.playNote('C4') : null}
-            onClick={isTouch ? null : () => this.playNote('C4')}
+            onTouchStart={this.props.isTouch ? () => this.playNote('C4') : null}
+            onClick={this.props.isTouch ? null : () => this.playNote('C4')}
           />
         </g>
         <g id="CSh5">
@@ -54,8 +53,8 @@ class CNotes extends Component {
             cy="497.909"
             rx="71.879"
             ry="103.233"
-            onTouchStart={isTouch ? () => this.playNote('CSh5') : null}
-            onClick={isTouch ? null : () => this.playNote('CSh5')}
+            onTouchStart={this.props.isTouch ? () => this.playNote('CSh5') : null}
+            onClick={this.props.isTouch ? null : () => this.playNote('CSh5')}
           />
         </g>
         <g id="C5">
@@ -66,8 +65,8 @@ class CNotes extends Component {
             cy="1002.969"
             rx="74.869"
             ry="106.963"
-            onTouchStart={isTouch ? () => this.playNote('C5') : null}
-            onClick={isTouch ? null : () => this.playNote('C5')}
+            onTouchStart={this.props.isTouch ? () => this.playNote('C5') : null}
+            onClick={this.props.isTouch ? null : () => this.playNote('C5')}
           />
         </g>
         <g id="CSh6">
@@ -77,8 +76,8 @@ class CNotes extends Component {
             cy="679.5"
             rx="55"
             ry="56"
-            onTouchStart={isTouch ? () => this.playNote('CSh6') : null}
-            onClick={isTouch ? null : () => this.playNote('CSh6')}
+            onTouchStart={this.props.isTouch ? () => this.playNote('CSh6') : null}
+            onClick={this.props.isTouch ? null : () => this.playNote('CSh6')}
           />
         </g>
         <g id="C6">
@@ -88,8 +87,8 @@ class CNotes extends Component {
             cy="798.5"
             rx="55"
             ry="56"
-            onTouchStart={isTouch ? () => this.playNote('C6') : null}
-            onClick={isTouch ? null : () => this.playNote('C6')}
+            onTouchStart={this.props.isTouch ? () => this.playNote('C6') : null}
+            onClick={this.props.isTouch ? null : () => this.playNote('C6')}
           />
         </g>
       </>
@@ -100,6 +99,7 @@ class CNotes extends Component {
 const mapStateToProps = state => ({
   colors: state.tenor,
   displayColors: state.displayColors,
+  isTouch: state.isTouch,
 });
 
 export default connect(mapStateToProps)(CNotes);

@@ -10,7 +10,7 @@ const StudentDashboard = () => (
   <div>
     <div>
       <p>
-        Student Dashboard 
+        Student Dashboard
         <LogOutButton />
       </p>
     </div>

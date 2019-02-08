@@ -8,7 +8,7 @@ class DNotes extends Component {
   playNote = (note) => {
     NOTES[note].play();
     this.props.dispatch({
-      type: 'PLAY_NOTE',
+      type: 'PLAY_TENOR_NOTE',
       payload: {
         note: note,
         color: this.props.displayColors ? COLORS.orange : COLORS.colorless,
@@ -18,7 +18,6 @@ class DNotes extends Component {
   }
 
   render() {
-    const isTouch = (('ontouchstart' in window) || (navigator.msMaxTouchPoints > 0));
     return (
       <>
         {/* D NOTES */}
@@ -30,8 +29,8 @@ class DNotes extends Component {
             cy="1029.355"
             rx="120.239"
             ry="151.596"
-            onTouchStart={isTouch ? () => this.playNote('D4') : null}
-            onClick={isTouch ? null : () => this.playNote('D4')}
+            onTouchStart={this.props.isTouch ? () => this.playNote('D4') : null}
+            onClick={this.props.isTouch ? null : () => this.playNote('D4')}
           />
         </g>
         <g id="D5">
@@ -42,8 +41,8 @@ class DNotes extends Component {
             cy="798.262"
             rx="71.247"
             ry="100.371"
-            onTouchStart={isTouch ? () => this.playNote('D5') : null}
-            onClick={isTouch ? null : () => this.playNote('D5')}
+            onTouchStart={this.props.isTouch ? () => this.playNote('D5') : null}
+            onClick={this.props.isTouch ? null : () => this.playNote('D5')}
           />
         </g>
         <g id="D6">
@@ -52,8 +51,8 @@ class DNotes extends Component {
             cx="834"
             cy="662"
             r="54.5"
-            onTouchStart={isTouch ? () => this.playNote('D6') : null}
-            onClick={isTouch ? null : () => this.playNote('D6')}
+            onTouchStart={this.props.isTouch ? () => this.playNote('D6') : null}
+            onClick={this.props.isTouch ? null : () => this.playNote('D6')}
           />
         </g>
       </>
@@ -64,6 +63,7 @@ class DNotes extends Component {
 const mapStateToProps = state => ({
   colors: state.tenor,
   displayColors: state.displayColors,
+  isTouch: state.isTouch,
 });
 
 export default connect(mapStateToProps)(DNotes);

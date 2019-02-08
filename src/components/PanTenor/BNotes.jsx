@@ -8,7 +8,7 @@ class BNotes extends Component {
   playNote = (note) => {
     NOTES[note].play();
     this.props.dispatch({
-      type: 'PLAY_NOTE',
+      type: 'PLAY_TENOR_NOTE',
       payload: {
         note: note,
         color: this.props.displayColors ? COLORS.pink : COLORS.colorless,
@@ -18,7 +18,6 @@ class BNotes extends Component {
   }
 
   render() {
-    const isTouch = (('ontouchstart' in window) || (navigator.msMaxTouchPoints > 0));
     return (
       <>
         {/* B NOTES */}
@@ -30,8 +29,8 @@ class BNotes extends Component {
             cy="280.58"
             rx="130.591"
             ry="101.538"
-            onTouchStart={isTouch ? () => this.playNote('B4') : null}
-            onClick={isTouch ? null : () => this.playNote('B4')}
+            onTouchStart={this.props.isTouch ? () => this.playNote('B4') : null}
+            onClick={this.props.isTouch ? null : () => this.playNote('B4')}
           />
         </g>
         <g id="Bb4">
@@ -42,8 +41,8 @@ class BNotes extends Component {
             cy="911.805"
             rx="129.46"
             ry="101.873"
-            onTouchStart={isTouch ? () => this.playNote('Bb4') : null}
-            onClick={isTouch ? null : () => this.playNote('Bb4')}
+            onTouchStart={this.props.isTouch ? () => this.playNote('Bb4') : null}
+            onClick={this.props.isTouch ? null : () => this.playNote('Bb4')}
           />
         </g>
         <g id="B5">
@@ -52,8 +51,8 @@ class BNotes extends Component {
             cx="836"
             cy="410"
             r="57.5"
-            onTouchStart={isTouch ? () => this.playNote('B5') : null}
-            onClick={isTouch ? null : () => this.playNote('B5')}
+            onTouchStart={this.props.isTouch ? () => this.playNote('B5') : null}
+            onClick={this.props.isTouch ? null : () => this.playNote('B5')}
           />
         </g>
         <g id="Bb5">
@@ -62,8 +61,8 @@ class BNotes extends Component {
             cx="468"
             cy="931"
             r="61.5"
-            onTouchStart={isTouch ? () => this.playNote('Bb5') : null}
-            onClick={isTouch ? null : () => this.playNote('Bb5')}
+            onTouchStart={this.props.isTouch ? () => this.playNote('Bb5') : null}
+            onClick={this.props.isTouch ? null : () => this.playNote('Bb5')}
           />
         </g>
       </>
@@ -74,6 +73,7 @@ class BNotes extends Component {
 const mapStateToProps = state => ({
   colors: state.tenor,
   displayColors: state.displayColors,
+  isTouch: state.isTouch,
 });
 
 export default connect(mapStateToProps)(BNotes);

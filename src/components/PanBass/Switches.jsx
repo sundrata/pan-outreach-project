@@ -10,21 +10,21 @@ class Switches extends React.Component {
     displayColors: true,
   };
 
-  componentDidMount(){
+  componentDidMount() {
     this.props.dispatch({ type: 'SHOW_COLORS' })
   }
-  
+
   handleColorChange = name => event => {
     this.setState({ [name]: event.target.checked });
     this.state.displayColors ?
-    this.props.dispatch({ type: 'HIDE_COLORS' })
-    :
-    this.props.dispatch({ type: 'SHOW_COLORS' })
+      this.props.dispatch({ type: 'HIDE_COLORS' })
+      :
+      this.props.dispatch({ type: 'SHOW_COLORS' })
   };
 
   handleNoteChange = name => event => {
     this.setState({ [name]: event.target.checked });
-    this.props.dispatch({ type: 'TOGGLE_TENOR_NOTES' });
+    this.props.dispatch({ type: 'TOGGLE_BASS_NOTES' });
   };
 
   render() {
