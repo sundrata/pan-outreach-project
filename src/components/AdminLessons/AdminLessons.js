@@ -21,14 +21,15 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 class AdminLessons extends Component {
   state = {
-    open: false,//state for add lesson plan dialog
+    edit: false, //this state controls whether or not to display edit dialog
+    open: false, //state for add lesson plan dialog
     open2: false, //state for manage categories dialog
     name: '',//state for new/edit lesson plan name
     category_id: 0,//state for new/edit lesson plan category
     file: '', //state for file associated with lesson plan
     category: '', //state for adding new category 
   }
-//delete lesson plan dispatch
+  //delete lesson plan dispatch
   deleteLesson = (row) => {
     this.props.dispatch({ type: 'DELETE_LESSON', payload: row.id })
   }
@@ -38,27 +39,29 @@ class AdminLessons extends Component {
   };
 
   handleClose = () => {
-    this.setState({ 
+    this.setState({
       open: false,
-      open2: false });
+      open2: false,
+      edit: false
+    });
   };
-//handlers for adding new lesson plan
+  //handlers for adding new lesson plan
   handleClick = () => {
     this.props.dispatch({ type: 'POST_LESSON', payload: this.state })
     this.handleClose();
   }
-  handleName = (event) => {   
-      this.setState({
-        ...this.state,
-        name: event.target.value
-      })
-    };
+  handleName = (event) => {
+    this.setState({
+      ...this.state,
+      name: event.target.value
+    })
+  };
   handleCategory = (event) => {
-      this.setState({
-        ...this.state,
-        category_id : event.target.value,
-      }); 
-    }   
+    this.setState({
+      ...this.state,
+      category_id: event.target.value,
+    });
+  }
   //handlers for categories
   handleCatOpen = () => {
     this.setState({
@@ -70,9 +73,9 @@ class AdminLessons extends Component {
     this.setState({
       ...this.state,
       category: event.target.value,
-    }); 
-  }  
-  
+    });
+  }
+
   deleteCategory = (row) => {
     this.props.dispatch({ type: 'DELETE_CATEGORY', payload: row.id })
   }
@@ -81,148 +84,208 @@ class AdminLessons extends Component {
     this.props.dispatch({ type: 'POST_CATEGORY', payload: this.state })
     this.handleClose();
   }
-render(){
-  return(
-    <div>
-        <AdminNav />
-        <div>
-          <h1 className="heading">
-            Lesson Plans
-        </h1>
-          <center>
-            {/* start add school */}
-            <div >
-              <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
-                Add Lesson Plan
-                        </Button>
-              <Dialog
-                open={this.state.open}
-                onClose={this.handleClose}
-                aria-labelledby="form-dialog-title"
-              >
-                <DialogTitle id="form-dialog-title">Add Lesson Plan</DialogTitle>
-                <DialogContent>
-                  {/* Lesson Plan Name input */}
-                  <TextField
-                    autoFocus
-                    margin="dense"
-                    id="newUsername"
-                    label="Plan Name"
-                    type="text"
-                    onChange={this.handleName}
-                    value={this.state.name}
-                    fullWidth
-                  />
-                  {/* select lesson plan category */}
+  //edit category handlers
+  editLesson = (row) => {
+    this.setState({ id: row.id });
+    this.setState({ edit: true });
+  }
+
+  //edit lesson plan handlers
+  editHandleClick = () => {
+    this.props.dispatch({ type: 'UPDATE_LESSON', payload: this.state })
+    this.handleClose();
+  }
+  render() {
+    return (
+      this.state.edit ?
+        <Dialog
+          open={this.state.edit}
+          onClose={this.handleClose}
+          aria-labelledby="form-dialog-title"
+        >
+          <DialogTitle id="form-dialog-title">Edit Lesson Plan</DialogTitle>
+          <DialogContent>
+            {/* Lesson Plan Name input */}
+            <TextField
+              autoFocus
+              margin="dense"
+              id="newUsername"
+              label="Plan Name"
+              type="text"
+              onChange={this.handleName}
+              value={this.state.name}
+              fullWidth
+            />
+            {/* select lesson plan category */}
             <DialogContentText>Select Category: <span><Select
-              value={this.state.category}
+              value={this.state.category_id}
               onChange={this.handleCategory}
               label="Category"
               inputProps={{
                 name: 'category',
               }}
             > <option value="none" default disabled>
-            Select Category
-          </option>
-              <MenuItem value={1}>History</MenuItem>
-              <MenuItem value={2}>Math</MenuItem>
-              <MenuItem value={3}>Theory</MenuItem>              
+                Select Category
+              </option>
+              {this.props.reduxStore.categoryReducer.map((row) => {
+                return (
+                  <MenuItem value={row.id}>{row.name}</MenuItem>
+                )
+              })}
             </Select></span></DialogContentText>
-                </DialogContent>
-                <DialogActions>
-                  <Button onClick={this.handleClose} color="primary">
-                    Cancel
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={this.handleClose} color="primary">
+              Cancel
                             </Button>
-                  <Button onClick={() => this.handleClick()} color="primary">
-                    Submit
+            <Button onClick={() => this.editHandleClick()} color="primary">
+              Submit
                             </Button>
-                </DialogActions>
-              </Dialog>
-            </div>
-            <div><Button variant="outlined" color="primary" onClick={this.handleCatOpen}>
+          </DialogActions>
+        </Dialog>
+        :
+        <div>
+          <AdminNav />
+          <div>
+            <h1 className="heading">
+              Lesson Plans
+        </h1>
+            <center>
+              {/* start add school */}
+              <div >
+                <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
+                  Add Lesson Plan
+                        </Button>
+                <Dialog
+                  open={this.state.open}
+                  onClose={this.handleClose}
+                  aria-labelledby="form-dialog-title"
+                >
+                  <DialogTitle id="form-dialog-title">Add Lesson Plan</DialogTitle>
+                  <DialogContent>
+                    {/* Lesson Plan Name input */}
+                    <TextField
+                      autoFocus
+                      margin="dense"
+                      id="newUsername"
+                      label="Plan Name"
+                      type="text"
+                      onChange={this.handleName}
+                      value={this.state.name}
+                      fullWidth
+                    />
+                    {/* select lesson plan category */}
+                    <DialogContentText>Select Category: <span><Select
+                      value={this.state.category_id}
+                      onChange={this.handleCategory}
+                      label="Category"
+                      inputProps={{
+                        name: 'category',
+                      }}
+                    > <option value="none" default disabled>
+                        Select Category
+              </option>
+                      {this.props.reduxStore.categoryReducer.map((row) => {
+                        return (
+                          <MenuItem value={row.id}>{row.name}</MenuItem>
+                        )
+                      })}
+                    </Select></span></DialogContentText>
+                  </DialogContent>
+                  <DialogActions>
+                    <Button onClick={this.handleClose} color="primary">
+                      Cancel
+                            </Button>
+                    <Button onClick={() => this.handleClick()} color="primary">
+                      Submit
+                            </Button>
+                  </DialogActions>
+                </Dialog>
+              </div>
+              <div><Button variant="outlined" color="primary" onClick={this.handleCatOpen}>
                 Manage Categories
                         </Button>
-              <Dialog
-                open={this.state.open2}
-                onClose={this.handleClose}
-                aria-labelledby="form-dialog-title"
-              >
-                <DialogTitle id="form-dialog-title">Add Category</DialogTitle>
-                <DialogContent>
-                  {/* Lesson Plan Name input */}
-                  <TextField
-                    autoFocus
-                    margin="dense"
-                    id="newCategory"
-                    label="Category Name"
-                    type="text"
-                    onChange={this.handleNewCategory}
-                    value={this.state.category}
-                    fullWidth
-                  />
-                <hr></hr>   
-                <DialogContentText>Existing Categories:</DialogContentText>
-                <Paper>
-              <Table className="adminTable">
-                <TableHead>
-                  <TableRow>
-                    <TableCell align="center">Category Name</TableCell>
-                    <TableCell align="center">Delete</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {this.props.reduxStore.categoryReducer.map((row) => {
-                      return (
-                        <TableRow key={row.id}>
-                          <TableCell align="center">{row.name}</TableCell>
-                          <TableCell align="center"><Button onClick={() => this.deleteCategory(row)}>Delete</Button></TableCell>
-                        </TableRow>
-                      )
-                  })}
-                </TableBody>
-              </Table>
-            </Paper> 
-                </DialogContent>
-                <DialogActions>
-                  <Button onClick={this.handleClose} color="primary">
-                    Cancel
+                <Dialog
+                  open={this.state.open2}
+                  onClose={this.handleClose}
+                  aria-labelledby="form-dialog-title"
+                >
+                  <DialogTitle id="form-dialog-title">Add Category</DialogTitle>
+                  <DialogContent>
+                    {/* Lesson Plan Name input */}
+                    <TextField
+                      autoFocus
+                      margin="dense"
+                      id="newCategory"
+                      label="Category Name"
+                      type="text"
+                      onChange={this.handleNewCategory}
+                      value={this.state.category}
+                      fullWidth
+                    />
+                    <hr></hr>
+                    <DialogContentText>Existing Categories:</DialogContentText>
+                    <Paper>
+                      <Table className="adminTable">
+                        <TableHead>
+                          <TableRow>
+                            <TableCell align="center">Category Name</TableCell>
+                            <TableCell align="center">Delete</TableCell>
+                          </TableRow>
+                        </TableHead>
+                        <TableBody>
+                          {this.props.reduxStore.categoryReducer.map((row) => {
+                            return (
+                              <TableRow key={row.id}>
+                                <TableCell align="center">{row.name}</TableCell>
+                                <TableCell align="center"><Button onClick={() => this.deleteCategory(row)}>Delete</Button></TableCell>
+                              </TableRow>
+                            )
+                          })}
+                        </TableBody>
+                      </Table>
+                    </Paper>
+                  </DialogContent>
+                  <DialogActions>
+                    <Button onClick={this.handleClose} color="primary">
+                      Cancel
                             </Button>
-                  <Button onClick={() => this.handleAddCat()} color="primary">
-                    Submit
+                    <Button onClick={() => this.handleAddCat()} color="primary">
+                      Submit
                             </Button>
-                </DialogActions>
-              </Dialog></div>
-            {/* end add school */}
-            <Paper>
-              <Table className="adminTable">
-                <TableHead>
-                  <TableRow>
-                    <TableCell align="center">Lesson Name</TableCell>
-                    <TableCell align="center">Category</TableCell>
-                    <TableCell align="center">Edit</TableCell>
-                    <TableCell align="center">Delete</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {this.props.reduxStore.lessonReducer.map((row) => {
+                  </DialogActions>
+                </Dialog></div>
+              {/* end add school */}
+              <Paper>
+                <Table className="adminTable">
+                  <TableHead>
+                    <TableRow>
+                      <TableCell align="center">Lesson Name</TableCell>
+                      <TableCell align="center">Category</TableCell>
+                      <TableCell align="center">Edit</TableCell>
+                      <TableCell align="center">Delete</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {this.props.reduxStore.lessonReducer.map((row) => {
                       return (
                         <TableRow key={row.id}>
                           <TableCell align="center">{row.name}</TableCell>
                           <TableCell align="center">{row.category_name}</TableCell>
-                          <TableCell align="center"><Button onClick={() => this.editSchool(row)}>Edit</Button></TableCell>
+                          <TableCell align="center"><Button onClick={() => this.editLesson(row)}>Edit</Button></TableCell>
                           <TableCell align="center"><Button onClick={() => this.deleteLesson(row)}>Delete</Button></TableCell>
                         </TableRow>
                       )
-                  })}
-                </TableBody>
-              </Table>
-            </Paper>
-            <button onClick={() => this.logState()}>log state</button>
-          </center>
+                    })}
+                  </TableBody>
+                </Table>
+              </Paper>
+              <button onClick={() => this.logState()}>log state</button>
+            </center>
+          </div>
         </div>
-      </div>
-  )
-}
+    )
+  }
 };
 
 const mapStateToProps = reduxStore => ({

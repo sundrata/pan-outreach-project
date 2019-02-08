@@ -39,12 +39,22 @@ function* postLesson(action){
     yield put({ type: 'FETCH_LESSON' });
 }
 
+function* updateLesson(action) {
+    try{
+        yield call(axios.put, `/api/lesson/${action.payload.id}`, action.payload);
+        console.log('the payload is:', action.payload)
+        yield put({type: 'FETCH_LESSON'});
+    } catch(error){
+        console.log(error);
+    }
+}
 
-function* personSaga() {
+function* lessonSaga() {
     yield takeEvery('FETCH_LESSON', fetchLesson);
     yield takeEvery('DELETE_LESSON', deleteLesson);
     yield takeEvery('POST_LESSON', postLesson);
-
+    yield takeEvery('UPDATE_LESSON', updateLesson)
 }
 
-export default personSaga;
+
+export default lessonSaga;
