@@ -58,16 +58,16 @@ class AdminSchools extends Component {
   }
 
   //slider toggle funcs
-  handleReady = (row) => {
-      this.setState({ id: row.id });
-      this.setState({ active: !row.active });  
-      console.log('hit handle ready', row.id) 
-      this.handleActive();
-  }
+  // handleReady = (row) => {
+  //     this.setState({ id: row.id });
+  //     this.setState({ active: !row.active });  
+  //     console.log('hit handle ready', row.id) 
+  //     this.handleActive();
+  // }
 
-  handleActive = () => {
-    this.props.dispatch({ type: 'UPDATE_ACTIVE', payload: this.state })
-    console.log('hit handle active', this.state.id)
+  handleActive = (row) => {
+    this.props.dispatch({ type: 'UPDATE_ACTIVE', payload: row })
+    // console.log('hit handle active', row)
   }
 
   //edit dialog funcs
@@ -276,9 +276,9 @@ class AdminSchools extends Component {
                           <TableCell align="left">{row.creation_date}</TableCell>
                           <TableCell align="left">
                             <Switch
-                              id={row.id}
+                              id=''
                               checked={row.active}
-                              onClick={() => this.handleReady(row)}
+                              onClick={() => this.handleActive(row)}
                               value={row.active}
                               color="primary"
                             />

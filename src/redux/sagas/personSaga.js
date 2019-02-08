@@ -51,6 +51,7 @@ function* updatePerson(action) {
 function* updateActive(action) {
     try{
         yield call(axios.put, `/api/person/active/${action.payload.id}`, action.payload);
+        console.log('payload is:', action.payload);
         yield put({type: 'FETCH_PERSON'});
     } catch(error){
         console.log('error on updateActive:', error);
