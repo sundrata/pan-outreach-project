@@ -8,7 +8,7 @@ class GNotes extends Component {
   playNote = (note) => {
     NOTES[note].play();
     this.props.dispatch({
-      type: 'PLAY_NOTE',
+      type: 'PLAY_TENOR_NOTE',
       payload: {
         note: note,
         color: this.props.displayColors ? COLORS.indigo : COLORS.colorless,
@@ -18,7 +18,6 @@ class GNotes extends Component {
   }
 
   render() {
-    const isTouch = (('ontouchstart' in window) || (navigator.msMaxTouchPoints > 0));
     return (
       <>
         {/* G NOTES  */}
@@ -30,8 +29,8 @@ class GNotes extends Component {
             cy="1226.77"
             rx="105.142"
             ry="138.12"
-            onTouchStart={isTouch ? () => this.playNote('G4') : null}
-            onClick={isTouch ? null : () => this.playNote('G4')}
+            onTouchStart={this.props.isTouch ? () => this.playNote('G4') : null}
+            onClick={this.props.isTouch ? null : () => this.playNote('G4')}
           />
         </g>
         <g id="GSh4">
@@ -42,8 +41,8 @@ class GNotes extends Component {
             cy="370.246"
             rx="106.013"
             ry="137.298"
-            onTouchStart={isTouch ? () => this.playNote('GSh4') : null}
-            onClick={isTouch ? null : () => this.playNote('GSh4')}
+            onTouchStart={this.props.isTouch ? () => this.playNote('GSh4') : null}
+            onClick={this.props.isTouch ? null : () => this.playNote('GSh4')}
           />
         </g>
         <g id="G5">
@@ -54,8 +53,8 @@ class GNotes extends Component {
             cy="944.07"
             rx="57.816"
             ry="84.637"
-            onTouchStart={isTouch ? () => this.playNote('G5') : null}
-            onClick={isTouch ? null : () => this.playNote('G5')}
+            onTouchStart={this.props.isTouch ? () => this.playNote('G5') : null}
+            onClick={this.props.isTouch ? null : () => this.playNote('G5')}
           />
         </g>
         <g id="GSh5">
@@ -66,8 +65,8 @@ class GNotes extends Component {
             cy="626.5"
             rx="55.845"
             ry="80.365"
-            onTouchStart={isTouch ? () => this.playNote('GSh5') : null}
-            onClick={isTouch ? null : () => this.playNote('GSh5')}
+            onTouchStart={this.props.isTouch ? () => this.playNote('GSh5') : null}
+            onClick={this.props.isTouch ? null : () => this.playNote('GSh5')}
           />
         </g>
       </>
@@ -78,6 +77,7 @@ class GNotes extends Component {
 const mapStateToProps = state => ({
   colors: state.tenor,
   displayColors: state.displayColors,
+  isTouch: state.isTouch,
 });
 
 export default connect(mapStateToProps)(GNotes);

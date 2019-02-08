@@ -6,7 +6,7 @@ let noteArray = ['A2', 'B2', 'Bb2', 'C2', 'C3', 'CSh2', 'CSh3', 'D2', 'D3', 'E2'
 
 for (const note of noteArray) {
   NOTES[note] = new Howl({
-    src: [`/BassWavs/Bass${note}.wav`, `/BassWavs/Bass${note}.wav`]
+    src: [`/Sounds/BassWavs/Bass${note}.wav`, `/Sounds/BassWavs/Bass${note}.wav`]
   })
 }
 

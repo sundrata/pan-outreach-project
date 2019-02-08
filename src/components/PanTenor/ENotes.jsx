@@ -8,7 +8,7 @@ class ENotes extends Component {
   playNote = (note) => {
     NOTES[note].play();
     this.props.dispatch({
-      type: 'PLAY_NOTE',
+      type: 'PLAY_TENOR_NOTE',
       payload: {
         note: note,
         color: this.props.displayColors ? COLORS.yellow : COLORS.colorless,
@@ -18,7 +18,6 @@ class ENotes extends Component {
   }
 
   render() {
-    const isTouch = (('ontouchstart' in window) || (navigator.msMaxTouchPoints > 0));
     return (
       <>
         {/* E NOTES */}
@@ -30,8 +29,8 @@ class ENotes extends Component {
             cy="498.066"
             rx="144.284"
             ry="111.421"
-            onTouchStart={isTouch ? () => this.playNote('E4') : null}
-            onClick={isTouch ? null : () => this.playNote('E4')}
+            onTouchStart={this.props.isTouch ? () => this.playNote('E4') : null}
+            onClick={this.props.isTouch ? null : () => this.playNote('E4')}
           />
         </g>
         <g id="Eb4">
@@ -42,8 +41,8 @@ class ENotes extends Component {
             cy="635.569"
             rx="119.153"
             ry="152.941"
-            onTouchStart={isTouch ? () => this.playNote('Eb4') : null}
-            onClick={isTouch ? null : () => this.playNote('Eb4')}
+            onTouchStart={this.props.isTouch ? () => this.playNote('Eb4') : null}
+            onClick={this.props.isTouch ? null : () => this.playNote('Eb4')}
           />
         </g>
         <g id="E5">
@@ -54,8 +53,8 @@ class ENotes extends Component {
             cy="506.735"
             rx="92.613"
             ry="66.307"
-            onTouchStart={isTouch ? () => this.playNote('E5') : null}
-            onClick={isTouch ? null : () => this.playNote('E5')}
+            onTouchStart={this.props.isTouch ? () => this.playNote('E5') : null}
+            onClick={this.props.isTouch ? null : () => this.playNote('E5')}
           />
         </g>
         <g id="Eb5">
@@ -66,8 +65,8 @@ class ENotes extends Component {
             cy="783.632"
             rx="95.385"
             ry="68.307"
-            onTouchStart={isTouch ? () => this.playNote('Eb5') : null}
-            onClick={isTouch ? null : () => this.playNote('Eb5')}
+            onTouchStart={this.props.isTouch ? () => this.playNote('Eb5') : null}
+            onClick={this.props.isTouch ? null : () => this.playNote('Eb5')}
           />
         </g>
         <g id="E6">
@@ -77,8 +76,8 @@ class ENotes extends Component {
             cy="598.5"
             rx="52.5"
             ry="51"
-            onTouchStart={isTouch ? () => this.playNote('E6') : null}
-            onClick={isTouch ? null : () => this.playNote('E6')}
+            onTouchStart={this.props.isTouch ? () => this.playNote('E6') : null}
+            onClick={this.props.isTouch ? null : () => this.playNote('E6')}
           />
         </g>
         <g id="Eb6">
@@ -87,8 +86,8 @@ class ENotes extends Component {
             cx="654"
             cy="806"
             r="52.5"
-            onTouchStart={isTouch ? () => this.playNote('Eb6') : null}
-            onClick={isTouch ? null : () => this.playNote('Eb6')}
+            onTouchStart={this.props.isTouch ? () => this.playNote('Eb6') : null}
+            onClick={this.props.isTouch ? null : () => this.playNote('Eb6')}
           />
         </g>
       </>
@@ -99,6 +98,7 @@ class ENotes extends Component {
 const mapStateToProps = state => ({
   colors: state.tenor,
   displayColors: state.displayColors,
+  isTouch: state.isTouch,
 });
 
 export default connect(mapStateToProps)(ENotes);
