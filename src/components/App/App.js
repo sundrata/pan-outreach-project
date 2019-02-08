@@ -25,6 +25,9 @@ class App extends Component {
   componentDidMount () {
     this.props.dispatch({type: 'FETCH_USER'})
     this.props.dispatch({ type: 'FETCH_PERSON' })
+    this.props.dispatch({ type: 'FETCH_LESSON' })
+    this.props.dispatch({ type: 'FETCH_CATEGORY' })
+
     // true if touch device, otherwise false
     this.props.dispatch({ type: 'IS_TOUCH_DEVICE', payload: (('ontouchstart' in window) || (navigator.msMaxTouchPoints > 0)) })
   }

@@ -9,7 +9,7 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
  * GET route template
  */
 router.get('/', rejectUnauthenticated, (req, res) => {
-    let queryText = (`SELECT * FROM "person";`);
+    let queryText = (`SELECT * FROM "person" ORDER BY "id" DESC;`);
     pool.query(queryText).then((result) => {
         console.log('result.rows:', result.rows);
         res.send(result.rows);
