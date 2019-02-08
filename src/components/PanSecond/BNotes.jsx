@@ -11,8 +11,8 @@ class BNotes extends Component {
       type: 'PLAY_SECOND_NOTE',
       payload: {
         note: note,
-        color: this.props.displayColors ? COLORS.pink : COLORS.colorless,
-        highlight: this.props.displayColors ? COLORS.pinkHighlight : COLORS.colorlessHighlight
+        color: this.props.displayColors ? COLORS.violet : COLORS.colorless,
+        highlight: this.props.displayColors ? COLORS.violetHighlight : COLORS.colorlessHighlight
       }
     })
   }
@@ -33,18 +33,6 @@ class BNotes extends Component {
             onClick={this.props.isTouch ? null : () => this.playNote('B3')}
           />
         </g>
-        <g id="Bb3">
-          <ellipse
-            transform="matrix(0.8778 -0.4789 0.4789 0.8778 -220.1074 312.8605)"
-            style={{ fill: this.props.colors.Bb3, stroke: 'black' }}
-            cx="503.281"
-            cy="587.931"
-            rx="116.042"
-            ry="84.484"
-            onTouchStart={this.props.isTouch ? () => this.playNote('Bb3') : null}
-            onClick={this.props.isTouch ? null : () => this.playNote('Bb3')}
-          />
-        </g>
         <g id="B4">
           <ellipse
             transform="matrix(0.9856 -0.1688 0.1688 0.9856 -39.7962 211.0937)"
@@ -55,27 +43,6 @@ class BNotes extends Component {
             ry="35.521"
             onTouchStart={this.props.isTouch ? () => this.playNote('B4') : null}
             onClick={this.props.isTouch ? null : () => this.playNote('B4')}
-          />
-        </g>
-        <g id="Bb4">
-          <ellipse
-            style={{ fill: this.props.colors.Bb4, stroke: 'black' }}
-            cx="369.5"
-            cy="480.5"
-            rx="37"
-            ry="53"
-            onTouchStart={this.props.isTouch ? () => this.playNote('Bb4') : null}
-            onClick={this.props.isTouch ? null : () => this.playNote('Bb4')}
-          />
-        </g>
-        <g id="Bb5">
-          <circle
-            style={{ fill: this.props.colors.Bb5, stroke: 'black' }}
-            cx="346"
-            cy="356"
-            r="34.5"
-            onTouchStart={this.props.isTouch ? () => this.playNote('Bb5') : null}
-            onClick={this.props.isTouch ? null : () => this.playNote('Bb5')}
           />
         </g>
       </>

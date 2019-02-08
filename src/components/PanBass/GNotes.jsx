@@ -31,15 +31,6 @@ class GNotes extends Component {
             onClick={this.props.isTouch ? null : () => this.playNote('G2')}
           />
         </g>
-        <g id="GSh2">
-          <path
-            style={{ fill: this.props.colors.GSh2, stroke: 'black' }}
-            d="M72.413,919.281C55.297,942.643,38.5,957.5,29.5,1046.5s79,164,79.985,164.917S183.5,1147.5,183.5,1046.5
-            c0-68.469-84.081-156.438-84.081-156.438L72.413,919.281z"
-            onTouchStart={this.props.isTouch ? () => this.playNote('GSh2') : null}
-            onClick={this.props.isTouch ? null : () => this.playNote('GSh2')}
-          />
-        </g>
       </>
     );
   }

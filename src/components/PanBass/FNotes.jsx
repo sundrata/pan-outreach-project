@@ -32,15 +32,6 @@ class FNotes extends Component {
             onClick={this.props.isTouch ? null : () => this.playNote('F2')}
           />
         </g>
-        <g id="FSh2">
-          <path
-            style={{ fill: this.props.colors.FSh2, stroke: 'black' }}
-            d="M1237.778,880.62c-14.565,17.406-81.132,94.557-73.553,162.377c11.945,106.899,86.161,160.881,86.161,160.881
-		        s81.439-71.224,69.745-172.259C1308.22,928.72,1237.778,880.62,1237.778,880.62z"
-            onTouchStart={this.props.isTouch ? () => this.playNote('FSh2') : null}
-            onClick={this.props.isTouch ? null : () => this.playNote('FSh2')}
-          />
-        </g>
         <g id="F3">
           <path
             style={{ fill: this.props.colors.F3, stroke: 'black' }}
