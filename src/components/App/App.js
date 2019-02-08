@@ -15,6 +15,9 @@ import AdminLessons from '../AdminLessons/AdminLessons';
 import AdminMusic from '../AdminMusic/AdminMusic';
 import AdminNav from '../AdminNav/AdminNav';
 import PanTenor from '../PanTenor/PanTenor';
+import PanSecond from '../PanSecond/PanSecond';
+import PanCello from '../PanCello/PanCello';
+import PanBass from '../PanBass/PanBass';
 import Split from '../Split/Split';
 import './App.css';
 
@@ -22,9 +25,13 @@ class App extends Component {
   componentDidMount () {
     this.props.dispatch({type: 'FETCH_USER'})
     this.props.dispatch({ type: 'FETCH_PERSON' })
+    // true if touch device, otherwise false
+    this.props.dispatch({ type: 'IS_TOUCH_DEVICE', payload: (('ontouchstart' in window) || (navigator.msMaxTouchPoints > 0)) })
   }
 
+
   render() {
+
     return (
       <Router>
         <div>
@@ -68,6 +75,21 @@ class App extends Component {
               exact
               path="/tenor"
               component={PanTenor}
+            />
+            <Route
+              exact
+              path="/second"
+              component={PanSecond}
+            />
+            <Route
+              exact
+              path="/cello"
+              component={PanCello}
+            />
+            <Route
+              exact
+              path="/bass"
+              component={PanBass}
             />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />

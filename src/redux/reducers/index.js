@@ -4,7 +4,11 @@ import loginMode from './loginModeReducer';
 import user from './userReducer';
 import personReducer from './personReducer';
 import tenor from './tenorReducer';
+import second from './secondReducer';
+import cello from './celloReducer';
+import bass from './bassReducer';
 import displayColors from './displayColorsReducer';
+import isTouch from './isTouchReducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -18,7 +22,11 @@ const rootReducer = combineReducers({
   user, // will have an id and username if someone is logged in
   personReducer, //seperate from user reducer. user reducer only contains logged in accounts info
   tenor, //sets note colors
+  second, //sets note colors
+  cello, //sets note colors
+  bass, //sets note colors
   displayColors, // boolean of whether to display colors or not
+  isTouch, // boolean determining if touch device is being used
 });
 
 export default rootReducer;

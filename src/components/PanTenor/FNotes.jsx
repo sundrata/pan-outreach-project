@@ -8,7 +8,7 @@ class FNotes extends Component {
   playNote = (note) => {
     NOTES[note].play();
     this.props.dispatch({
-      type: 'PLAY_NOTE',
+      type: 'PLAY_TENOR_NOTE',
       payload: {
         note: note,
         color: this.props.displayColors ? COLORS.green : COLORS.colorless,
@@ -18,7 +18,6 @@ class FNotes extends Component {
   }
 
   render() {
-    const isTouch = (('ontouchstart' in window) || (navigator.msMaxTouchPoints > 0));
     return (
       <>
         {/* F NOTES */}
@@ -30,8 +29,8 @@ class FNotes extends Component {
             cy="173.184"
             rx="143.707"
             ry="110.209"
-            onTouchStart={isTouch ? () => this.playNote('FSh4') : null}
-            onClick={isTouch ? null : () => this.playNote('FSh4')}
+            onTouchStart={this.props.isTouch ? () => this.playNote('FSh4') : null}
+            onClick={this.props.isTouch ? null : () => this.playNote('FSh4')}
           />
         </g>
         <g id="F4">
@@ -42,8 +41,8 @@ class FNotes extends Component {
             cy="1133.613"
             rx="144.589"
             ry="111.309"
-            onTouchStart={isTouch ? () => this.playNote('F4') : null}
-            onClick={isTouch ? null : () => this.playNote('F4')}
+            onTouchStart={this.props.isTouch ? () => this.playNote('F4') : null}
+            onClick={this.props.isTouch ? null : () => this.playNote('F4')}
           />
         </g>
         <g id="FSh5">
@@ -54,8 +53,8 @@ class FNotes extends Component {
             cy="429.604"
             rx="61.378"
             ry="86.213"
-            onTouchStart={isTouch ? () => this.playNote('FSh5') : null}
-            onClick={isTouch ? null : () => this.playNote('FSh5')}
+            onTouchStart={this.props.isTouch ? () => this.playNote('FSh5') : null}
+            onClick={this.props.isTouch ? null : () => this.playNote('FSh5')}
           />
         </g>
         <g id="F5">
@@ -66,8 +65,8 @@ class FNotes extends Component {
             cy="984.672"
             rx="89.688"
             ry="62.346"
-            onTouchStart={isTouch ? () => this.playNote('F5') : null}
-            onClick={isTouch ? null : () => this.playNote('F5')}
+            onTouchStart={this.props.isTouch ? () => this.playNote('F5') : null}
+            onClick={this.props.isTouch ? null : () => this.playNote('F5')}
           />
         </g>
       </>
@@ -78,6 +77,7 @@ class FNotes extends Component {
 const mapStateToProps = state => ({
   colors: state.tenor,
   displayColors: state.displayColors,
+  isTouch: state.isTouch,
 });
 
 export default connect(mapStateToProps)(FNotes);

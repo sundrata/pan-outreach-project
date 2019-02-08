@@ -1,4 +1,7 @@
-#seconds-svg {
-  width: 90%;
-  height: 90%;
+.disable-touch-zoom {
+  touch-action: none;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+#seconds-svg{
+  transform: scale(0.75);
 }
