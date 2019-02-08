@@ -81,6 +81,7 @@ class AdminSchools extends Component {
     // add dialog handlers
   handleClick = () => {
     this.props.dispatch({ type: 'POST_PERSON', payload: this.state })
+    this.handleClose();
   }
 
   handleClickOpen = () => {
