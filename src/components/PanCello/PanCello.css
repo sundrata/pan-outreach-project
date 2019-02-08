@@ -1,4 +1,7 @@
-#cello-svg {
-  width: 57%;
-  height: 57%;
+.disable-touch-zoom {
+  touch-action: none;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+#cello-svg{
+  transform: scale(0.75);
 }

@@ -8,7 +8,7 @@ class ANotes extends Component {
   playNote = (note) => {
     NOTES[note].play();
     this.props.dispatch({
-      type: 'PLAY_NOTE',
+      type: 'PLAY_TENOR_NOTE',
       payload: {
         note: note,
         color: this.props.displayColors ? COLORS.blue : COLORS.colorless,
@@ -18,7 +18,6 @@ class ANotes extends Component {
   }
 
   render() {
-    const isTouch = (('ontouchstart' in window) || (navigator.msMaxTouchPoints > 0));
     return (
       <>
         {/* A NOTES */}
@@ -30,8 +29,8 @@ class ANotes extends Component {
             cy="775.61"
             rx="100.021"
             ry="131.926"
-            onTouchStart={isTouch ? () => this.playNote('A4') : null}
-            onClick={isTouch ? null : () => this.playNote('A4')}
+            onTouchStart={this.props.isTouch ? () => this.playNote('A4') : null}
+            onClick={this.props.isTouch ? null : () => this.playNote('A4')}
           />
         </g>
         <g id="A5">
@@ -40,8 +39,8 @@ class ANotes extends Component {
             cx="1034"
             cy="650"
             r="61.5"
-            onTouchStart={isTouch ? () => this.playNote('A5') : null}
-            onClick={isTouch ? null : () => this.playNote('A5')}
+            onTouchStart={this.props.isTouch ? () => this.playNote('A5') : null}
+            onClick={this.props.isTouch ? null : () => this.playNote('A5')}
           />
         </g>
       </>
@@ -52,6 +51,7 @@ class ANotes extends Component {
 const mapStateToProps = state => ({
   colors: state.tenor,
   displayColors: state.displayColors,
+  isTouch: state.isTouch,
 });
 
 export default connect(mapStateToProps)(ANotes);

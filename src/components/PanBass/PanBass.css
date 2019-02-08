@@ -1,0 +1,7 @@
+.disable-touch-zoom {
+  touch-action: none;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+#bass-svg{
+  transform: scale(0.75);
+}
