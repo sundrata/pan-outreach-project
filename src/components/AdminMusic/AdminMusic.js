@@ -32,10 +32,13 @@ class AdminMusic extends Component {
     edit: false,
     name: '',
     file: '',
-    instrument: null,
-    difficulty: null,
+    instrument: '',
+    difficulty: '',
     open: false,
     hidden: false,
+    searchInstrument: '',
+    searchDifficulty: 0,
+    searchName: '',
 
   }
 
@@ -165,13 +168,19 @@ class AdminMusic extends Component {
     this.setState({ id: row.id });
     this.setState({ edit: true });
   }
+  
+  handleSearchChange = (event) => {
+    console.log('event was here', this.state)
+    this.setState({
+      ...this.state,
+      [event.target.name]: event.target.value
 
-  seeState = () => {
-    console.log(this.state);
-    
+    });
   }
+  
   render() {
     return (
+      // our edit dialog box 
       this.state.edit ?
         <Dialog
           open={this.state.edit}
@@ -180,11 +189,9 @@ class AdminMusic extends Component {
         >
           <DialogTitle id="form-dialog-title">Edit Music</DialogTitle>
           <DialogContent>
-            <button onClick={this.seeState}> heeeey</button>
             <DialogContentText>
               Edit Song
                 </DialogContentText>
-            {/* Username input for new school */}
             <TextField
               autoFocus
               margin="dense"
@@ -230,7 +237,6 @@ class AdminMusic extends Component {
           </DialogContent>
           <form onSubmit={this.submitFile}>
             <input label='upload file' type='file' onChange={this.handleFileUpload} />
-            {/* <button type='submit'>Send</button> */}
           </form>
           <DialogActions>
             <Button onClick={this.editHandleClose} color="primary">
@@ -249,11 +255,51 @@ class AdminMusic extends Component {
         </h1>
           <center>
             <div>
-              {/* start add new music */}
+              
               <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
                 Add New Music
             </Button>
-
+            {/* start sorting table */}
+              <DialogContentText>
+                Sort by Instrument
+                </DialogContentText>
+              <Select
+                name='searchInstrument'
+                value={this.state.searchInstrument}
+                onChange={this.handleSearchChange}
+                inputProps={{
+                  name: 'searchInstrument',
+                }}
+              >
+                <MenuItem value={'Tenor'}>Tenor</MenuItem>
+                <MenuItem value={'Seconds'}>Seconds</MenuItem>
+                <MenuItem value={'Cello'}>Cello</MenuItem>
+                <MenuItem value={'Bass'}>Bass</MenuItem>
+              </Select>
+              <DialogContentText>
+                Sort by Difficulty
+                </DialogContentText>
+              <Select
+                name='searchDifficulty'
+                value={this.state.searchDifficulty}
+                onChange={this.handleSearchChange}
+                inputProps={{
+                  name: 'searchDifficulty',
+                }}
+              >
+                <MenuItem value={1}>1</MenuItem>
+                <MenuItem value={2}>2</MenuItem>
+                <MenuItem value={3}>3</MenuItem>
+                <MenuItem value={4}>4</MenuItem>
+                <MenuItem value={5}>5</MenuItem>
+              </Select>
+              <DialogContentText>
+                Search by Song Name
+              </DialogContentText>
+              <TextField onChange={this.handleSearchChange}>
+                
+              </TextField>
+              {/* start add new music */}
               <Dialog
                 open={this.state.open}
                 onClose={this.handleClose}
@@ -264,7 +310,6 @@ class AdminMusic extends Component {
                   <DialogContentText>
                     Add New Song
                 </DialogContentText>
-                  {/* Username input for new school */}
                   <TextField
                     autoFocus
                     margin="dense"
@@ -323,6 +368,7 @@ class AdminMusic extends Component {
               </Dialog>
               {/* ends add new music */}
             </div>
+            {/* add table */}
             <Paper>
               <Table className="adminTable">
                 <TableHead>
