@@ -73,7 +73,7 @@ router.put('/active/:id', function(req, res){
     const person = req.body; // This the data we sent
     const query = `UPDATE "person" SET "active" = NOT "active" WHERE id = $1;`
     console.log('yeahah:', req.body);
-    pool.query(query, [id, person.active])
+    pool.query(query, [id])
     .then((result)=>{
         console.log(result);
         res.sendStatus(201);
