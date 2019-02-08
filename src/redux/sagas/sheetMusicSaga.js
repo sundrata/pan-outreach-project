@@ -6,7 +6,7 @@ function* getMusic() {
     try {
 
 
-        const setMusic = yield axios.get('/api/music/');  // get seen art items
+        const setMusic = yield axios.get('/api/music/');  // get sheet music
         console.log(`get sheet music`, setMusic.data);
 
         yield dispatch({ type: 'SET_SHEET_MUSIC', payload: setMusic.data });
@@ -16,7 +16,27 @@ function* getMusic() {
     } catch (error) {
         console.log('error in get sheet music:', error);
     }
-}
+};
+
+function* searchMusic(action) {
+    try {
+
+        console.log(`our action going to our saga`, action.payload);
+        let instrument = action.payload.instrument || '*';
+        let difficulty = action.payload.difficulty || '*';
+        let name = action.payload.name || '*';
+        const setMusic = yield axios.get(`/api/music/search/${instrument}/${difficulty}/${name}`);  // get searched sheet music
+        console.log(`get search music`, setMusic.data);
+
+        yield dispatch({ type: 'SET_SHEET_MUSIC', payload: setMusic.data });
+
+
+
+    } catch (error) {
+        console.log('error in get sheet music:', error);
+    }
+};
+
 function* deleteMusic(action){
     try{
         yield axios.delete(`/api/music/${action.payload}`);
@@ -24,11 +44,13 @@ function* deleteMusic(action){
     } catch(error) {
         console.log('error deleting music', error);
     }
-}
+};
+
 
 
 function* getSheetMusicWatcher() {
     yield takeLatest('GET_SHEET_MUSIC', getMusic);
     yield takeLatest('DELETE_SHEET_MUSIC', deleteMusic);
+    yield takeLatest('SEARCH_SHEET_MUSIC', searchMusic)
 }
 export default getSheetMusicWatcher;
