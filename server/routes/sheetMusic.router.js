@@ -16,6 +16,21 @@ router.get('/', rejectUnauthenticated, (req, res) => {
         });
 });
 
+router.get('/search/', rejectUnauthenticated, (req, res) => {
+    console.log('sheet music search hit');
+    console.log(req.body);
+    
+    const queryString = `SELECT * from "sheet_music" ORDER BY "name" ASC;`;
+    pool.query(queryString)
+        .then((result) => {
+            console.log(result.rows);
+            res.send(result.rows);
+        }).catch(error => {
+            console.log(error);
+            res.sendStatus(500);
+        });
+});
+
 router.delete('/:id', (req, res) => {
     queryString = `DELETE FROM "sheet_music" WHERE "id" = $1;`;
     let id = req.params.id
