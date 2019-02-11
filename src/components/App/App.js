@@ -19,6 +19,7 @@ import PanSecond from '../PanSecond/PanSecond';
 import PanCello from '../PanCello/PanCello';
 import PanBass from '../PanBass/PanBass';
 import Split from '../Split/Split';
+import studentMusic from '../StudentMusic/StudentMusic';
 import './App.css';
 
 class App extends Component {
@@ -92,6 +93,12 @@ class App extends Component {
               exact
               path="/bass"
               component={PanBass}
+            />
+
+            <Route
+              exact
+              path="/studentMusic"
+              component={studentMusic}
             />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
