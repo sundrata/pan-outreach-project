@@ -74,23 +74,23 @@ class App extends Component {
               path="/music"
               component={AdminMusic}
               />
-            {/* pan routes */}
-            <Route
+
+            <ProtectedRoute
               exact
               path="/tenor"
               component={PanTenor}
             />
-            <Route
+            <ProtectedRoute
               exact
               path="/second"
               component={PanSecond}
             />
-            <Route
+            <ProtectedRoute
               exact
               path="/cello"
               component={PanCello}
             />
-            <Route
+            <ProtectedRoute
               exact
               path="/bass"
               component={PanBass}
