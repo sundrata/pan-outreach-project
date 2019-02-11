@@ -32,6 +32,11 @@ class GNotes extends Component {
             onTouchStart={this.props.isTouch ? () => this.playNote('G3') : null}
             onClick={this.props.isTouch ? null : () => this.playNote('G3')}
           />
+          <text 
+            transform="matrix(1 0 0 1 1017.3936 122.1016)"
+          >
+            G3
+          </text>
         </g>
         <g id="G4">
           <ellipse
@@ -44,16 +49,26 @@ class GNotes extends Component {
             onTouchStart={this.props.isTouch ? () => this.playNote('G4') : null}
             onClick={this.props.isTouch ? null : () => this.playNote('G4')}
           />
+          <text 
+            transform="matrix(1 0 0 1 1105.2305 274.4229)" 
+          >
+            G4
+          </text>
         </g>
         <g id="G5">
           <circle
             style={{ fill: this.props.colors.G5, stroke: 'black' }}
-            cx="990.5"
-            cy="435.5"
-            r="37"
+            cx="1068"
+            cy="358"
+            r="34.5"
             onTouchStart={this.props.isTouch ? () => this.playNote('G5') : null}
             onClick={this.props.isTouch ? null : () => this.playNote('G5')}
           />
+          <text 
+            transform="matrix(1 0 0 1 1033.9092 379.666)"
+          >
+            G5
+          </text>
         </g>
       </>
     );

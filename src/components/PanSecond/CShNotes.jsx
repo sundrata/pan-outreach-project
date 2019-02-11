@@ -32,6 +32,11 @@ class CShNotes extends Component {
             onTouchStart={this.props.isTouch ? () => this.playNote('CSh4') : null}
             onClick={this.props.isTouch ? null : () => this.playNote('CSh4')}
           />
+          <text 
+            transform="matrix(1 0 0 1 814.3721 239.7886)"
+          >
+            C&#9839;4
+          </text>
         </g>
         <g id="CSh5">
           <ellipse
@@ -44,6 +49,11 @@ class CShNotes extends Component {
             onTouchStart={this.props.isTouch ? () => this.playNote('CSh5') : null}
             onClick={this.props.isTouch ? null : () => this.playNote('CSh5')}
           />
+          <text 
+            transform="matrix(1 0 0 1 963.9092 280.9199)"
+          >
+            C&#9839;5
+          </text>
         </g>
       </>
     );

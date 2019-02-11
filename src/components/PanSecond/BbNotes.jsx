@@ -32,6 +32,11 @@ class BbNotes extends Component {
             onTouchStart={this.props.isTouch ? () => this.playNote('Bb3') : null}
             onClick={this.props.isTouch ? null : () => this.playNote('Bb3')}
           />
+          <text 
+            transform="matrix(1 0 0 1 458.6704 611.3408)" 
+          >
+            B&#9837;3
+          </text>
         </g>
         <g id="Bb4">
           <ellipse
@@ -43,6 +48,11 @@ class BbNotes extends Component {
             onTouchStart={this.props.isTouch ? () => this.playNote('Bb4') : null}
             onClick={this.props.isTouch ? null : () => this.playNote('Bb4')}
           />
+          <text 
+            transform="matrix(1 0 0 1 322.0615 500.5098)" 
+          >
+            B&#9837;4
+          </text>
         </g>
         <g id="Bb5">
           <circle
@@ -53,6 +63,11 @@ class BbNotes extends Component {
             onTouchStart={this.props.isTouch ? () => this.playNote('Bb5') : null}
             onClick={this.props.isTouch ? null : () => this.playNote('Bb5')}
           />
+          <text 
+            transform="matrix(1 0 0 1 221.0869 457.666)" 
+          >
+            B&#9837;5
+          </text>
         </g>
       </>
     );
