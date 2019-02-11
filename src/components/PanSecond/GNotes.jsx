@@ -32,8 +32,9 @@ class GNotes extends Component {
             onTouchStart={this.props.isTouch ? () => this.playNote('G3') : null}
             onClick={this.props.isTouch ? null : () => this.playNote('G3')}
           />
-          <text 
+          <text
             transform="matrix(1 0 0 1 1017.3936 122.1016)"
+            className={this.props.displayNotes}
           >
             G3
           </text>
@@ -49,8 +50,9 @@ class GNotes extends Component {
             onTouchStart={this.props.isTouch ? () => this.playNote('G4') : null}
             onClick={this.props.isTouch ? null : () => this.playNote('G4')}
           />
-          <text 
-            transform="matrix(1 0 0 1 1105.2305 274.4229)" 
+          <text
+            transform="matrix(1 0 0 1 1105.2305 274.4229)"
+            className={this.props.displayNotes}
           >
             G4
           </text>
@@ -64,8 +66,9 @@ class GNotes extends Component {
             onTouchStart={this.props.isTouch ? () => this.playNote('G5') : null}
             onClick={this.props.isTouch ? null : () => this.playNote('G5')}
           />
-          <text 
+          <text
             transform="matrix(1 0 0 1 1033.9092 379.666)"
+            className={this.props.displayNotes}
           >
             G5
           </text>
@@ -78,6 +81,7 @@ class GNotes extends Component {
 const mapStateToProps = state => ({
   colors: state.second,
   displayColors: state.displayColors,
+  displayNotes: state.displayNotes,
   isTouch: state.isTouch,
 });
 
