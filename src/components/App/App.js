@@ -73,7 +73,6 @@ class App extends Component {
               path="/music"
               component={AdminMusic}
               />
-
             <ProtectedRoute
               exact
               path="/tenor"
