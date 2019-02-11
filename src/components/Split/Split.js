@@ -7,12 +7,12 @@ import StudentDashboard from '../StudentDashboard/StudentDashboard';
 class Split extends Component {
     render() {
         if (this.props.user.admin) {
-            return(
-            <AdminDashboard />
+            return (
+                <AdminDashboard />
             )
         } else {
             return (
-            <StudentDashboard />
+                <StudentDashboard />
             )
         }
     }
