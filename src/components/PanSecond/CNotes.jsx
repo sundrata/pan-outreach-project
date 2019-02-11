@@ -32,8 +32,9 @@ class CNotes extends Component {
             onTouchStart={this.props.isTouch ? () => this.playNote('C4') : null}
             onClick={this.props.isTouch ? null : () => this.playNote('C4')}
           />
-          <text 
+          <text
             transform="matrix(1 0 0 1 543.5791 239.501)"
+            className={this.props.displayNotes}
           >
             C4
           </text>
@@ -49,8 +50,9 @@ class CNotes extends Component {
             onTouchStart={this.props.isTouch ? () => this.playNote('C5') : null}
             onClick={this.props.isTouch ? null : () => this.playNote('C5')}
           />
-          <text 
+          <text
             transform="matrix(1 0 0 1 465.0952 359.188)"
+            className={this.props.displayNotes}
           >
             C5
           </text>
@@ -63,6 +65,7 @@ class CNotes extends Component {
 const mapStateToProps = state => ({
   colors: state.second,
   displayColors: state.displayColors,
+  displayNotes: state.displayNotes,
   isTouch: state.isTouch,
 });
 
