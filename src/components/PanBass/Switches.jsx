@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 
 class Switches extends React.Component {
   state = {
-    displayNotes: false,
+    displayNotes: true,
     displayColors: true,
   };
 
@@ -24,9 +24,11 @@ class Switches extends React.Component {
 
   handleNoteChange = name => event => {
     this.setState({ [name]: event.target.checked });
-    this.props.dispatch({ type: 'TOGGLE_BASS_NOTES' });
+    this.state.displayNotes ?
+      this.props.dispatch({ type: 'HIDE_NOTES' })
+      :
+      this.props.dispatch({ type: 'SHOW_NOTES' })
   };
-
   render() {
     return (
       <FormGroup row>

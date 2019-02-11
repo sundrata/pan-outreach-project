@@ -30,8 +30,9 @@ class FShNotes extends Component {
             onTouchStart={this.props.isTouch ? () => this.playNote('FSh2') : null}
             onClick={this.props.isTouch ? null : () => this.playNote('FSh2')}
           />
-          <text 
+          <text
             transform="matrix(1 0 0 1 1184.4795 1069.3525)"
+            className={this.props.displayNotes}
           >
             F&#9839;2
           </text>
@@ -44,6 +45,7 @@ class FShNotes extends Component {
 const mapStateToProps = state => ({
   colors: state.bass,
   displayColors: state.displayColors,
+  displayNotes: state.displayNotes,
   isTouch: state.isTouch,
 });
 
