@@ -32,6 +32,11 @@ class CNotes extends Component {
             onTouchStart={this.props.isTouch ? () => this.playNote('C4') : null}
             onClick={this.props.isTouch ? null : () => this.playNote('C4')}
           />
+          <text 
+            transform="matrix(1 0 0 1 543.5791 239.501)"
+          >
+            C4
+          </text>
         </g>
         <g id="C5">
           <ellipse
@@ -44,6 +49,11 @@ class CNotes extends Component {
             onTouchStart={this.props.isTouch ? () => this.playNote('C5') : null}
             onClick={this.props.isTouch ? null : () => this.playNote('C5')}
           />
+          <text 
+            transform="matrix(1 0 0 1 465.0952 359.188)"
+          >
+            C5
+          </text>
         </g>
       </>
     );
