@@ -29,6 +29,11 @@ class BbNotes extends Component {
             onTouchStart={this.props.isTouch ? () => this.playNote('Bb2') : null}
             onClick={this.props.isTouch ? null : () => this.playNote('Bb2')}
           />
+          <text 
+            transform="matrix(1 0 0 1 55.0591 628.5552)"
+          >
+            B&#9837;2
+          </text>
         </g>
       </>
     );

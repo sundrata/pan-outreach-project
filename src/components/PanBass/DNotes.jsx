@@ -31,6 +31,11 @@ class DNotes extends Component {
             onTouchStart={this.props.isTouch ? () => this.playNote('D2') : null}
             onClick={this.props.isTouch ? null : () => this.playNote('D2')}
           />
+          <text 
+            transform="matrix(1 0 0 1 763.5283 314.9033)"
+          >
+            D2
+          </text>
         </g>
         <g id="D3">
           <path
@@ -40,6 +45,11 @@ class DNotes extends Component {
             onTouchStart={this.props.isTouch ? () => this.playNote('D3') : null}
             onClick={this.props.isTouch ? null : () => this.playNote('D3')}
           />
+          <text 
+            transform="matrix(1 0 0 1 978.1816 314.9033)"
+          >
+            D3
+          </text>
         </g>
       </>
     );

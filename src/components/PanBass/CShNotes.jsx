@@ -31,6 +31,11 @@ class CShNotes extends Component {
             onTouchStart={this.props.isTouch ? () => this.playNote('CSh2') : null}
             onClick={this.props.isTouch ? null : () => this.playNote('CSh2')}
           />
+          <text 
+            transform="matrix(1 0 0 1 970.6074 977.6025)"
+          >
+            C&#9839;2
+          </text>
         </g>
         <g id="CSh3">
           <path
@@ -41,6 +46,11 @@ class CShNotes extends Component {
             onTouchStart={this.props.isTouch ? () => this.playNote('CSh3') : null}
             onClick={this.props.isTouch ? null : () => this.playNote('CSh3')}
           />
+          <text 
+            transform="matrix(1 0 0 1 1002.8926 1188.1973)"
+          >
+            C&#9839;3
+          </text>
         </g>
       </>
     );

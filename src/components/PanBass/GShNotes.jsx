@@ -30,6 +30,11 @@ class GShNotes extends Component {
             onTouchStart={this.props.isTouch ? () => this.playNote('GSh2') : null}
             onClick={this.props.isTouch ? null : () => this.playNote('GSh2')}
           />
+          <text 
+            transform="matrix(1 0 0 1 40.1104 1068.9121)"
+          >
+            G&#9839;2
+          </text>
         </g>
       </>
     );

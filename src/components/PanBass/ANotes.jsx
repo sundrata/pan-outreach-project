@@ -29,6 +29,11 @@ class ANotes extends Component {
             onTouchStart={this.props.isTouch ? () => this.playNote('A2') : null}
             onClick={this.props.isTouch ? null : () => this.playNote('A2')}
           />
+          <text 
+            transform="matrix(1 0 0 1 859.0146 123.772)"
+          >
+            A2
+          </text>
         </g>
       </>
     );

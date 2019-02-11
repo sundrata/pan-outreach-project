@@ -30,6 +30,11 @@ class GNotes extends Component {
             onTouchStart={this.props.isTouch ? () => this.playNote('G2') : null}
             onClick={this.props.isTouch ? null : () => this.playNote('G2')}
           />
+          <text 
+            transform="matrix(1 0 0 1 407.4038 123.8589)"
+          >
+            G2
+          </text>
         </g>
       </>
     );
