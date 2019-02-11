@@ -31,8 +31,9 @@ class ENotes extends Component {
             onTouchStart={this.props.isTouch ? () => this.playNote('E3') : null}
             onClick={this.props.isTouch ? null : () => this.playNote('E3')}
           />
-          <text 
+          <text
             transform="matrix(1 0 0 1 1085.9189 780.8896)"
+            className={this.props.displayNotes}
           >
             E3
           </text>
@@ -48,8 +49,9 @@ class ENotes extends Component {
             onTouchStart={this.props.isTouch ? () => this.playNote('E4') : null}
             onClick={this.props.isTouch ? null : () => this.playNote('E4')}
           />
-          <text 
+          <text
             transform="matrix(1 0 0 1 1294.8916 896.3555)"
+            className={this.props.displayNotes}
           >
             E4
           </text>
@@ -62,6 +64,7 @@ class ENotes extends Component {
 const mapStateToProps = state => ({
   colors: state.cello,
   displayColors: state.displayColors,
+  displayNotes: state.displayNotes,
   isTouch: state.isTouch,
 });
 
