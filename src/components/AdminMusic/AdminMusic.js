@@ -223,7 +223,7 @@ class AdminMusic extends Component {
             </Select>
             <DialogContentText>
               Choose Difficulty
-                </DialogContentText>
+            </DialogContentText>
             <Select
               value={this.state.difficulty}
               onChange={this.handleDifficultyChange}
@@ -245,10 +245,10 @@ class AdminMusic extends Component {
           <DialogActions>
             <Button onClick={this.editHandleClose} color="primary">
               Cancel
-                            </Button>
+            </Button>
             <Button onClick={() => this.editHandleClick()} color="primary">
               Submit
-                            </Button>
+            </Button>
           </DialogActions>
           
         </Dialog> :
@@ -262,7 +262,7 @@ class AdminMusic extends Component {
               
               <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
                 Add New Music
-            </Button>
+              </Button>
             {/* start sorting table */}
               <DialogContentText>
                 Sort by Instrument

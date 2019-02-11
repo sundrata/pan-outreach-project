@@ -38,7 +38,7 @@ class App extends Component {
     return (
       <Router>
         <div>
-          {this.props.user.admin ? null : <StudentNav /> }
+          {this.props.user.admin ? <AdminNav /> : <StudentNav /> }
           <Switch>
             {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
             <Redirect exact from="/" to="/home" />
@@ -49,11 +49,11 @@ class App extends Component {
               path="/home"
               component={Split}
             />
-            <AdminRoute
+            {/* <AdminRoute
               exact
               path="/adminNav"
               component={AdminNav}
-              />
+              /> */}
             {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/home will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the 'Login' or 'Register' page.
