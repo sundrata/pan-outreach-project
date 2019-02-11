@@ -32,6 +32,12 @@ class DNotes extends Component {
             onTouchStart={this.props.isTouch ? () => this.playNote('D4') : null}
             onClick={this.props.isTouch ? null : () => this.playNote('D4')}
           />
+          <text
+            transform="matrix(1 0 0 1 1140.6904 1061.0615)"
+            className={this.props.displayNotes}
+          >
+            D4
+          </text>
         </g>
         <g id="D5">
           <ellipse
@@ -44,6 +50,12 @@ class DNotes extends Component {
             onTouchStart={this.props.isTouch ? () => this.playNote('D5') : null}
             onClick={this.props.isTouch ? null : () => this.playNote('D5')}
           />
+          <text
+            transform="matrix(1 0 0 1 951.1436 823.9507)"
+            className={this.props.displayNotes}
+          >
+            D5
+          </text>
         </g>
         <g id="D6">
           <circle
@@ -54,6 +66,12 @@ class DNotes extends Component {
             onTouchStart={this.props.isTouch ? () => this.playNote('D6') : null}
             onClick={this.props.isTouch ? null : () => this.playNote('D6')}
           />
+          <text
+            transform="matrix(1 0 0 1 799.9971 682.3135)"
+            className={this.props.displayNotes}
+          >
+            D6
+          </text>
         </g>
       </>
     );
@@ -63,6 +81,7 @@ class DNotes extends Component {
 const mapStateToProps = state => ({
   colors: state.tenor,
   displayColors: state.displayColors,
+  displayNotes: state.displayNotes,
   isTouch: state.isTouch,
 });
 
