@@ -16,9 +16,10 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Switch from '@material-ui/core/Switch';
-import AdminNav from '../AdminNav/AdminNav';
+
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
+
 class AdminLessons extends Component {
   state = {
     edit: false, //this state controls whether or not to display edit dialog
@@ -213,7 +214,7 @@ submitSearch = () => {
         </Dialog>
         :
         <div>
-          <AdminNav />
+          
           <div>
             <h1 className="heading">
               Lesson Plans

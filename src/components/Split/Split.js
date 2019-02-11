@@ -9,14 +9,11 @@ class Split extends Component {
     render() {
         if (this.props.user.admin) {
             return(
-            <AdminDashboard />
+                <AdminDashboard />
             )
         } else {
             return (
-            <>
-                <StudentNav />
                 <StudentDashboard />
-            </>
             )
         }
     }

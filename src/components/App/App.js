@@ -20,6 +20,8 @@ import PanCello from '../PanCello/PanCello';
 import PanBass from '../PanBass/PanBass';
 import StudentLessons from '../StudentLessons/StudentLessons';
 import Split from '../Split/Split';
+import studentMusic from '../StudentMusic/StudentMusic';
+import StudentNav from '../StudentNav/StudentNav'
 import './App.css';
 
 class App extends Component {
@@ -38,6 +40,7 @@ class App extends Component {
     return (
       <Router>
         <div>
+          {this.props.user.admin ? <AdminNav /> : <StudentNav /> }
           <Switch>
             {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
             <Redirect exact from="/" to="/home" />
@@ -48,11 +51,11 @@ class App extends Component {
               path="/home"
               component={Split}
             />
-            <AdminRoute
+            {/* <AdminRoute
               exact
               path="/adminNav"
               component={AdminNav}
-              />
+              /> */}
             {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/home will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the 'Login' or 'Register' page.
@@ -74,7 +77,6 @@ class App extends Component {
               path="/music"
               component={AdminMusic}
               />
-
             <ProtectedRoute
               exact
               path="/tenor"
@@ -95,11 +97,17 @@ class App extends Component {
               path="/bass"
               component={PanBass}
             />
-            <Route 
+            <ProtectedRoute 
               exact
               path="/studentLessons"
               component={StudentLessons}
             />  
+
+            <ProtectedRoute
+              exact
+              path="/studentMusic"
+              component={studentMusic}
+            />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
 
@@ -110,4 +118,8 @@ class App extends Component {
   )}
 }
 
-export default connect()(App);
+const mapStateToProps = state => ({
+  user: state.user,
+});
+
+export default connect(mapStateToProps)(App);

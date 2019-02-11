@@ -1,16 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-// import PanTenor from '../PanTenor/PanTenor';
-// import PanSecond from '../PanSecond/PanSecond';
-// import PanCello from '../PanCello/PanCello';
-// import PanBass from '../PanBass/PanBass';
+import PanTenor from '../PanTenor/PanTenor';
+import PanSecond from '../PanSecond/PanSecond';
+import PanCello from '../PanCello/PanCello';
+import PanBass from '../PanBass/PanBass';
 
 const music = require('./music.jpg');
 
 const StudentDashboard = () => (
   <div>
-    <div>      
+    <div>  
       <div className="studentDashDisplay">
         <div className="dashBox">
           <img className="dashImages" alt="Tenor" src={music} /> <br></br>

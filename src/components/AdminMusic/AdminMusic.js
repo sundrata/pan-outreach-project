@@ -111,23 +111,6 @@ class AdminMusic extends Component {
     this.setState({ edit: false });
   };
 
-  //slider handlers
-  // handleHiddenChange = (event, hidden) => {
-  //   this.setState(state => ({
-  //     hidden,
-  //     // hidden implies !open
-  //     open: hidden ? false : state.open,
-  //   }));
-  // };
-
-  // handleSliderChange = () => {
-  //   this.setState({
-  //     active: false,
-  //   });
-  //   console.log('hit handleSlider:', this.state.active);
-  //   this.props.dispatch({ type: 'UPDATE_PERSON', payload: this.state })
-  // }
-
   handleInstrumentChange = (event) => {
     this.setState({
       ...this.state,
@@ -174,13 +157,28 @@ class AdminMusic extends Component {
       [event.target.name]: event.target.value
 
     });
-  }
+  };
 
   submitSearch = () => {
     this.props.dispatch({
       type: 'SEARCH_SHEET_MUSIC', payload: {instrument: this.state.searchInstrument, difficulty: this.state.searchDifficulty, name: this.state.searchName}
     });
-  }
+  };
+
+  resetSearch = () => {
+    this.props.dispatch({
+      type: 'GET_SHEET_MUSIC'
+    })
+
+    this.setState({
+      id: 0,
+      searchInstrument: '',
+      searchDifficulty: 0,
+      searchName: '',
+
+    })
+
+  };
   
   render() {
     return (
@@ -223,7 +221,7 @@ class AdminMusic extends Component {
             </Select>
             <DialogContentText>
               Choose Difficulty
-                </DialogContentText>
+            </DialogContentText>
             <Select
               value={this.state.difficulty}
               onChange={this.handleDifficultyChange}
@@ -245,10 +243,10 @@ class AdminMusic extends Component {
           <DialogActions>
             <Button onClick={this.editHandleClose} color="primary">
               Cancel
-                            </Button>
+            </Button>
             <Button onClick={() => this.editHandleClick()} color="primary">
               Submit
-                            </Button>
+            </Button>
           </DialogActions>
           
         </Dialog> :
@@ -262,7 +260,7 @@ class AdminMusic extends Component {
               
               <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
                 Add New Music
-            </Button>
+              </Button>
             {/* start sorting table */}
               <DialogContentText>
                 Sort by Instrument
@@ -303,6 +301,7 @@ class AdminMusic extends Component {
               <TextField onChange={this.handleSearchChange} name='searchName'> 
               </TextField>
               <Button variant="outlined" color="primary" onClick={this.submitSearch}>Submit Search</Button>
+              <Button variant="outlined" color="primary" onClick={this.resetSearch}>Reset Search</Button>
               {/* start add new music */}
               <Dialog
                 open={this.state.open}
