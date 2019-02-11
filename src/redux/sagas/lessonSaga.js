@@ -25,6 +25,19 @@ function* fetchLesson() {
     }
 }
 
+function* searchLesson(action) {
+    try {
+        console.log(`our action going to our saga`, action.payload);
+        let category = action.payload.category || '*';
+        let name = action.payload.name || '*';
+        const setLesson= yield axios.get(`/api/lesson/search/${category}/${name}`);  // get searched lesson plan
+        console.log(`get lesson`, setLesson.data);
+        yield put({ type: 'SET_LESSON', payload: setLesson.data });
+    } catch (error) {
+        console.log('error in get lesson plan:', error);
+    }
+};
+
 function* deleteLesson(action) {
     try {
         yield call(axios.delete, `/api/lesson/${action.payload}`);
@@ -53,7 +66,8 @@ function* lessonSaga() {
     yield takeEvery('FETCH_LESSON', fetchLesson);
     yield takeEvery('DELETE_LESSON', deleteLesson);
     yield takeEvery('POST_LESSON', postLesson);
-    yield takeEvery('UPDATE_LESSON', updateLesson)
+    yield takeEvery('UPDATE_LESSON', updateLesson);
+    yield takeEvery('SEARCH_LESSON', searchLesson)
 }
 
 

@@ -28,6 +28,8 @@ class AdminLessons extends Component {
     category_id: 0,//state for new/edit lesson plan category
     file: '', //state for file associated with lesson plan
     category: '', //state for adding new category 
+    searchCategory : 0, //state for sorting by category
+    searchName: '' //state for searching by name
   }
   //delete lesson plan dispatch
   deleteLesson = (row) => {
@@ -119,6 +121,12 @@ handleSearchChange = (event) => {
 
   });
 }
+
+submitSearch = () => {
+  this.props.dispatch({
+    type: 'SEARCH_LESSON', payload: {category: this.state.searchCategory, name: this.state.searchName}
+  });
+}
   //edit lesson plan handlers
   editHandleClick = () => {
     this.setState({ edit: false });
@@ -208,44 +216,30 @@ handleSearchChange = (event) => {
                   Add Lesson Plan
                         </Button>
                         <DialogContentText>
-                Sort by Instrument
+                Sort by Category
                 </DialogContentText>
               <Select
-                name='searchInstrument'
-                value={this.state.searchInstrument}
+                name='searchCategory'
+                value={this.state.searchCategory}
                 onChange={this.handleSearchChange}
                 inputProps={{
-                  name: 'searchInstrument',
+                  name: 'searchCategory',
                 }}
               >
-                <MenuItem value={'Tenor'}>Tenor</MenuItem>
-                <MenuItem value={'Seconds'}>Seconds</MenuItem>
-                <MenuItem value={'Cello'}>Cello</MenuItem>
-                <MenuItem value={'Bass'}>Bass</MenuItem>
+                {this.props.reduxStore.categoryReducer.map((row) => {
+                        return (
+                          <MenuItem value={row.id}>{row.name}</MenuItem>
+                        )
+                      })}
               </Select>
               <DialogContentText>
-                Sort by Difficulty
-                </DialogContentText>
-              <Select
-                name='searchDifficulty'
-                value={this.state.searchDifficulty}
-                onChange={this.handleSearchChange}
-                inputProps={{
-                  name: 'searchDifficulty',
-                }}
-              >
-                <MenuItem value={1}>1</MenuItem>
-                <MenuItem value={2}>2</MenuItem>
-                <MenuItem value={3}>3</MenuItem>
-                <MenuItem value={4}>4</MenuItem>
-                <MenuItem value={5}>5</MenuItem>
-              </Select>
-              <DialogContentText>
-                Search by Song Name
+                Search by Lesson Name
               </DialogContentText>
-              <TextField onChange={this.handleSearchChange}>
-                
+              <TextField onChange={this.handleSearchChange}>               
               </TextField>
+              <Button variant="outlined" color="primary" onClick={this.submitSearch}>Submit Search</Button>
+              {/* end sort and search */}
+              {/* begin add lesson plan */}
                 <Dialog
                   open={this.state.open}
                   onClose={this.handleClose}
