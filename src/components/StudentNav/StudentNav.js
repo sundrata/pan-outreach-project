@@ -42,7 +42,7 @@ class StudentNav extends Component {
         <Link to="/second">
           <p>Second</p>
         </Link>
-        <Link to="/tenor">
+        <Link to="/cello">
           <p>Cello</p>
         </Link>
         <Link to="/bass">
