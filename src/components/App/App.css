@@ -25,12 +25,17 @@ body {
     box-shadow: 3px 2px 5px black;
  }
 
+.studentDashDisplay{
+    margin: 10px auto;
+    text-align: center; 
+}
+
 .alert {
     background-color: #ff4545;
     margin: 50px;
 }
 .dashBox{
-    margin: 0px 10px;
+    margin: 5px 10px;
     display: inline-block;
     background-color: rgb(233, 231, 231);
     border-radius: 1%;

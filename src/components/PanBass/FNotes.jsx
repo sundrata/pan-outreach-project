@@ -31,6 +31,12 @@ class FNotes extends Component {
             onTouchStart={this.props.isTouch ? () => this.playNote('F2') : null}
             onClick={this.props.isTouch ? null : () => this.playNote('F2')}
           />
+          <text
+            transform="matrix(1 0 0 1 267.6304 733.752)"
+            className={this.props.displayNotes}
+          >
+            F2
+          </text>
         </g>
         <g id="F3">
           <path
@@ -41,6 +47,12 @@ class FNotes extends Component {
             onTouchStart={this.props.isTouch ? () => this.playNote('F3') : null}
             onClick={this.props.isTouch ? null : () => this.playNote('F3')}
           />
+          <text
+            transform="matrix(1 0 0 1 239.4438 522.1343)"
+            className={this.props.displayNotes}
+          >
+            F3
+          </text>
         </g>
       </>
     );
@@ -50,6 +62,7 @@ class FNotes extends Component {
 const mapStateToProps = state => ({
   colors: state.bass,
   displayColors: state.displayColors,
+  displayNotes: state.displayNotes,
   isTouch: state.isTouch,
 });
 

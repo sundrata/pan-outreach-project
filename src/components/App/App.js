@@ -20,6 +20,7 @@ import PanCello from '../PanCello/PanCello';
 import PanBass from '../PanBass/PanBass';
 import Split from '../Split/Split';
 import studentMusic from '../StudentMusic/StudentMusic';
+import StudentNav from '../StudentNav/StudentNav'
 import './App.css';
 
 class App extends Component {
@@ -38,6 +39,7 @@ class App extends Component {
     return (
       <Router>
         <div>
+          {this.props.user.admin ? <AdminNav /> : <StudentNav /> }
           <Switch>
             {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
             <Redirect exact from="/" to="/home" />
@@ -48,11 +50,11 @@ class App extends Component {
               path="/home"
               component={Split}
             />
-            <AdminRoute
+            {/* <AdminRoute
               exact
               path="/adminNav"
               component={AdminNav}
-              />
+              /> */}
             {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/home will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the 'Login' or 'Register' page.
@@ -74,22 +76,22 @@ class App extends Component {
               path="/music"
               component={AdminMusic}
               />
-            <Route
+            <ProtectedRoute
               exact
               path="/tenor"
               component={PanTenor}
             />
-            <Route
+            <ProtectedRoute
               exact
               path="/second"
               component={PanSecond}
             />
-            <Route
+            <ProtectedRoute
               exact
               path="/cello"
               component={PanCello}
             />
-            <Route
+            <ProtectedRoute
               exact
               path="/bass"
               component={PanBass}
@@ -110,4 +112,8 @@ class App extends Component {
   )}
 }
 
-export default connect()(App);
+const mapStateToProps = state => ({
+  user: state.user,
+});
+
+export default connect(mapStateToProps)(App);

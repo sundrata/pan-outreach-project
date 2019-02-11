@@ -17,6 +17,37 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     })
 });
 
+// search lesson plan GET
+router.get('/search/:category/:name', rejectUnauthenticated, (req, res) => {
+    let name = req.params.name;
+    let category = req.params.category;
+    if (name === '*') { name = null }
+    if (category === '*') { category = null }
+    console.log('hit router:', name, category);
+    let queryValues;
+    let queryString;
+    if (name) {
+      queryString = `SELECT lesson_plan.*, category.name AS category_name FROM "lesson_plan"
+                          left JOIN "category" ON "lesson_plan".category_id = "category".id
+                          WHERE
+                          ($1::text is NULL or "lesson_plan".name ~~* $1) and
+                          ($2::integer is NULL or "category_id" = $2)`;
+      queryValues = [`%${name}%`, category]
+    } else {
+      queryString = `SELECT lesson_plan.*, category.name AS category_name FROM "lesson_plan"
+                          left JOIN "category" ON "lesson_plan".category_id = "category".id
+                          WHERE "category_id" = $1;`;
+      queryValues = [category]
+    }
+    pool.query(queryString, queryValues)
+        .then((result) => {
+            console.log(result.rows);
+            res.send(result.rows);
+        }).catch(error => {
+            console.log(error);
+            res.sendStatus(500);
+        });
+});
 /**
  * POST route template
  */

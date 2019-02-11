@@ -32,6 +32,12 @@ class ANotes extends Component {
             onTouchStart={this.props.isTouch ? () => this.playNote('A4') : null}
             onClick={this.props.isTouch ? null : () => this.playNote('A4')}
           />
+          <text
+            transform="matrix(1 0 0 1 1240.9463 792.9326)"
+            className={this.props.displayNotes}
+          >
+            A4
+          </text>
         </g>
         <g id="A5">
           <circle
@@ -42,6 +48,12 @@ class ANotes extends Component {
             onTouchStart={this.props.isTouch ? () => this.playNote('A5') : null}
             onClick={this.props.isTouch ? null : () => this.playNote('A5')}
           />
+          <text
+            transform="matrix(1 0 0 1 999.8164 668.6768)"
+            className={this.props.displayNotes}
+          >
+            A5
+          </text>
         </g>
       </>
     );
@@ -51,6 +63,7 @@ class ANotes extends Component {
 const mapStateToProps = state => ({
   colors: state.tenor,
   displayColors: state.displayColors,
+  displayNotes: state.displayNotes,
   isTouch: state.isTouch,
 });
 

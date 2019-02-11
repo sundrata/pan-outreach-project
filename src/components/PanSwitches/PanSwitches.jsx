@@ -6,12 +6,17 @@ import { connect } from 'react-redux';
 
 class Switches extends React.Component {
   state = {
-    displayNotes: false,
+    displayNotes: true,
     displayColors: true,
   };
 
   componentDidMount() {
     this.props.dispatch({ type: 'SHOW_COLORS' })
+    this.props.dispatch({ type: 'SHOW_NOTES' })
+    this.setState({
+      displayNotes: true,
+      displayColors: true,
+    })
   }
 
   handleColorChange = name => event => {
@@ -24,7 +29,10 @@ class Switches extends React.Component {
 
   handleNoteChange = name => event => {
     this.setState({ [name]: event.target.checked });
-    this.props.dispatch({ type: 'TOGGLE_SECOND_NOTES' });
+    this.state.displayNotes ?
+      this.props.dispatch({ type: 'HIDE_NOTES' })
+      :
+      this.props.dispatch({ type: 'SHOW_NOTES' })
   };
 
   render() {

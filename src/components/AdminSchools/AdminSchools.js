@@ -15,7 +15,6 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Switch from '@material-ui/core/Switch';
-import AdminNav from '../AdminNav/AdminNav';
 
 const styles = theme => ({
   root: {
@@ -203,7 +202,7 @@ logState = () => {
           </DialogActions>         
         </Dialog> :
       <div>
-        <AdminNav />
+        
         <div>
           <h1 className="heading">
             Schools
