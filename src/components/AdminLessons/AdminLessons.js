@@ -47,8 +47,26 @@ class AdminLessons extends Component {
   };
   //handlers for adding new lesson plan
   handleClick = () => {
-    this.props.dispatch({ type: 'POST_LESSON', payload: this.state })
-    this.handleClose();
+    this.setState({ open: false });
+    // event.preventDefault();
+    const formData = new FormData();
+    formData.append('file', this.state.file[0]);
+    formData.append('name', this.state.name);
+    formData.append('category_id', this.state.category_id);
+    axios.post(`/api/upload/lesson-plan`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    }).then(response => {
+      console.log('response:', response.data.Location);
+      this.props.dispatch({
+        type: 'FETCH_LESSON'
+      });
+      // handle your response;
+    }).catch(error => {
+      console.log('error in posting file or submitting state', error);
+
+    });
   }
   handleName = (event) => {
     this.setState({
@@ -62,6 +80,9 @@ class AdminLessons extends Component {
       category_id: event.target.value,
     });
   }
+  handleFileUpload = (event) => {
+    this.setState({ file: event.target.files });
+  };
   //handlers for categories
   handleCatOpen = () => {
     this.setState({
@@ -100,8 +121,27 @@ handleSearchChange = (event) => {
 }
   //edit lesson plan handlers
   editHandleClick = () => {
-    this.props.dispatch({ type: 'UPDATE_LESSON', payload: this.state })
-    this.handleClose();
+    this.setState({ edit: false });
+    // event.preventDefault();
+    const formData = new FormData();
+    formData.append('file', this.state.file[0]);
+    formData.append('id', this.state.id);
+    formData.append('name', this.state.name);
+    formData.append('category_id', this.state.category_id);
+    axios.put(`/api/upload/edit-lesson-plan`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    }).then(response => {
+      console.log('response:', response.data.Location);
+      this.props.dispatch({
+        type: 'FETCH_LESSON'
+      });
+      // handle your response;
+    }).catch(error => {
+      console.log('error in editing file or submitting state', error);
+
+    });
   }
   render() {
     return (
@@ -141,6 +181,9 @@ handleSearchChange = (event) => {
                 )
               })}
             </Select></span></DialogContentText>
+            <form onSubmit={this.submitFile}>
+            <input label='upload file' type='file' onChange={this.handleFileUpload} />
+          </form>
           </DialogContent>
           <DialogActions>
             <Button onClick={this.handleClose} color="primary">
@@ -238,6 +281,10 @@ handleSearchChange = (event) => {
                         )
                       })}
                     </Select></span></DialogContentText>
+                    <form onSubmit={this.submitFile}>
+                  <input label='upload file' type='file' onChange={this.handleFileUpload} />
+                  {/* <button type='submit'>Send</button> */}
+                </form>
                   </DialogContent>
                   <DialogActions>
                     <Button onClick={this.handleClose} color="primary">

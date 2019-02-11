@@ -175,6 +175,12 @@ class AdminMusic extends Component {
 
     });
   }
+
+  submitSearch = () => {
+    this.props.dispatch({
+      type: 'SEARCH_SHEET_MUSIC', payload: {instrument: this.state.searchInstrument, difficulty: this.state.searchDifficulty, name: this.state.searchName}
+    });
+  }
   
   render() {
     return (
@@ -294,9 +300,9 @@ class AdminMusic extends Component {
               <DialogContentText>
                 Search by Song Name
               </DialogContentText>
-              <TextField onChange={this.handleSearchChange}>
-                
+              <TextField onChange={this.handleSearchChange} name='searchName'> 
               </TextField>
+              <Button variant="outlined" color="primary" onClick={this.submitSearch}>Submit Search</Button>
               {/* start add new music */}
               <Dialog
                 open={this.state.open}

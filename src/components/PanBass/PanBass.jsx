@@ -5,11 +5,16 @@ import './PanBass.css';
 // svg imports
 import ANotes from './ANotes';
 import BNotes from './BNotes';
+import BbNotes from './BbNotes';
 import CNotes from './CNotes';
+import CShNotes from './CShNotes';
 import DNotes from './DNotes';
 import ENotes from './ENotes';
+import EbNotes from './EbNotes';
 import FNotes from './FNotes';
+import FShNotes from './FShNotes';
 import GNotes from './GNotes';
+import GShNotes from './GShNotes';
 
 class PanBass extends Component {
   state = {
@@ -73,11 +78,16 @@ class PanBass extends Component {
 
           <ANotes />
           <BNotes />
+          <BbNotes />
           <CNotes />
+          <CShNotes />
           <DNotes />
           <ENotes />
+          <EbNotes />
           <FNotes />
+          <FShNotes />
           <GNotes />
+          <GShNotes />
         </svg>
       </div>
     );
