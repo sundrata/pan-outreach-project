@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Switches from './Switches'
+import Switches from '../PanSwitches/PanSwitches'
 import CNotes from './CNotes';
 import CShNotes from './CShNotes';
 import FNotes from './FNotes';

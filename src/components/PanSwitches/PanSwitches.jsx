@@ -12,6 +12,11 @@ class Switches extends React.Component {
 
   componentDidMount() {
     this.props.dispatch({ type: 'SHOW_COLORS' })
+    this.props.dispatch({ type: 'SHOW_NOTES' })
+    this.setState({
+      displayNotes: true,
+      displayColors: true,
+    })
   }
 
   handleColorChange = name => event => {
@@ -29,6 +34,7 @@ class Switches extends React.Component {
       :
       this.props.dispatch({ type: 'SHOW_NOTES' })
   };
+
   render() {
     return (
       <FormGroup row>

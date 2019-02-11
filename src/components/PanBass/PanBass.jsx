@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import Switches from './Switches';
-// css import
+import Switches from '../PanSwitches/PanSwitches'
 import './PanBass.css';
-// svg imports
 import ANotes from './ANotes';
 import BNotes from './BNotes';
 import BbNotes from './BbNotes';
