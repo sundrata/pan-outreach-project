@@ -235,7 +235,7 @@ submitSearch = () => {
               <DialogContentText>
                 Search by Lesson Name
               </DialogContentText>
-              <TextField onChange={this.handleSearchChange}>               
+              <TextField onChange={this.handleSearchChange} name='searchName'>               
               </TextField>
               <Button variant="outlined" color="primary" onClick={this.submitSearch}>Submit Search</Button>
               {/* end sort and search */}

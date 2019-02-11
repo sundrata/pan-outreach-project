@@ -26,9 +26,9 @@ router.get('/search/:category/:name', rejectUnauthenticated, (req, res) => {
     console.log('hit router:', req.body);
     const queryString = `SELECT lesson_plan.*, category.name AS category_name FROM "lesson_plan" 
                         left JOIN "category" ON "lesson_plan".category_id = "category".id 
-                        WHERE ($1::text is NULL or "lesson_plan".name = $1) and
+                        WHERE ($1::text is NULL or "lesson_plan".name ~~* $1) and
                         ($2::integer is NULL or "category_id" = $2)`;
-    const queryValues = [name, category]
+    const queryValues = [`%${name}%`, category]
     pool.query(queryString, queryValues)
         .then((result) => {
             console.log(result.rows);
