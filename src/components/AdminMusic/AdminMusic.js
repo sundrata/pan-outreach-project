@@ -112,21 +112,21 @@ class AdminMusic extends Component {
   };
 
   //slider handlers
-  handleHiddenChange = (event, hidden) => {
-    this.setState(state => ({
-      hidden,
-      // hidden implies !open
-      open: hidden ? false : state.open,
-    }));
-  };
+  // handleHiddenChange = (event, hidden) => {
+  //   this.setState(state => ({
+  //     hidden,
+  //     // hidden implies !open
+  //     open: hidden ? false : state.open,
+  //   }));
+  // };
 
-  handleSliderChange = () => {
-    this.setState({
-      active: false,
-    });
-    console.log('hit handleSlider:', this.state.active);
-    this.props.dispatch({ type: 'UPDATE_PERSON', payload: this.state })
-  }
+  // handleSliderChange = () => {
+  //   this.setState({
+  //     active: false,
+  //   });
+  //   console.log('hit handleSlider:', this.state.active);
+  //   this.props.dispatch({ type: 'UPDATE_PERSON', payload: this.state })
+  // }
 
   handleInstrumentChange = (event) => {
     this.setState({
@@ -143,9 +143,7 @@ class AdminMusic extends Component {
       ...this.state,
       [event.target.name]: event.target.value,
     });
-
     console.log(this.state.difficulty);
-
   }
 
   handleNameChange = (event) => {
