@@ -20,7 +20,6 @@ function* getMusic() {
 
 function* searchMusic(action) {
     try {
-
         console.log(`our action going to our saga`, action.payload);
         let instrument = action.payload.instrument || '*';
         let difficulty = action.payload.difficulty || '*';
@@ -29,9 +28,6 @@ function* searchMusic(action) {
         console.log(`get search music`, setMusic.data);
 
         yield dispatch({ type: 'SET_SHEET_MUSIC', payload: setMusic.data });
-
-
-
     } catch (error) {
         console.log('error in get sheet music:', error);
     }

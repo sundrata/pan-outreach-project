@@ -28,6 +28,8 @@ class AdminLessons extends Component {
     category_id: 0,//state for new/edit lesson plan category
     file: '', //state for file associated with lesson plan
     category: '', //state for adding new category 
+    searchCategory : 0, //state for sorting by category
+    searchName: '' //state for searching by name
   }
   //delete lesson plan dispatch
   deleteLesson = (row) => {
@@ -110,7 +112,21 @@ class AdminLessons extends Component {
     this.setState({ id: row.id });
     this.setState({ edit: true });
   }
+//sort and search handlers
+handleSearchChange = (event) => {
+  console.log('event was here', this.state)
+  this.setState({
+    ...this.state,
+    [event.target.name]: event.target.value
 
+  });
+}
+
+submitSearch = () => {
+  this.props.dispatch({
+    type: 'SEARCH_LESSON', payload: {category: this.state.searchCategory, name: this.state.searchName}
+  });
+}
   //edit lesson plan handlers
   editHandleClick = () => {
     this.setState({ edit: false });
@@ -199,6 +215,31 @@ class AdminLessons extends Component {
                 <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
                   Add Lesson Plan
                         </Button>
+                        <DialogContentText>
+                Sort by Category
+                </DialogContentText>
+              <Select
+                name='searchCategory'
+                value={this.state.searchCategory}
+                onChange={this.handleSearchChange}
+                inputProps={{
+                  name: 'searchCategory',
+                }}
+              >
+                {this.props.reduxStore.categoryReducer.map((row) => {
+                        return (
+                          <MenuItem value={row.id}>{row.name}</MenuItem>
+                        )
+                      })}
+              </Select>
+              <DialogContentText>
+                Search by Lesson Name
+              </DialogContentText>
+              <TextField onChange={this.handleSearchChange} name='searchName'>               
+              </TextField>
+              <Button variant="outlined" color="primary" onClick={this.submitSearch}>Submit Search</Button>
+              {/* end sort and search */}
+              {/* begin add lesson plan */}
                 <Dialog
                   open={this.state.open}
                   onClose={this.handleClose}
