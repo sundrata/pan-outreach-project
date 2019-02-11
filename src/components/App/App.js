@@ -20,7 +20,7 @@ import PanCello from '../PanCello/PanCello';
 import PanBass from '../PanBass/PanBass';
 import StudentLessons from '../StudentLessons/StudentLessons';
 import Split from '../Split/Split';
-import studentMusic from '../StudentMusic/StudentMusic';
+import StudentMusic from '../StudentMusic/StudentMusic';
 import StudentNav from '../StudentNav/StudentNav'
 import './App.css';
 
@@ -106,7 +106,7 @@ class App extends Component {
             <ProtectedRoute
               exact
               path="/studentMusic"
-              component={studentMusic}
+              component={StudentMusic}
             />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
