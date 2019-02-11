@@ -13,9 +13,7 @@ class Split extends Component {
             )
         } else {
             return (
-            <>
                 <StudentDashboard />
-            </>
             )
         }
     }
