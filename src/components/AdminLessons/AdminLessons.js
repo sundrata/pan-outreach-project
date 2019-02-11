@@ -89,7 +89,15 @@ class AdminLessons extends Component {
     this.setState({ id: row.id });
     this.setState({ edit: true });
   }
+//sort and search handlers
+handleSearchChange = (event) => {
+  console.log('event was here', this.state)
+  this.setState({
+    ...this.state,
+    [event.target.name]: event.target.value
 
+  });
+}
   //edit lesson plan handlers
   editHandleClick = () => {
     this.props.dispatch({ type: 'UPDATE_LESSON', payload: this.state })
@@ -156,6 +164,45 @@ class AdminLessons extends Component {
                 <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
                   Add Lesson Plan
                         </Button>
+                        <DialogContentText>
+                Sort by Instrument
+                </DialogContentText>
+              <Select
+                name='searchInstrument'
+                value={this.state.searchInstrument}
+                onChange={this.handleSearchChange}
+                inputProps={{
+                  name: 'searchInstrument',
+                }}
+              >
+                <MenuItem value={'Tenor'}>Tenor</MenuItem>
+                <MenuItem value={'Seconds'}>Seconds</MenuItem>
+                <MenuItem value={'Cello'}>Cello</MenuItem>
+                <MenuItem value={'Bass'}>Bass</MenuItem>
+              </Select>
+              <DialogContentText>
+                Sort by Difficulty
+                </DialogContentText>
+              <Select
+                name='searchDifficulty'
+                value={this.state.searchDifficulty}
+                onChange={this.handleSearchChange}
+                inputProps={{
+                  name: 'searchDifficulty',
+                }}
+              >
+                <MenuItem value={1}>1</MenuItem>
+                <MenuItem value={2}>2</MenuItem>
+                <MenuItem value={3}>3</MenuItem>
+                <MenuItem value={4}>4</MenuItem>
+                <MenuItem value={5}>5</MenuItem>
+              </Select>
+              <DialogContentText>
+                Search by Song Name
+              </DialogContentText>
+              <TextField onChange={this.handleSearchChange}>
+                
+              </TextField>
                 <Dialog
                   open={this.state.open}
                   onClose={this.handleClose}
