@@ -30,9 +30,9 @@ function* searchLesson(action) {
         console.log(`our action going to our saga`, action.payload);
         let category = action.payload.category || '*';
         let name = action.payload.name || '*';
-        const setLesson= yield axios.get(`/api/lesson/search/${category}/${name}`);  // get searched lesson plan
-        console.log(`get lesson plan:`, setLesson.data);
+        const setLesson = yield axios.get(`/api/lesson/search/${category}/${name}`);  // get searched lesson plan
         yield put({ type: 'SET_LESSON', payload: setLesson.data });
+        console.log('yo')
     } catch (error) {
         console.log('error in get lesson plan:', error);
     }

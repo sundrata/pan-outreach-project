@@ -18,6 +18,7 @@ import PanTenor from '../PanTenor/PanTenor';
 import PanSecond from '../PanSecond/PanSecond';
 import PanCello from '../PanCello/PanCello';
 import PanBass from '../PanBass/PanBass';
+import StudentLessons from '../StudentLessons/StudentLessons';
 import Split from '../Split/Split';
 import './App.css';
 
@@ -73,6 +74,7 @@ class App extends Component {
               path="/music"
               component={AdminMusic}
               />
+            {/* pan routes */}
             <Route
               exact
               path="/tenor"
@@ -93,6 +95,11 @@ class App extends Component {
               path="/bass"
               component={PanBass}
             />
+            <Route 
+              exact
+              path="/studentLessons"
+              component={StudentLessons}
+            />  
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
 

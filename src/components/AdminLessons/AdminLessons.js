@@ -29,7 +29,7 @@ class AdminLessons extends Component {
     file: '', //state for file associated with lesson plan
     category: '', //state for adding new category 
     searchCategory : 0, //state for sorting by category
-    searchName: '' //state for searching by name
+    searchName: null //state for searching by name
   }
   //delete lesson plan dispatch
   deleteLesson = (row) => {
