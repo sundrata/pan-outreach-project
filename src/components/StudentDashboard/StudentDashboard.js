@@ -1,6 +1,13 @@
 import React from 'react';
 import './StudentDashboard.css';
 
+import {
+  HashRouter as Router,
+  Route,
+  Redirect,
+  Switch,
+} from 'react-router-dom';
+
 import StudentNav from '../StudentNav/StudentNav';
 import PanCello from '../PanCello/PanCello';
 import PanSecond from '../PanSecond/PanSecond';
@@ -17,17 +24,17 @@ const StudentDashboard = () => (
     </div>
     <div className="container">
       <div className="item">
-        ITEM 1
-        </div>
+        Tenor
+      </div>
       <div className="item">
-        ITEM 2
-        </div>
+        Second
+      </div>
       <div className="item">
-        ITEM 3
-        </div>
+        Cello
+      </div>
       <div className="item">
-        ITEM 4
-        </div>
+        Bass
+      </div>
     </div>
   </div>
 );
