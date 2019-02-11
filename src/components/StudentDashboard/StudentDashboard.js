@@ -1,4 +1,6 @@
 import React from 'react';
+import './StudentDashboard.css';
+
 import StudentNav from '../StudentNav/StudentNav';
 import PanCello from '../PanCello/PanCello';
 import PanSecond from '../PanSecond/PanSecond';
@@ -10,9 +12,22 @@ const StudentDashboard = () => (
   <div>
     <div>
       <p>
-        Student Dashboard 
-        <LogOutButton />
+        <StudentNav />
       </p>
+    </div>
+    <div className="container">
+      <div className="item">
+        ITEM 1
+        </div>
+      <div className="item">
+        ITEM 2
+        </div>
+      <div className="item">
+        ITEM 3
+        </div>
+      <div className="item">
+        ITEM 4
+        </div>
     </div>
   </div>
 );

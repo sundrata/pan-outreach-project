@@ -1,0 +1,18 @@
+.content {
+  margin: 0 auto;
+}
+.container {
+  display: flex; /* or inline-flex */
+  flex-flow: row wrap;
+  width: 100%;
+  justify-content: center;
+}
+
+.item {
+  width: 350px;
+  height: 300px;
+  border: 1px solid #000;
+  /* background: #000; */
+  margin: 10px;
+}
+
