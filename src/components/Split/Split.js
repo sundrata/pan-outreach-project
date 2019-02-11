@@ -14,7 +14,6 @@ class Split extends Component {
         } else {
             return (
             <>
-                <StudentNav />
                 <StudentDashboard />
             </>
             )

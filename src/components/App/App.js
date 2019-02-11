@@ -19,6 +19,7 @@ import PanSecond from '../PanSecond/PanSecond';
 import PanCello from '../PanCello/PanCello';
 import PanBass from '../PanBass/PanBass';
 import Split from '../Split/Split';
+import StudentNav from '../StudentNav/StudentNav'
 import './App.css';
 
 class App extends Component {
@@ -37,6 +38,7 @@ class App extends Component {
     return (
       <Router>
         <div>
+          {this.props.user.admin ? null : <StudentNav /> }
           <Switch>
             {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
             <Redirect exact from="/" to="/home" />
@@ -104,4 +106,8 @@ class App extends Component {
   )}
 }
 
-export default connect()(App);
+const mapStateToProps = state => ({
+  user: state.user,
+});
+
+export default connect(mapStateToProps)(App);
