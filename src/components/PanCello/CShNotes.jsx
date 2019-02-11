@@ -31,8 +31,9 @@ class CShNotes extends Component {
             onTouchStart={this.props.isTouch ? () => this.playNote('CSh3') : null}
             onClick={this.props.isTouch ? null : () => this.playNote('CSh3')}
           />
-          <text 
+          <text
             transform="matrix(1 0 0 1 1040.4414 1263.2617)"
+            className={this.props.displayNotes}
           >
             CSh3
           </text>
@@ -48,8 +49,9 @@ class CShNotes extends Component {
             onTouchStart={this.props.isTouch ? () => this.playNote('CSh4') : null}
             onClick={this.props.isTouch ? null : () => this.playNote('CSh4')}
           />
-          <text 
+          <text
             transform="matrix(1 0 0 1 822.3184 1142.125)"
+            className={this.props.displayNotes}
           >
             CSh4
           </text>
@@ -65,8 +67,9 @@ class CShNotes extends Component {
             onTouchStart={this.props.isTouch ? () => this.playNote('CSh5') : null}
             onClick={this.props.isTouch ? null : () => this.playNote('CSh5')}
           />
-          <text 
+          <text
             transform="matrix(1 0 0 1 1004.5762 1083.793)"
+            className={this.props.displayNotes}
           >
             CSh5
           </text>
@@ -79,6 +82,7 @@ class CShNotes extends Component {
 const mapStateToProps = state => ({
   colors: state.cello,
   displayColors: state.displayColors,
+  displayNotes: state.displayNotes,
   isTouch: state.isTouch,
 });
 
