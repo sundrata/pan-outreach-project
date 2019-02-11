@@ -31,6 +31,11 @@ class ENotes extends Component {
             onTouchStart={this.props.isTouch ? () => this.playNote('E2') : null}
             onClick={this.props.isTouch ? null : () => this.playNote('E2')}
           />
+          <text 
+            transform="matrix(1 0 0 1 1003.1816 536.0146)"
+          >
+            E2
+          </text>
         </g>
         <g id="E3">
           <path
@@ -41,6 +46,11 @@ class ENotes extends Component {
             onTouchStart={this.props.isTouch ? () => this.playNote('E3') : null}
             onClick={this.props.isTouch ? null : () => this.playNote('E3')}
           />
+          <text 
+            transform="matrix(1 0 0 1 1042.4346 751.8545)"
+          >
+            E3
+          </text>
         </g>
       </>
     );

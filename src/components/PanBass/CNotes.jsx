@@ -30,6 +30,11 @@ class CNotes extends Component {
             onTouchStart={this.props.isTouch ? () => this.playNote('C2') : null}
             onClick={this.props.isTouch ? null : () => this.playNote('C2')}
           />
+          <text 
+            transform="matrix(1 0 0 1 321.2329 314.7979)"
+          >
+            C2
+          </text>
         </g>
         <g id="C3">
           <path
@@ -39,6 +44,11 @@ class CNotes extends Component {
             onTouchStart={this.props.isTouch ? () => this.playNote('C3') : null}
             onClick={this.props.isTouch ? null : () => this.playNote('C3')}
           />
+          <text 
+            transform="matrix(1 0 0 1 536.2798 314.9819)"
+          >
+            C3
+          </text>
         </g>
       </>
     );

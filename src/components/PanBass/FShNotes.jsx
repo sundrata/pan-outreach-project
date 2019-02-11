@@ -30,6 +30,11 @@ class FShNotes extends Component {
             onTouchStart={this.props.isTouch ? () => this.playNote('FSh2') : null}
             onClick={this.props.isTouch ? null : () => this.playNote('FSh2')}
           />
+          <text 
+            transform="matrix(1 0 0 1 1184.4795 1069.3525)"
+          >
+            F&#9839;2
+          </text>
         </g>
       </>
     );
