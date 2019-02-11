@@ -11,6 +11,7 @@ import second from './secondReducer';
 import cello from './celloReducer';
 import bass from './bassReducer';
 import displayColors from './displayColorsReducer';
+import displayNotes from './displayNotesReducer';
 import isTouch from './isTouchReducer';
 
 // rootReducer is the primary reducer for our entire project
@@ -25,13 +26,14 @@ const rootReducer = combineReducers({
   user, // will have an id and username if someone is logged in
   personReducer, //seperate from user reducer. user reducer only contains logged in accounts info
   sheetMusicReducer,
-  lessonReducer, 
+  lessonReducer,
   categoryReducer,// has the
   tenor, //sets note colors
   second, //sets note colors
   cello, //sets note colors
   bass, //sets note colors
   displayColors, // boolean of whether to display colors or not
+  displayNotes, // boolean of whether to display note names or not
   isTouch, // boolean determining if touch device is being used
 });
 
