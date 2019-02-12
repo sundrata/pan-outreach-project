@@ -37,7 +37,7 @@ class Switches extends React.Component {
 
   render() {
     return (
-      <FormGroup row>
+      <FormGroup column>
         <FormControlLabel
           control={
             <Switch
