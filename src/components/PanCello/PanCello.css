@@ -5,7 +5,15 @@
 }
 
 #cello-svg{
-  transform: scale(0.75);
+  display: block;
+  margin: 0 auto;
+  width: 900px;
+  height: 749px;
+}
+
+.switch-div-cello {
+  position: absolute;
+  left: 780px;
 }
 
 .note-text {

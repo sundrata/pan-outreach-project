@@ -34,6 +34,7 @@ body {
     background-color: #ff4545;
     margin: 50px;
 }
+
 .dashBox{
     margin: 5px 10px;
     display: inline-block;
@@ -41,6 +42,7 @@ body {
     border-radius: 1%;
     box-shadow: 1px 1px 2px rgb(66, 66, 66);
 }
+
 .dashButtons{
     box-shadow: 1px 1px 1px rgb(185, 184, 184);
     font-size: 34px;
@@ -51,6 +53,7 @@ body {
     padding: 5px 10px;
     margin: 10px 10px 20px 10px;
 }
+
 .dashImages{
     font-size: 20px;
     max-height: 340px;
@@ -58,6 +61,7 @@ body {
     padding: 10px 10px;
     margin: 20px 10px 10px 10px;
 }
+
 form {
     background-color: #eb6505;
     width: 30%;
@@ -77,6 +81,11 @@ form {
     font-size: 44px;
     margin: 10px auto;
 }
+
+h3 {
+    margin: 0px;
+}
+
 input {
     margin: 5px;
     margin-bottom: 10px;

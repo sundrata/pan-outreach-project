@@ -9,12 +9,11 @@
   margin: 0 auto;
   width: 770px;
   height: 730px;
-  /* transform: scale(0.75); */
 }
 
-.switch-div {
+.switch-div-tenor {
   position: absolute;
-  left: 200px;
+  left: 780px;
 }
 
 .note-text {

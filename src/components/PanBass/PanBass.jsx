@@ -27,12 +27,15 @@ class PanBass extends Component {
   render() {
     return (
       <div className='disable-touch-zoom' onClick={this.testTouch}>
-        <Switches />
+        <div className="switch-div-bass">
+          <h3>Bass</h3>
+          <Switches />
+        </div>
         <svg
           id="bass-svg"
           x="0px"
           y="0px"
-          viewBox="0 0 1613 1450"
+          viewBox="0 0 1353 1281"
         >
           {/* BASE LAYER */}
           <g id="base">

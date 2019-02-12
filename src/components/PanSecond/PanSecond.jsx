@@ -28,6 +28,7 @@ class PanSecond extends Component {
     return (
       <div className='disable-touch-zoom' onClick={this.testTouch}>
         <div className="switch-div-second">
+          <h3>Second</h3>
           <Switches />
         </div>
         <svg
