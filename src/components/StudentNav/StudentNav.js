@@ -42,7 +42,7 @@ const styles = theme => ({
   },
 });
 
-class TemporaryDrawer extends React.Component {
+class StudentNav extends React.Component {
   state = {
     left: false,
   };
@@ -58,17 +58,22 @@ class TemporaryDrawer extends React.Component {
   }
 
   render() {
+    // for material ui styling
     const { classes } = this.props;
-
+    // the list items in the studentNav bar
     const sideList = (
       <div className={classes.list}>
         <List>
+          {/* DRUM/HOME LIST ITEM */}
           <ListItem button key='Drums' onClick={() => this.handleClick('home')}>
             <ListItemIcon>
               <DrumIcon />
             </ListItemIcon>
             <ListItemText primary="Drums" />
           </ListItem>
+
+          {/* NESTED LIST */}
+            {/* TENOR LIST ITEM */}
             <List component="div" disablePadding>
               <ListItem button className={classes.nested} onClick={() => this.handleClick('tenor')}>
                 <ListItemIcon>
@@ -76,18 +81,24 @@ class TemporaryDrawer extends React.Component {
                 </ListItemIcon>
                 <ListItemText primary='Tenor' />
               </ListItem>
+
+            {/* SECOND LIST ITEM */}
               <ListItem button className={classes.nested} onClick={() => this.handleClick('second')}>
                 <ListItemIcon>
                   <ArrowRightRounded />
                 </ListItemIcon>
                 <ListItemText primary='Second' />
               </ListItem>
+            
+            {/* CELLO LIST ITEM */}
               <ListItem button className={classes.nested} onClick={() => this.handleClick('cello')}>
                 <ListItemIcon>
                   <ArrowRightRounded />
                 </ListItemIcon>
                 <ListItemText primary='Cello' />
               </ListItem>
+
+            {/* BASS LIST ITEM */}
               <ListItem button className={classes.nested} onClick={() => this.handleClick('bass')}>
                 <ListItemIcon>
                   <ArrowRightRounded />
@@ -95,19 +106,27 @@ class TemporaryDrawer extends React.Component {
                 <ListItemText primary='Bass' />
               </ListItem>
             </List>
-          <ListItem button key='Sheet Music'>
+
+          {/* SHEET MUSIC LIST ITEM */}
+          <ListItem button key='Sheet Music' onClick={() => this.handleClick('studentMusic')}>
             <ListItemIcon>
               <NoteIcon />
             </ListItemIcon>
             <ListItemText primary='Sheet Music' />
           </ListItem>
-          <ListItem button key='Lesson Plans'>
+
+          {/* LESSON PLAN LIST ITEM */}
+          <ListItem button key='Lesson Plans' onClick={() => this.handleClick('studentLessons')}>
             <ListItemIcon>
               <AssignmentIcon />
             </ListItemIcon>
             <ListItemText primary='Lesson Plans' />
           </ListItem>
+
+          {/* DIVIDER */}
           <Divider />
+
+          {/* LOGOUT BUTTON LIST ITEM */}
           <ListItem button key='Logout' onClick={() => this.props.dispatch({ type: 'LOGOUT' })}>
             <ListItemIcon>
               <LogoutIcon />
@@ -120,6 +139,7 @@ class TemporaryDrawer extends React.Component {
 
     return (
       <div>
+        {/* the studentNav bar drawer */}
         <div
           color="inherit"
           aria-label="Open drawer"
@@ -143,8 +163,8 @@ class TemporaryDrawer extends React.Component {
   }
 }
 
-TemporaryDrawer.propTypes = {
+StudentNav.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default connect()(withRouter(withStyles(styles)(TemporaryDrawer)));
+export default connect()(withRouter(withStyles(styles)(StudentNav)));

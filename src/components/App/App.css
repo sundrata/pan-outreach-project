@@ -19,7 +19,7 @@ body {
     /* padding: 10px auto;
     font-size: 42px; */
     padding-top: 5px;
-    height: 50px;
+    height: 55px;
     color: #eb6505; 
     font-weight: bolder;
     /* -webkit-text-stroke-width: 1.5px;
@@ -30,8 +30,8 @@ body {
  .adminNav {
     display: inline-block;
     position: absolute;
-    top: 10px;
-    left: 10px;
+    top: 0px;
+    left: 0px;
     margin: 0px;
     padding: 0px;
     /* background: red; */
