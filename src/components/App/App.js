@@ -97,11 +97,11 @@ class App extends Component {
               path="/bass"
               component={PanBass}
             />
-            <ProtectedRoute 
+            <ProtectedRoute
               exact
               path="/studentLessons"
               component={StudentLessons}
-            />  
+            />
 
             <ProtectedRoute
               exact
