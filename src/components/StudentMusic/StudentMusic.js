@@ -57,11 +57,8 @@ class StudentMusic extends Component {
       open: true, 
       url: row.url,
       name: row.name,
-      fileType: fileExtension,
-      
+      fileType: fileExtension,     
     });
-    
-    
   };
 
   handleClose = () => {
