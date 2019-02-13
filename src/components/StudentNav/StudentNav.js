@@ -5,22 +5,25 @@ import { connect } from 'react-redux';
 
 // material-ui imports
 import { withStyles } from '@material-ui/core/styles';
+import Collapse from '@material-ui/core/Collapse';
 import Divider from '@material-ui/core/Divider';
 import Drawer from '@material-ui/core/Drawer';
-import LogOutButton from '../LogOutButton/LogOutButton';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 
 // icon imports
-import DrumIcon from '@material-ui/icons/GroupWork';
 import AssignmentIcon from '@material-ui/icons/Assignment';
-import NoteIcon from '@material-ui/icons/MusicNote';
-import MenuIcon from '@material-ui/icons/Menu';
+import DrumIcon from '@material-ui/icons/GroupWork';
+import ExpandLess from '@material-ui/icons/ExpandLess';
+import ExpandMore from '@material-ui/icons/ExpandMore';
 import LogoutIcon from '@material-ui/icons/ExitToApp';
+import MenuIcon from '@material-ui/icons/Menu';
+import NoteIcon from '@material-ui/icons/MusicNote';
+import ArrowRightRounded from '@material-ui/icons/ArrowRightRounded';
 
-const styles = {
+const styles = theme => ({
   list: {
     width: 250,
   },
@@ -37,7 +40,10 @@ const styles = {
     width: 30,
     textAlign: 'center',
   },
-};
+  nested: {
+    paddingLeft: theme.spacing.unit * 5,
+  },
+});
 
 class TemporaryDrawer extends React.Component {
   state = {
@@ -48,7 +54,7 @@ class TemporaryDrawer extends React.Component {
     this.setState({
       [side]: open,
     });
-  };
+  }
 
   handleClick = (route) => {
     this.props.history.push(`/${route}`)
@@ -60,30 +66,38 @@ class TemporaryDrawer extends React.Component {
     const sideList = (
       <div className={classes.list}>
         <List>
-          <ListItem button key='Tenor' onClick={() => this.handleClick('tenor')}>
+          <ListItem button key='Drums' onClick={() => this.handleClick('home')}>
             <ListItemIcon>
               <DrumIcon />
             </ListItemIcon>
-            <ListItemText primary='Tenor' />
+            <ListItemText primary="Drums" />
           </ListItem>
-          <ListItem button key='Seconds' onClick={() => this.handleClick('second')}>
-            <ListItemIcon>
-              <DrumIcon />
-            </ListItemIcon>
-            <ListItemText primary='Seconds' />
-          </ListItem>
-          <ListItem button key='Cello' onClick={() => this.handleClick('cello')}>
-            <ListItemIcon>
-              <DrumIcon />
-            </ListItemIcon>
-            <ListItemText primary='Cello' />
-          </ListItem>
-          <ListItem button key='Bass' onClick={() => this.handleClick('bass')}>
-            <ListItemIcon>
-              <DrumIcon />
-            </ListItemIcon>
-            <ListItemText primary='Bass' />
-          </ListItem>
+            <List component="div" disablePadding>
+              <ListItem button className={classes.nested} onClick={() => this.handleClick('tenor')}>
+                <ListItemIcon>
+                  <ArrowRightRounded />
+                </ListItemIcon>
+                <ListItemText primary='Tenor' />
+              </ListItem>
+              <ListItem button className={classes.nested} onClick={() => this.handleClick('second')}>
+                <ListItemIcon>
+                  <ArrowRightRounded />
+                </ListItemIcon>
+                <ListItemText primary='Second' />
+              </ListItem>
+              <ListItem button className={classes.nested} onClick={() => this.handleClick('cello')}>
+                <ListItemIcon>
+                  <ArrowRightRounded />
+                </ListItemIcon>
+                <ListItemText primary='Cello' />
+              </ListItem>
+              <ListItem button className={classes.nested} onClick={() => this.handleClick('bass')}>
+                <ListItemIcon>
+                  <ArrowRightRounded />
+                </ListItemIcon>
+                <ListItemText primary='Bass' />
+              </ListItem>
+            </List>
           <ListItem button key='Sheet Music'>
             <ListItemIcon>
               <NoteIcon />
@@ -100,7 +114,6 @@ class TemporaryDrawer extends React.Component {
           <ListItem button key='Logout' onClick={() => this.props.dispatch({ type: 'LOGOUT' })}>
             <ListItemIcon>
               <LogoutIcon />
-              {/* <LogOutButton /> */}
             </ListItemIcon>
             <ListItemText primary='Logout' />
           </ListItem>
