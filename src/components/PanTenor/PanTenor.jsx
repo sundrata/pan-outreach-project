@@ -15,7 +15,6 @@ import GNotes from './GNotes';
 import GShNotes from './GShNotes';
 import './PanTenor.css'
 
-
 class PanTenor extends Component {
   state = {
     baseColor: '#F7E8AC',
@@ -24,41 +23,44 @@ class PanTenor extends Component {
   }
 
   // dummy function needed to prevent double tap zoom on touch devices
-  testTouch = () => {}
+  testTouch = () => { }
 
   render() {
     return (
       <div className='disable-touch-zoom' onClick={this.testTouch}>
-        <Switches />
-        <svg
-          id="tenor-svg"
-          x="0px"
-          y="0px"
-          viewBox="0 0 1440 1438"
-        >
-          {/* BASE LAYER */}
-          <g id="Layer_2">
-            <ellipse
-              style={{ fill: this.state.baseColor, stroke: this.state.baseStroke }}
-              cx="720"
-              cy="720.75"
-              rx="707.5"
-              ry="710.25"
-            />
-          </g>
-          <CNotes />
-          <CShNotes />
-          <FNotes />
-          <FShNotes />
-          <BNotes />
-          <BbNotes />
-          <ENotes />
-          <EbNotes />
-          <ANotes />
-          <DNotes />
-          <GNotes />
-          <GShNotes />
-        </svg>
+        <div className="switch-div-tenor">
+          <h3>Tenor</h3>
+          <Switches />
+        </div>
+          <svg
+            id="tenor-svg"
+            x="0"
+            y="0"
+            viewBox="0 0 1440 1438"
+          >
+            {/* BASE LAYER */}
+            <g id="Layer_2">
+              <ellipse
+                style={{ fill: this.state.baseColor, stroke: this.state.baseStroke }}
+                cx="720"
+                cy="720.75"
+                rx="707.5"
+                ry="710.25"
+              />
+            </g>
+            <CNotes />
+            <CShNotes />
+            <FNotes />
+            <FShNotes />
+            <BNotes />
+            <BbNotes />
+            <ENotes />
+            <EbNotes />
+            <ANotes />
+            <DNotes />
+            <GNotes />
+            <GShNotes />
+          </svg>
       </div>
     );
   }

@@ -27,12 +27,15 @@ class PanSecond extends Component {
   render() {
     return (
       <div className='disable-touch-zoom' onClick={this.testTouch}>
-        <Switches />
+        <div className="switch-div-second">
+          <h3>Second</h3>
+          <Switches />
+        </div>
         <svg
           id="seconds-svg"
           x="0px"
           y="0px"
-          viewBox="0 0 1450 1438"
+          viewBox="0 0 1451 730"
         >
           {/* BASE LAYER */}
 

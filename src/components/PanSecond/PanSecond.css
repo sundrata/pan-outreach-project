@@ -5,7 +5,15 @@
 }
 
 #seconds-svg{
-  transform: scale(0.75);
+  display: block;
+  margin: 0 auto;
+  width: 900px;
+  height: 500px;
+}
+
+.switch-div-second {
+  position: absolute;
+  left: 910px;
 }
 
 .note-text {
