@@ -11,7 +11,6 @@ import Button from '@material-ui/core/Button';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import Divider from '@material-ui/core/Divider';
 
-
 const styles = {
   list: {
     width: 250,
