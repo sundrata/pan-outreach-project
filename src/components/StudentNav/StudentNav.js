@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withRouter } from 'react-router'
+import { withRouter } from 'react-router';
+import { connect } from 'react-redux';
 
 // material-ui imports
 import { withStyles } from '@material-ui/core/styles';
@@ -96,7 +97,7 @@ class TemporaryDrawer extends React.Component {
             <ListItemText primary='Lesson Plans' />
           </ListItem>
           <Divider />
-          <ListItem button key='Logout'>
+          <ListItem button key='Logout' onClick={() => this.props.dispatch({ type: 'LOGOUT' })}>
             <ListItemIcon>
               <LogoutIcon />
               {/* <LogOutButton /> */}
@@ -136,4 +137,4 @@ TemporaryDrawer.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withRouter(withStyles(styles)(TemporaryDrawer));
+export default connect()(withRouter(withStyles(styles)(TemporaryDrawer)));
