@@ -7,13 +7,13 @@ import {
 } from 'react-router-dom';
 
 import {connect} from 'react-redux';
-import Footer from '../Footer/Footer';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 import AdminRoute from '../AdminRoute/AdminRoute';
 import AdminSchools from '../AdminSchools/AdminSchools';
 import AdminLessons from '../AdminLessons/AdminLessons';
 import AdminMusic from '../AdminMusic/AdminMusic';
-import AdminNav from '../AdminNav/AdminNav';
+import AdminHeader from '../AdminHeader/AdminHeader';
+// import AdminNav from '../AdminNav/AdminNav';
 import PanTenor from '../PanTenor/PanTenor';
 import PanSecond from '../PanSecond/PanSecond';
 import PanCello from '../PanCello/PanCello';
@@ -21,7 +21,7 @@ import PanBass from '../PanBass/PanBass';
 import StudentLessons from '../StudentLessons/StudentLessons';
 import Split from '../Split/Split';
 import StudentMusic from '../StudentMusic/StudentMusic';
-import StudentNav from '../StudentNav/StudentNav'
+import StudentNav from '../StudentNav/StudentNav';
 import './App.css';
 
 class App extends Component {
@@ -40,7 +40,7 @@ class App extends Component {
     return (
       <Router>
         <div>
-          {this.props.user.admin ? <AdminNav /> : <StudentNav /> }
+          {this.props.user.admin ? <AdminHeader /> : <StudentNav /> }
           <Switch>
             {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
             <Redirect exact from="/" to="/home" />
@@ -112,7 +112,6 @@ class App extends Component {
             <Route render={() => <h1>404</h1>} />
 
           </Switch>
-          <Footer />
         </div>
       </Router>
   )}

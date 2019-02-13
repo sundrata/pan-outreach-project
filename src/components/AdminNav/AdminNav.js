@@ -1,9 +1,5 @@
-// import AdminDashboard from '../AdminDashboard/AdminDashboard';
-// import AdminLessons from '../AdminLessons/AdminLessons';
-// import AdminMusic from '../AdminMusic/AdminMusic';
-// import AdminSchools from '../AdminSchools/AdminSchools';
-import { Link } from 'react-router-dom';
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
