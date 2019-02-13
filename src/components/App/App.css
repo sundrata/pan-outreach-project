@@ -12,6 +12,7 @@ body {
     max-width: 70%;
     margin: 20px auto;
 }
+
 .adminHeader{
     background-color: #eb6505;
     text-align: center;
@@ -43,6 +44,17 @@ body {
     box-shadow: 1px 1px 2px rgb(66, 66, 66);
 }
 
+.studentDashBox {
+    position: relative;
+    margin: 5px 10px;
+    display: inline-block;
+    background-color: rgb(233, 231, 231);
+    border-radius: 1%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    width: 340px;
+    height: 340px;
+}
+
 .dashButtons{
     box-shadow: 1px 1px 1px rgb(185, 184, 184);
     font-size: 34px;
@@ -59,7 +71,52 @@ body {
     max-height: 340px;
     max-width: 340px;
     padding: 10px 10px;
-    margin: 20px 10px 10px 10px;
+    margin: 10px 10px 10px 10px;
+}
+
+.studentDashImages{
+    border-radius: 1%;
+    opacity: 1;
+    display: block;
+    width: 100%;
+    height: auto;
+    transition: .5s ease;
+    backface-visibility: hidden;
+}
+
+.center {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+  overflow: hidden;
+}
+
+.center-box {
+    background-color: #eb6505;
+    padding: 16px 32px;
+}
+
+.text {
+    color: white;
+    font-size: 20px;
+    text-decoration: none;
+}
+
+.studentDashBox:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.studentDashBox:hover .studentDashImages {
+  opacity: 0.3;
+}
+
+.studentDashBox:hover .center {
+  opacity: 1;
 }
 
 form {
