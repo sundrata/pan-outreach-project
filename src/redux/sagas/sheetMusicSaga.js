@@ -24,6 +24,8 @@ function* searchMusic(action) {
         let instrument = action.payload.instrument || '*';
         let difficulty = action.payload.difficulty || '*';
         let name = action.payload.name || '*';
+        console.log('checking to see if null', instrument, difficulty, name);
+        
         const setMusic = yield axios.get(`/api/music/search/${instrument}/${difficulty}/${name}`);  // get searched sheet music
         console.log(`get search music`, setMusic.data);
 

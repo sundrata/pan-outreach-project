@@ -78,6 +78,9 @@ class StudentMusic extends Component {
     this.props.dispatch({
       type: 'SEARCH_SHEET_MUSIC', payload: { instrument: this.state.searchInstrument, difficulty: this.state.searchDifficulty, name: this.state.searchName }
     });
+    this.setState({
+      searchName: ''
+    });
   };
 
   resetSearch = () => {
@@ -141,7 +144,7 @@ class StudentMusic extends Component {
         <DialogContentText>
           Search by Song Name
         </DialogContentText>
-        <TextField onChange={this.handleSearchChange} name='searchName'>
+        <TextField onChange={this.handleSearchChange} name='searchName' value={this.state.searchName}>
         </TextField>
         <Button variant="outlined" color="primary" onClick={this.submitSearch}>Submit Search</Button>
         <Button variant="outlined" color="primary" onClick={this.resetSearch}>Reset Search</Button>
