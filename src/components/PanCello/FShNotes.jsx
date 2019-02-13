@@ -36,7 +36,7 @@ class FShNotes extends Component {
             transform="matrix(1 0 0 1 919.9189 479.9858)"
             className={this.props.displayNotes}
           >
-            FSh3
+            F&#9839;3
           </text>
         </g>
         <g id="FSh4">
@@ -54,7 +54,7 @@ class FShNotes extends Component {
             transform="matrix(1 0 0 1 766.9736 376.1914)"
             className={this.props.displayNotes}
           >
-            FSh4
+            F&#9839;4
           </text>
         </g>
       </>

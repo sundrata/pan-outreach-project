@@ -28,7 +28,8 @@ class PanTenor extends Component {
   render() {
     return (
       <div className='disable-touch-zoom' onClick={this.testTouch}>
-        <div className="switch-div">
+        <div className="switch-div-tenor">
+          <h3>Tenor</h3>
           <Switches />
         </div>
           <svg

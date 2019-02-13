@@ -11,11 +11,21 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
+import FileViewer from 'react-file-viewer';
+import Dialog from '@material-ui/core/Dialog';
+
+// HANDLE NO PDF ERROR
 
 class StudentLessons extends Component {
   state = {
     searchCategory: 0,
-    searchName : ''
+    searchName : '',
+    open: false, //state for view pdf
+    fileType: ''
   }
 
   handleSearchChange = (event) => {
@@ -41,6 +51,23 @@ class StudentLessons extends Component {
       type: 'FETCH_LESSON'
     });
   }
+
+  //pdf view handlers
+  handleClickOpen = (row) => {
+    console.log('hitting handle click open', row);
+    let fileExtension = row.url.split('.').pop();
+    console.log(fileExtension);
+    this.setState({ 
+      open: true, 
+      url: row.url,
+      name: row.name,
+      fileType: fileExtension,     
+    });
+  };
+
+  handleClose = () => {
+    this.setState({ open: false });
+  };
 
   render() {
     return (
@@ -72,6 +99,25 @@ class StudentLessons extends Component {
               <Button variant="outlined" color="primary" onClick={this.submitSearch}>Submit Search</Button>
               <Button variant="outlined" color="primary" onClick={this.resetSearch}>Reset Search</Button>
               {/* end sort and search */}
+              {/* pdf box */}
+              <Dialog
+          fullScreen
+          open={this.state.open}
+          onClose={this.handleClose}
+        >
+          <AppBar>
+            <Toolbar>
+              <IconButton color="inherit" onClick={this.handleClose} aria-label="Close">
+                <CloseIcon />
+              </IconButton>
+            </Toolbar>
+          </AppBar>
+          <br></br>
+          <br></br>
+          <FileViewer
+            fileType= {this.state.fileType}
+            filePath={this.state.url} />       
+        </Dialog>
         <Paper>
           <Table className="adminTable">
             <TableHead>
@@ -88,7 +134,7 @@ class StudentLessons extends Component {
                     <TableCell align="left">{row.name}</TableCell>
                     <TableCell align="left">{row.category_name}</TableCell>
                     {/* view lesson plan */}
-                    <TableCell align="left"><Button onClick={() => this.editLesson(row)}>View</Button></TableCell> 
+                    <TableCell align="left"><Button onClick={() => this.handleClickOpen(row)}>View</Button></TableCell> 
                   </TableRow>
                 )
               })}

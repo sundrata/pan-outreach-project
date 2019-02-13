@@ -35,7 +35,7 @@ class CShNotes extends Component {
             transform="matrix(1 0 0 1 1040.4414 1263.2617)"
             className={this.props.displayNotes}
           >
-            CSh3
+            C&#9839;3
           </text>
         </g>
         <g id="CSh4">
@@ -53,7 +53,7 @@ class CShNotes extends Component {
             transform="matrix(1 0 0 1 822.3184 1142.125)"
             className={this.props.displayNotes}
           >
-            CSh4
+            C&#9839;4
           </text>
         </g>
         <g id="CSh5">
@@ -71,7 +71,7 @@ class CShNotes extends Component {
             transform="matrix(1 0 0 1 1004.5762 1083.793)"
             className={this.props.displayNotes}
           >
-            CSh5
+            C&#9839;5
           </text>
         </g>
       </>
