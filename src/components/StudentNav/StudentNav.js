@@ -1,19 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router'
+
+// material-ui imports
 import { withStyles } from '@material-ui/core/styles';
+import Divider from '@material-ui/core/Divider';
 import Drawer from '@material-ui/core/Drawer';
-import Button from '@material-ui/core/Button';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+
+// icon imports
 import DrumIcon from '@material-ui/icons/GroupWork';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import NoteIcon from '@material-ui/icons/MusicNote';
 import MenuIcon from '@material-ui/icons/Menu';
 import LogoutIcon from '@material-ui/icons/ExitToApp';
-import { withRouter } from 'react-router'
 
 const styles = {
   list: {
@@ -55,25 +59,25 @@ class TemporaryDrawer extends React.Component {
     const sideList = (
       <div className={classes.list}>
         <List>
-          <ListItem button key='Tenor' onClick={this.handleClick('tenor')}>
+          <ListItem button key='Tenor' onClick={() => this.handleClick('tenor')}>
             <ListItemIcon>
               <DrumIcon />
             </ListItemIcon>
             <ListItemText primary='Tenor' />
           </ListItem>
-          <ListItem button key='Seconds'>
+          <ListItem button key='Seconds' onClick={() => this.handleClick('second')}>
             <ListItemIcon>
               <DrumIcon />
             </ListItemIcon>
             <ListItemText primary='Seconds' />
           </ListItem>
-          <ListItem button key='Cello'>
+          <ListItem button key='Cello' onClick={() => this.handleClick('cello')}>
             <ListItemIcon>
               <DrumIcon />
             </ListItemIcon>
             <ListItemText primary='Cello' />
           </ListItem>
-          <ListItem button key='Bass'>
+          <ListItem button key='Bass' onClick={() => this.handleClick('bass')}>
             <ListItemIcon>
               <DrumIcon />
             </ListItemIcon>
@@ -91,9 +95,11 @@ class TemporaryDrawer extends React.Component {
             </ListItemIcon>
             <ListItemText primary='Lesson Plans' />
           </ListItem>
+          <Divider />
           <ListItem button key='Logout'>
             <ListItemIcon>
               <LogoutIcon />
+              {/* <LogOutButton /> */}
             </ListItemIcon>
             <ListItemText primary='Logout' />
           </ListItem>

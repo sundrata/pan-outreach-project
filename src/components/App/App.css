@@ -92,6 +92,17 @@ input {
     border: 1px black solid;
 }
 
+.logout-button {
+    margin-top: 10px;
+    padding-left: 15px;
+}
+
+.logout-text {
+    margin: 0px;
+    font-size: 16px;
+    padding-left: 33px;
+}
+
 .log-in, .log-out, .register {
   background-color: #01e8ec;
   border-radius: 4px;
