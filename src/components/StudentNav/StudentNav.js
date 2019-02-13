@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 
 // material-ui imports
 import { withStyles } from '@material-ui/core/styles';
-import Collapse from '@material-ui/core/Collapse';
 import Divider from '@material-ui/core/Divider';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
@@ -16,8 +15,6 @@ import ListItemText from '@material-ui/core/ListItemText';
 // icon imports
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import DrumIcon from '@material-ui/icons/GroupWork';
-import ExpandLess from '@material-ui/icons/ExpandLess';
-import ExpandMore from '@material-ui/icons/ExpandMore';
 import LogoutIcon from '@material-ui/icons/ExitToApp';
 import MenuIcon from '@material-ui/icons/Menu';
 import NoteIcon from '@material-ui/icons/MusicNote';
