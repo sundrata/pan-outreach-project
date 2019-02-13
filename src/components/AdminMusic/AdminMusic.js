@@ -19,6 +19,11 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
+import FileViewer from 'react-file-viewer';
 
 const mapStateToProps = reduxStore => {
   return {
@@ -39,7 +44,7 @@ class AdminMusic extends Component {
     searchInstrument: '',
     searchDifficulty: 0,
     searchName: '',
-
+    pdfView: false
   }
 
   componentDidMount() {
@@ -175,11 +180,25 @@ class AdminMusic extends Component {
       searchInstrument: '',
       searchDifficulty: 0,
       searchName: '',
-
     })
-
   };
   
+  //view pdf handlers
+  handleClickOpen = (row) => {
+    console.log('hitting handle click open', row);
+    let fileExtension = row.url.split('.').pop();
+    console.log(fileExtension);
+    this.setState({ 
+      pdfView: true, 
+      url: row.url,
+      name: row.name,
+      fileType: fileExtension,     
+    });
+  };
+
+  handleClose = () => {
+    this.setState({ pdfView: false });
+  };
   render() {
     return (
       // our edit dialog box 
@@ -299,9 +318,29 @@ class AdminMusic extends Component {
                 Search by Song Name
               </DialogContentText>
               <TextField onChange={this.handleSearchChange} name='searchName'> 
-              </TextField>
+              </TextField><br></br>
               <Button variant="outlined" color="primary" onClick={this.submitSearch}>Submit Search</Button>
               <Button variant="outlined" color="primary" onClick={this.resetSearch}>Reset Search</Button>
+              {/* pdf view handlers */}
+              <Dialog
+          fullScreen
+          open={this.state.pdfView}
+          onClose={this.handleClose}
+        >
+          <AppBar>
+            <Toolbar>
+              <IconButton color="inherit" onClick={this.handleClose} aria-label="Close">
+                <CloseIcon />
+              </IconButton>
+            </Toolbar>
+          </AppBar>
+          <br></br>
+          <br></br>
+          <FileViewer
+            fileType= {this.state.fileType}
+            filePath={this.state.url} />
+        
+        </Dialog>
               {/* start add new music */}
               <Dialog
                 open={this.state.open}
@@ -379,7 +418,7 @@ class AdminMusic extends Component {
                     <TableCell>Name</TableCell>
                     <TableCell>Instrument</TableCell>
                     <TableCell align="center">Difficulty</TableCell>
-                    <TableCell align="center">URL</TableCell>
+                    <TableCell align="center">.PDF</TableCell>
                     <TableCell align="center">Edit</TableCell>
                     <TableCell align="center">Delete</TableCell>
                   </TableRow>
@@ -390,10 +429,10 @@ class AdminMusic extends Component {
                       <TableRow key={row.id}>
                         <TableCell align="left">{row.name}</TableCell>
                         <TableCell align="left">{row.instrument}</TableCell>
-                        <TableCell align="left">{row.difficulty} </TableCell>
-                        <TableCell align="center">{row.url} </TableCell>
-                        <TableCell align="left"><Button onClick={() => this.editSheetMusic(row)}>Edit</Button></TableCell>
-                        <TableCell align="left"><Button onClick={() => this.deleteSheetMusic(row)}>Delete</Button></TableCell>
+                        <TableCell align="center">{row.difficulty} </TableCell>
+                        <TableCell align="center"><Button onClick={() => this.handleClickOpen(row)}>View</Button></TableCell>
+                        <TableCell align="center"><Button onClick={() => this.editSheetMusic(row)}>Edit</Button></TableCell>
+                        <TableCell align="center"><Button onClick={() => this.deleteSheetMusic(row)}>Delete</Button></TableCell>
                       </TableRow>
                     )
                   }

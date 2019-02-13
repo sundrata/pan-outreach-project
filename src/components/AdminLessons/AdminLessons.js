@@ -20,6 +20,13 @@ import Switch from '@material-ui/core/Switch';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
+import FileViewer from 'react-file-viewer';
+import SweetAlert from 'sweetalert2-react';
+
 class AdminLessons extends Component {
   state = {
     edit: false, //this state controls whether or not to display edit dialog
@@ -30,7 +37,8 @@ class AdminLessons extends Component {
     file: '', //state for file associated with lesson plan
     category: '', //state for adding new category 
     searchCategory : 0, //state for sorting by category
-    searchName: null //state for searching by name
+    searchName: null, //state for searching by name
+    pdfView: false
   }
   //delete lesson plan dispatch
   deleteLesson = (row) => {
@@ -45,7 +53,8 @@ class AdminLessons extends Component {
     this.setState({
       open: false,
       open2: false,
-      edit: false
+      edit: false,
+      pdfView: false
     });
   };
   //handlers for adding new lesson plan
@@ -161,6 +170,19 @@ submitSearch = () => {
 
     });
   }
+
+  //pdf handlers
+  handlePdf= (row) => {
+    console.log('hitting handle click open', row);
+    let fileExtension = row.url.split('.').pop();
+    console.log(fileExtension);
+    this.setState({ 
+      pdfView: true, 
+      url: row.url,
+      name: row.name,
+      fileType: fileExtension,     
+    });
+  };
   render() {
     return (
       this.state.edit ?
@@ -250,6 +272,25 @@ submitSearch = () => {
               <Button variant="outlined" color="primary" onClick={this.submitSearch}>Submit Search</Button>
               <Button variant="outlined" color="primary" onClick={this.resetSearch}>Reset Search</Button>
               {/* end sort and search */}
+              {/* pdf box */}
+              <Dialog
+          fullScreen
+          open={this.state.pdfView}
+          onClose={this.handleClose}
+        >
+          <AppBar>
+            <Toolbar>
+              <IconButton color="inherit" onClick={this.handleClose} aria-label="Close">
+                <CloseIcon />
+              </IconButton>
+            </Toolbar>
+          </AppBar>
+          <br></br>
+          <br></br>
+          <FileViewer
+            fileType= {this.state.fileType}
+            filePath={this.state.url} />       
+        </Dialog>
               {/* begin add lesson plan */}
                 <Dialog
                   open={this.state.open}
@@ -361,6 +402,7 @@ submitSearch = () => {
                     <TableRow>
                       <TableCell align="center">Lesson Name</TableCell>
                       <TableCell align="center">Category</TableCell>
+                      <TableCell align="center">.PDF</TableCell>
                       <TableCell align="center">Edit</TableCell>
                       <TableCell align="center">Delete</TableCell>
                     </TableRow>
@@ -371,6 +413,7 @@ submitSearch = () => {
                         <TableRow key={row.id}>
                           <TableCell align="center">{row.name}</TableCell>
                           <TableCell align="center">{row.category_name}</TableCell>
+                          <TableCell align="center"><Button onClick={() => this.handlePdf(row)}>View</Button></TableCell>
                           <TableCell align="center"><Button onClick={() => this.editLesson(row)}>Edit</Button></TableCell>
                           <TableCell align="center"><Button onClick={() => this.deleteLesson(row)}>Delete</Button></TableCell>
                         </TableRow>
