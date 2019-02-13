@@ -12,6 +12,7 @@ body {
     max-width: 70%;
     margin: 20px auto;
 }
+
 .adminHeader{
     background-color: #eb6505;
     text-align: center;
@@ -26,8 +27,32 @@ body {
  }
 
 .studentDashDisplay{
-    margin: 10px auto;
+    margin: 0px auto;
     text-align: center; 
+    width: 70%;
+}
+
+.studentDashBox {
+    margin: 5px 10px 5px 0px;
+    display: inline-block;
+    background-color: white;
+    border: 1px solid #eb6505;
+    width: 277px;
+    /* box-shadow: 1px 1px 2px rgb(66, 66, 66); */
+}
+
+.studentDashImages {
+    width: 277px;
+    height: 277px;
+}
+
+.studentDashButtons{
+    font-size: 34px;
+    height: 60px;
+    width: 70%;
+    cursor: pointer;
+    padding: 5px 5px;
+    margin: 5px 5px 10px 10px;
 }
 
 .alert {

@@ -1,39 +1,35 @@
 import React from 'react';
+
 import { Link } from 'react-router-dom';
 
-// import PanTenor from '../PanTenor/PanTenor';
-// import PanSecond from '../PanSecond/PanSecond';
-// import PanCello from '../PanCello/PanCello';
-// import PanBass from '../PanBass/PanBass';
-
-const music = require('./music.jpg');
+const tenor = require('./tenor1.jpg');
 
 const StudentDashboard = () => (
   <div>
     <div>  
       <div className="studentDashDisplay">
-        <div className="dashBox">
-          <img className="dashImages" alt="Tenor" src={music} /> <br></br>
+        <div className="studentDashBox">
+          <img className="studentDashImages" alt="Tenor" src={tenor} /> <br></br>
           <Link to="/tenor">
-            <button className="dashButtons">Tenor</button>
+            <button className="studentDashButtons">Tenor</button>
           </Link>
         </div>
-        <div className="dashBox">
-          <img className="dashImages" alt="Second" src={music} /> <br></br>
+        <div className="studentDashBox">
+          <img className="studentDashImages" alt="Second" src={tenor} /> <br></br>
           <Link to="/second">
-            <button className="dashButtons">Second</button>
+            <button className="studentDashButtons">Second</button>
           </Link>
         </div>
-        <div className="dashBox">
-          <img className="dashImages" alt="Cello" src={music} /> <br></br>
+        <div className="studentDashBox">
+          <img className="studentDashImages" alt="Cello" src={tenor} /> <br></br>
           <Link to="/cello">
-            <button className="dashButtons">Cello</button>
+            <button className="studentDashButtons">Cello</button>
           </Link>
         </div>
-        <div className="dashBox">
-          <img className="dashImages" alt="Bass" src={music} /> <br></br>
+        <div className="studentDashBox">
+          <img className="studentDashImages" alt="Bass" src={tenor} /> <br></br>
           <Link to="/bass">
-            <button className="dashButtons">Bass</button>
+            <button className="studentDashButtons">Bass</button>
           </Link>
         </div>
       </div>
