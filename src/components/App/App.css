@@ -1,5 +1,5 @@
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Open Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0px;
 }
 
@@ -12,17 +12,30 @@ body {
     max-width: 70%;
     margin: 20px auto;
 }
+
 .adminHeader{
-    background-color: #eb6505;
-    text-align: center;
-    padding: 10px auto;
-    font-size: 42px;
-    height: 52px;
-    color: white;
+    background-color: white;
+    /* text-align: center; */
+    /* padding: 10px auto;
+    font-size: 42px; */
+    padding-top: 5px;
+    height: 50px;
+    color: #eb6505; 
     font-weight: bolder;
-    -webkit-text-stroke-width: 1.5px;
-    -webkit-text-stroke-color: rgb(0, 0, 0);
-    box-shadow: 3px 2px 5px black;
+    /* -webkit-text-stroke-width: 1.5px;
+    -webkit-text-stroke-color: rgb(0, 0, 0); */
+    box-shadow: 3px 2px 5px 3px rgb(192, 192, 192);
+ }
+
+ .adminNav {
+    display: inline-block;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    margin: 0px;
+    padding: 0px;
+    /* background: red; */
+    /* padding: 5px; */
  }
 
 .studentDashDisplay{
@@ -38,15 +51,19 @@ body {
 .dashBox{
     margin: 5px 10px;
     display: inline-block;
-    background-color: rgb(233, 231, 231);
+    background: white;
+    width: 340px;
+    /* background-color: rgb(233, 231, 231); */
     border-radius: 1%;
-    box-shadow: 1px 1px 2px rgb(66, 66, 66);
+    box-shadow: 1px 1px 4px 0px rgb(109, 108, 108);
 }
 
 .dashButtons{
-    box-shadow: 1px 1px 1px rgb(185, 184, 184);
+    /* box-shadow: 1px 1px 1px rgb(185, 184, 184); */
     font-size: 34px;
-    border-radius: 1%;
+    background: white;
+    border: 0px;
+    /* border-radius: 1%; */
     height: 60px;
     width: 70%;
     cursor: pointer;
@@ -58,8 +75,9 @@ body {
     font-size: 20px;
     max-height: 340px;
     max-width: 340px;
-    padding: 10px 10px;
-    margin: 20px 10px 10px 10px;
+    border-radius: 1% 1% 0 0;
+    /* padding: 10px 10px; */
+    /* margin: 20px 10px 10px 10px; */
 }
 
 form {
@@ -80,6 +98,13 @@ form {
     text-align: center;
     font-size: 44px;
     margin: 10px auto;
+}
+
+h1 {
+    /* display: inline-block; */
+    font-size: 30px;
+    margin-top: 0px;
+    text-align: center;
 }
 
 h3 {
