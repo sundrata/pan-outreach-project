@@ -25,6 +25,10 @@ import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import FileViewer from 'react-file-viewer';
 
+import { withSwalInstance } from 'sweetalert2-react';
+import swal from 'sweetalert2';
+const SweetAlert = withSwalInstance(swal);
+
 const mapStateToProps = reduxStore => {
   return {
     reduxStore
@@ -44,7 +48,8 @@ class AdminMusic extends Component {
     searchInstrument: '',
     searchDifficulty: 0,
     searchName: '',
-    pdfView: false
+    pdfView: false,
+    addAlert: false
   }
 
   componentDidMount() {
@@ -55,7 +60,10 @@ class AdminMusic extends Component {
   }
 
   handleClick = (event) => {
-    this.setState({ open: false });
+    this.setState({ 
+      open: false,
+    addAlert: true
+    });
     // event.preventDefault();
     const formData = new FormData();
     formData.append('file', this.state.file[0]);
@@ -184,7 +192,7 @@ class AdminMusic extends Component {
   };
   
   //view pdf handlers
-  handleClickOpen = (row) => {
+  handlePdf = (row) => {
     console.log('hitting handle click open', row);
     let fileExtension = row.url.split('.').pop();
     console.log(fileExtension);
@@ -409,6 +417,13 @@ class AdminMusic extends Component {
                 </DialogActions>
               </Dialog>
               {/* ends add new music */}
+              <SweetAlert
+        show={this.state.addAlert}
+        title="Success"
+        text="Successfuly uploaded sheet music"
+        type='success'
+        onConfirm={() => this.setState({ addAlert: false })}
+      />
             </div>
             {/* add table */}
             <Paper>
@@ -430,7 +445,7 @@ class AdminMusic extends Component {
                         <TableCell align="left">{row.name}</TableCell>
                         <TableCell align="left">{row.instrument}</TableCell>
                         <TableCell align="center">{row.difficulty} </TableCell>
-                        <TableCell align="center"><Button onClick={() => this.handleClickOpen(row)}>View</Button></TableCell>
+                        <TableCell align="center"><Button onClick={() => this.handlePdf(row)}>View</Button></TableCell>
                         <TableCell align="center"><Button onClick={() => this.editSheetMusic(row)}>Edit</Button></TableCell>
                         <TableCell align="center"><Button onClick={() => this.deleteSheetMusic(row)}>Delete</Button></TableCell>
                       </TableRow>

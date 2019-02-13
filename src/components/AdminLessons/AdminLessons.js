@@ -25,7 +25,10 @@ import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import FileViewer from 'react-file-viewer';
-import SweetAlert from 'sweetalert2-react';
+import { withSwalInstance } from 'sweetalert2-react';
+import swal from 'sweetalert2';
+const SweetAlert = withSwalInstance(swal);
+
 
 class AdminLessons extends Component {
   state = {
@@ -54,12 +57,17 @@ class AdminLessons extends Component {
       open: false,
       open2: false,
       edit: false,
-      pdfView: false
+      pdfView: false,
+      addAlert: false
     });
   };
   //handlers for adding new lesson plan
   handleClick = () => {
-    this.setState({ open: false });
+    this.setState({ 
+      open: false,
+      addAlert: true
+    });
+    
     // event.preventDefault();
     const formData = new FormData();
     formData.append('file', this.state.file[0]);
@@ -183,6 +191,8 @@ submitSearch = () => {
       fileType: fileExtension,     
     });
   };
+
+  
   render() {
     return (
       this.state.edit ?
@@ -341,6 +351,13 @@ submitSearch = () => {
                             </Button>
                   </DialogActions>
                 </Dialog>
+                <SweetAlert
+        show={this.state.addAlert}
+        title="Success"
+        text="Successfuly uploaded new lesson plan"
+        type='success'
+        onConfirm={() => this.setState({ addAlert: false })}
+      />
               </div>
               <div><Button variant="outlined" color="primary" onClick={this.handleCatOpen}>
                 Manage Categories
