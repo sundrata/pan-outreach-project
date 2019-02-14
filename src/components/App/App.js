@@ -1,19 +1,19 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
   HashRouter as Router,
   Route,
   Redirect,
   Switch,
 } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-import {connect} from 'react-redux';
-import Footer from '../Footer/Footer';
+// route imports
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 import AdminRoute from '../AdminRoute/AdminRoute';
 import AdminSchools from '../AdminSchools/AdminSchools';
 import AdminLessons from '../AdminLessons/AdminLessons';
 import AdminMusic from '../AdminMusic/AdminMusic';
-import AdminNav from '../AdminNav/AdminNav';
+import AdminHeader from '../AdminHeader/AdminHeader';
 import PanTenor from '../PanTenor/PanTenor';
 import PanSecond from '../PanSecond/PanSecond';
 import PanCello from '../PanCello/PanCello';
@@ -22,11 +22,14 @@ import StudentLessons from '../StudentLessons/StudentLessons';
 import Split from '../Split/Split';
 import StudentMusic from '../StudentMusic/StudentMusic';
 import StudentNav from '../StudentNav/StudentNav';
+
+// CSS imports
 import './App.css';
 import Snackbar from '../Snackbar/Snackbar'
 class App extends Component {
-  componentDidMount () {
-    this.props.dispatch({type: 'FETCH_USER'})
+  // loads the user, lessons, & category each time the page loads
+  componentDidMount() {
+    this.props.dispatch({ type: 'FETCH_USER' })
     this.props.dispatch({ type: 'FETCH_PERSON' })
     this.props.dispatch({ type: 'FETCH_LESSON' })
     this.props.dispatch({ type: 'FETCH_CATEGORY' })
@@ -34,34 +37,33 @@ class App extends Component {
     this.props.dispatch({ type: 'IS_TOUCH_DEVICE', payload: (('ontouchstart' in window) || (navigator.msMaxTouchPoints > 0)) })
   }
 
-
   render() {
+
+    // conditionally render navigation
+    let Navbar;
+    if (!this.props.user.id) {  // if no user logged in
+      Navbar = null
+    } else if (this.props.user.admin) {  // if admin
+      Navbar = <AdminHeader />
+    } else if (!this.props.user.admin) { // if not admin
+      Navbar = <StudentNav />
+    }
 
     return (
       <Router>
         <div>
-          {this.props.user.admin ? <AdminNav /> : <StudentNav /> }
+          {/* render navbar */}
+          {Navbar}
           <Switch>
             {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
             <Redirect exact from="/" to="/home" />
-            {/* Visiting localhost:3000/about will show the about page.
-            This is a route anyone can see, no login necessary */}
+
             <ProtectedRoute
               exact
               path="/home"
               component={Split}
             />
-            {/* <AdminRoute
-              exact
-              path="/adminNav"
-              component={AdminNav}
-              /> */}
-            {/* For protected routes, the view could show one of several things on the same route.
-            Visiting localhost:3000/home will show the UserPage if the user is logged in.
-            If the user is not logged in, the ProtectedRoute will show the 'Login' or 'Register' page.
-            Even though it seems like they are different pages, the user is always on localhost:3000/home */}
-            {/* This works the same as the other protected route, except that if the user is logged in,
-            they will see the info page instead. */}
+
             <AdminRoute
               exact
               path="/schools"
@@ -76,7 +78,8 @@ class App extends Component {
               exact
               path="/music"
               component={AdminMusic}
-              />
+            />
+
             <ProtectedRoute
               exact
               path="/tenor"
@@ -97,26 +100,25 @@ class App extends Component {
               path="/bass"
               component={PanBass}
             />
-            <ProtectedRoute 
-              exact
-              path="/studentLessons"
-              component={StudentLessons}
-            />  
-
             <ProtectedRoute
               exact
               path="/studentMusic"
               component={StudentMusic}
             />
+            <ProtectedRoute
+              exact
+              path="/studentLessons"
+              component={StudentLessons}
+            />
+
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
-
           </Switch>
           <Snackbar />
-          <Footer />
         </div>
       </Router>
-  )}
+    )
+  }
 }
 
 const mapStateToProps = state => ({

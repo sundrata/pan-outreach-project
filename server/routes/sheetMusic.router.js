@@ -23,11 +23,22 @@ router.get('/search/:instrument/:difficulty/:name', rejectUnauthenticated, (req,
     if (name === '*') { name = null }
     if (difficulty === '*') { difficulty = null }
     if (instrument === '*') { instrument = null }
-    const queryString = `SELECT * from sheet_music where
+    console.log('hit get search', name, difficulty, instrument);
+    let queryValues;
+    let queryString;
+    if (name){
+    queryString = `SELECT * from sheet_music where
                         ($1::text is NULL or "name" ILIKE $1) and
                         ($2::difficulty is NULL or "difficulty" = $2) and
                         ($3::instrument is NULL or "instrument" = $3);`;
-    const queryValues = [ `%${name}%`, difficulty, instrument]
+    queryValues = [`%${name}%`, difficulty, instrument]
+    } else {
+    queryString = `SELECT * from sheet_music where
+                        ($1::difficulty is NULL or "difficulty" = $1) and
+                        ($2::instrument is NULL or "instrument" = $2);`;
+    queryValues = [difficulty, instrument]
+    }
+    
     pool.query(queryString, queryValues)
         .then((result) => {
             console.log(result.rows);

@@ -43,12 +43,16 @@ class StudentLessons extends Component {
     this.setState({
       searchCategory: 0,
       searchName : ''
-    })
+    });
   }
 
   resetSearch = () => {
     this.props.dispatch({
       type: 'FETCH_LESSON'
+    });
+    this.setState({
+      searchCategory: 0,
+      searchName : ''
     });
   }
 
@@ -94,9 +98,9 @@ class StudentLessons extends Component {
               <DialogContentText>
                 Search by Lesson Name
               </DialogContentText>
-              <TextField onChange={this.handleSearchChange} name='searchName'>               
+        <TextField onChange={this.handleSearchChange} name='searchName' value={this.state.searchName}>               
               </TextField><br></br>
-              <Button variant="outlined" color="primary" onClick={this.submitSearch}>Submit Search</Button>
+              <Button variant="outlined" color="primary" onClick={this.submitSearch} value={this.state.searchName}>Submit Search</Button>
               <Button variant="outlined" color="primary" onClick={this.resetSearch}>Reset Search</Button>
               {/* end sort and search */}
               {/* pdf box */}

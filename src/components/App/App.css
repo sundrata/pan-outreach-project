@@ -1,5 +1,5 @@
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Open Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0px;
 }
 
@@ -12,17 +12,35 @@ body {
     max-width: 70%;
     margin: 20px auto;
 }
+
 .adminHeader{
-    background-color: #eb6505;
-    text-align: center;
-    padding: 10px auto;
-    font-size: 42px;
-    height: 52px;
-    color: white;
+    background-color: #fc9102;
+    /* text-align: center; */
+    /* padding: 10px auto;
+    font-size: 42px; */
+    padding-top: 5px;
+    height: 55px;
+    /* -webkit-text-stroke-width: 1.5px;
+    -webkit-text-stroke-color: rgb(0, 0, 0); */
+    box-shadow: 3px 2px 5px 3px rgb(192, 192, 192);
+ }
+
+ .adminHeaderLink {
+    color: #fff; 
     font-weight: bolder;
-    -webkit-text-stroke-width: 1.5px;
-    -webkit-text-stroke-color: rgb(0, 0, 0);
-    box-shadow: 3px 2px 5px black;
+    font-size: 36px; 
+    text-decoration: none;
+ }
+
+ .adminNav {
+    display: inline-block;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    margin: 0px;
+    padding: 0px;
+    /* background: red; */
+    /* padding: 5px; */
  }
 
 .studentDashDisplay{
@@ -38,15 +56,20 @@ body {
 .dashBox{
     margin: 5px 10px;
     display: inline-block;
-    background-color: rgb(233, 231, 231);
+    background: white;
+    width: 375px;
+    height: 430px;
+    /* background-color: rgb(233, 231, 231); */
     border-radius: 1%;
-    box-shadow: 1px 1px 2px rgb(66, 66, 66);
+    box-shadow: 1px 1px 4px 0px rgb(109, 108, 108);
 }
 
 .dashButtons{
-    box-shadow: 1px 1px 1px rgb(185, 184, 184);
+    /* box-shadow: 1px 1px 1px rgb(185, 184, 184); */
     font-size: 34px;
-    border-radius: 1%;
+    background: white;
+    border: 0px;
+    /* border-radius: 1%; */
     height: 60px;
     width: 70%;
     cursor: pointer;
@@ -56,15 +79,16 @@ body {
 
 .dashImages{
     font-size: 20px;
-    max-height: 340px;
-    max-width: 340px;
-    padding: 10px 10px;
-    margin: 20px 10px 10px 10px;
+    height: 340px;
+    width: 375px;
+    border-radius: 1% 1% 0 0;
+    /* padding: 10px 10px; */
+    /* margin: 20px 10px 10px 10px; */
 }
 
 form {
-    background-color: #eb6505;
-    width: 30%;
+    background-color: #fc9102;
+    width: 20%;
     height: 250px;
     margin: 75px auto 10px;
     padding: 25px;
@@ -82,6 +106,13 @@ form {
     margin: 10px auto;
 }
 
+h1 {
+    /* display: inline-block; */
+    font-size: 30px;
+    margin-top: 0px;
+    text-align: center;
+}
+
 h3 {
     margin: 0px;
 }
@@ -92,19 +123,32 @@ input {
     border: 1px black solid;
 }
 
+.logout-button {
+    margin-top: 10px;
+    padding-left: 15px;
+}
+
+.logout-text {
+    margin: 0px;
+    font-size: 16px;
+    padding-left: 33px;
+}
+
 .log-in, .log-out, .register {
-  background-color: #01e8ec;
+  background-color: #058beb;
   border-radius: 4px;
-  color: black;
-  min-height: 50px;
-  min-width: 100px;
+  color: white;
+  font-size: 15px;
+  margin-top: 10px;
+  min-height: 40px;
+  min-width: 80px;
   outline:0;
   cursor: pointer;
-  border: 1px black solid;
+  border: 1px #058beb solid;
 }
 
 .log-in:hover, .log-out:hover, .register:hover {
-  background-color: #008183;
+  background-color: #058beb;
 }
 
 .logo{
@@ -114,10 +158,10 @@ input {
 }
 
 .loginTitle{
-    text-align: left;
+    text-align: center;
     height: 110px;
     width: 100%;
-    background-color: #eb6505;
+    background-color: #fc9102;
 }
 /* This line makes the "Register" and "Login" buttons look like links */
 .link-button {

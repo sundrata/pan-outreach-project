@@ -147,12 +147,16 @@ submitSearch = () => {
   this.setState({
     searchCategory: 0,
     searchName : ''
-  })
+  });
 }
 
   resetSearch = () => {
     this.props.dispatch({
       type: 'FETCH_LESSON'
+    });
+    this.setState({
+      searchCategory: 0,
+      searchName: ''
     });
   }
   //edit lesson plan handlers
@@ -279,7 +283,7 @@ submitSearch = () => {
               <DialogContentText>
                 Search by Lesson Name
               </DialogContentText>
-              <TextField onChange={this.handleSearchChange} name='searchName'>               
+              <TextField onChange={this.handleSearchChange} name='searchName' value={this.state.searchName}>               
               </TextField><br></br>
               <Button variant="outlined" color="primary" onClick={this.submitSearch}>Submit Search</Button>
               <Button variant="outlined" color="primary" onClick={this.resetSearch}>Reset Search</Button>
