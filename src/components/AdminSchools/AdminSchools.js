@@ -199,7 +199,8 @@ logState = () => {
               Submit
                             </Button>
           </DialogActions>         
-        </Dialog> :
+        </Dialog>
+        :
       <div>
         
         <div>

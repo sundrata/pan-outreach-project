@@ -330,7 +330,7 @@ class AdminMusic extends Component {
                 Search by Song Name
               </DialogContentText>
               <TextField onChange={this.handleSearchChange} name='searchName' value={this.state.searchName}> 
-              </TextField>
+              </TextField><br></br>
               <Button variant="outlined" color="primary" onClick={this.submitSearch}>Submit Search</Button>
               <Button variant="outlined" color="primary" onClick={this.resetSearch}>Reset Search</Button>
               {/* pdf view handlers */}

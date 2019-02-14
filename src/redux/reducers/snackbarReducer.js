@@ -1,11 +1,11 @@
-const snackbarReducer = (state = { open: false, message: '' }, action) => {
+const snackbarReducer = (state = { open: false, message: '', class:'' }, action) => {
     switch (action.type) {
       case 'ADD_PERSON_SNACK':
         return { open: true, message: 'School Successfully Added' };
       case 'EDIT_PERSON_SNACK':
         return { open: true, message: 'School Successfully Updated' };
       case 'DELETE_PERSON_SNACK':
-        return { open: true, message: 'School Successfully Deleted' };   
+        return { open: true, message: 'School Successfully Deleted', class: '.del'};   
       case 'DELETE_MUSIC_SNACK':
         return { open: true, message: 'Sheet Music Succesfully Deleted' };
       case 'ADD_MUSIC_SNACK':
