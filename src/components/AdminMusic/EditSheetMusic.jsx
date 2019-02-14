@@ -40,15 +40,8 @@ class EditSheetMusic extends Component {
     id: this.props.sheetMusic.id,
   }
 
-  handleClickOpen = () => {
-    this.setState({
-      open: true,
-    })
-  }
-
   handleClose = () => {
     this.setState({
-      open: false,
       name: '',
       instrument: '',
       difficulty: '',
