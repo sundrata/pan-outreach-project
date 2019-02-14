@@ -195,7 +195,7 @@ logState = () => {
             <Button onClick={() => this.handleClose()} color="primary">
               Cancel
                             </Button>
-            <Button onClick={() => this.editHandleClick()} color="primary">
+            <Button disabled={!isEnabled} onClick={() => this.editHandleClick()} color="primary">
               Submit
                             </Button>
           </DialogActions>         

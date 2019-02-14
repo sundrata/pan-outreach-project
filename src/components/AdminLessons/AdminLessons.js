@@ -25,10 +25,6 @@ import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import FileViewer from 'react-file-viewer';
-import { withSwalInstance } from 'sweetalert2-react';
-import swal from 'sweetalert2';
-const SweetAlert = withSwalInstance(swal);
-
 
 class AdminLessons extends Component {
   state = {
@@ -80,6 +76,9 @@ class AdminLessons extends Component {
       }
     }).then(response => {
       console.log('response:', response.data.Location);
+      this.props.dispatch({
+        type: 'ADD_LESSON_SNACK'
+      });
       this.props.dispatch({
         type: 'FETCH_LESSON'
       });
@@ -175,6 +174,9 @@ submitSearch = () => {
     }).then(response => {
       console.log('response:', response.data.Location);
       this.props.dispatch({
+        type: 'EDIT_LESSON_SNACK'
+      });
+      this.props.dispatch({
         type: 'FETCH_LESSON'
       });
       // handle your response;
@@ -245,7 +247,7 @@ submitSearch = () => {
             <Button onClick={this.handleClose} color="primary">
               Cancel
                             </Button>
-            <Button onClick={() => this.editHandleClick()} color="primary">
+            <Button disabled={!isEnabled} onClick={() => this.editHandleClick()} color="primary">
               Submit
                             </Button>
           </DialogActions>
@@ -357,13 +359,6 @@ submitSearch = () => {
                             </Button>
                   </DialogActions>
                 </Dialog>
-                <SweetAlert
-        show={this.state.addAlert}
-        title="Success"
-        text="Successfuly uploaded new lesson plan"
-        type='success'
-        onConfirm={() => this.setState({ addAlert: false })}
-      />
               </div>
               <div><Button variant="outlined" color="primary" onClick={this.handleCatOpen}>
                 Manage Categories

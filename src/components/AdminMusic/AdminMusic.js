@@ -101,6 +101,9 @@ class AdminMusic extends Component {
     }).then(response => {
       console.log('response:', response.data.Location);
       this.props.dispatch({
+        type: 'EDIT_MUSIC_SNACK'
+      })
+      this.props.dispatch({
         type: 'GET_SHEET_MUSIC'
       });
       // handle your response;
@@ -272,7 +275,7 @@ class AdminMusic extends Component {
             <Button onClick={this.editHandleClose} color="primary">
               Cancel
             </Button>
-            <Button onClick={() => this.editHandleClick()} color="primary">
+            <Button disabled={!isEnabled} onClick={() => this.editHandleClick()} color="primary">
               Submit
             </Button>
           </DialogActions>
