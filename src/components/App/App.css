@@ -14,17 +14,22 @@ body {
 }
 
 .adminHeader{
-    background-color: white;
+    background-color: #fc9102;
     /* text-align: center; */
     /* padding: 10px auto;
     font-size: 42px; */
     padding-top: 5px;
     height: 55px;
-    color: #eb6505; 
-    font-weight: bolder;
     /* -webkit-text-stroke-width: 1.5px;
     -webkit-text-stroke-color: rgb(0, 0, 0); */
     box-shadow: 3px 2px 5px 3px rgb(192, 192, 192);
+ }
+
+ .adminHeaderLink {
+    color: #fff; 
+    font-weight: bolder;
+    font-size: 36px; 
+    text-decoration: none;
  }
 
  .adminNav {
@@ -52,7 +57,8 @@ body {
     margin: 5px 10px;
     display: inline-block;
     background: white;
-    width: 340px;
+    width: 375px;
+    height: 430px;
     /* background-color: rgb(233, 231, 231); */
     border-radius: 1%;
     box-shadow: 1px 1px 4px 0px rgb(109, 108, 108);
@@ -73,16 +79,16 @@ body {
 
 .dashImages{
     font-size: 20px;
-    max-height: 340px;
-    max-width: 340px;
+    height: 340px;
+    width: 375px;
     border-radius: 1% 1% 0 0;
     /* padding: 10px 10px; */
     /* margin: 20px 10px 10px 10px; */
 }
 
 form {
-    background-color: #eb6505;
-    width: 30%;
+    background-color: #fc9102;
+    width: 20%;
     height: 250px;
     margin: 75px auto 10px;
     padding: 25px;
@@ -129,18 +135,20 @@ input {
 }
 
 .log-in, .log-out, .register {
-  background-color: #01e8ec;
+  background-color: #058beb;
   border-radius: 4px;
-  color: black;
-  min-height: 50px;
-  min-width: 100px;
+  color: white;
+  font-size: 15px;
+  margin-top: 10px;
+  min-height: 40px;
+  min-width: 80px;
   outline:0;
   cursor: pointer;
-  border: 1px black solid;
+  border: 1px #058beb solid;
 }
 
 .log-in:hover, .log-out:hover, .register:hover {
-  background-color: #008183;
+  background-color: #058beb;
 }
 
 .logo{
@@ -150,10 +158,10 @@ input {
 }
 
 .loginTitle{
-    text-align: left;
+    text-align: center;
     height: 110px;
     width: 100%;
-    background-color: #eb6505;
+    background-color: #fc9102;
 }
 /* This line makes the "Register" and "Login" buttons look like links */
 .link-button {

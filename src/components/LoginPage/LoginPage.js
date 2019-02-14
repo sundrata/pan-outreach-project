@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// import PropTypes from 'prop-types';
-// import classNames from 'classnames';
+
+// materal ui imports
 import { withStyles } from '@material-ui/core/styles';
-// import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
 
 const panlogo = require('./panlogo.png');
+
 const styles = theme => ({  
   container: {
     display: 'flex',
@@ -112,20 +112,10 @@ class LoginPage extends Component {
               className="log-in"
               type="submit"
               name="submit"
-              value="Log In"
+              value="Submit"
             />
           </div>
         </form>
-        <center>
-          {/* this register button will be deleted but is necessary for first account setup */}
-          <button
-            type="button"
-            className="link-button"
-            onClick={() => { this.props.dispatch({ type: 'SET_TO_REGISTER_MODE' }) }}
-          >
-            Register
-          </button>
-        </center>
       </div>
     );
   }

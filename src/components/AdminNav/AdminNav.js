@@ -40,7 +40,7 @@ const styles = {
     textAlign: 'center',
   },
   icon: {
-    color: '#058beb',
+    color: '#eb6505',
   },
 };
 
