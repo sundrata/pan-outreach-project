@@ -40,6 +40,9 @@ const styles = theme => ({
   nested: {
     paddingLeft: theme.spacing.unit * 5,
   },
+  icon: {
+    color: '#eb6505',
+  },
 });
 
 class StudentNav extends React.Component {
@@ -67,7 +70,7 @@ class StudentNav extends React.Component {
           {/* DRUM/HOME LIST ITEM */}
           <ListItem button key='Drums' onClick={() => this.handleClick('home')}>
             <ListItemIcon>
-              <DrumIcon />
+              <DrumIcon className={classes.icon} />
             </ListItemIcon>
             <ListItemText primary="Drums" />
           </ListItem>
@@ -110,7 +113,7 @@ class StudentNav extends React.Component {
           {/* SHEET MUSIC LIST ITEM */}
           <ListItem button key='Sheet Music' onClick={() => this.handleClick('studentMusic')}>
             <ListItemIcon>
-              <NoteIcon />
+              <NoteIcon className={classes.icon} />
             </ListItemIcon>
             <ListItemText primary='Sheet Music' />
           </ListItem>
@@ -118,7 +121,7 @@ class StudentNav extends React.Component {
           {/* LESSON PLAN LIST ITEM */}
           <ListItem button key='Lesson Plans' onClick={() => this.handleClick('studentLessons')}>
             <ListItemIcon>
-              <AssignmentIcon />
+              <AssignmentIcon className={classes.icon} />
             </ListItemIcon>
             <ListItemText primary='Lesson Plans' />
           </ListItem>
@@ -129,7 +132,7 @@ class StudentNav extends React.Component {
           {/* LOGOUT BUTTON LIST ITEM */}
           <ListItem button key='Logout' onClick={() => this.props.dispatch({ type: 'LOGOUT' })}>
             <ListItemIcon>
-              <LogoutIcon />
+              <LogoutIcon className={classes.icon} />
             </ListItemIcon>
             <ListItemText primary='Logout' />
           </ListItem>

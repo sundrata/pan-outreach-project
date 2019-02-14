@@ -16,6 +16,20 @@ router.get('/', rejectUnauthenticated, (req, res) => {
         });
 });
 
+router.put('/', rejectUnauthenticated, (req, res) => {
+  const { id, name, difficulty, instrument } = req.body;
+  const queryValues = [name, difficulty, instrument, id];
+  const queryText = `UPDATE "sheet_music" SET name = $1, difficulty = $2, instrument = $3 WHERE id = $4`;
+  pool.query(queryText, queryValues)
+    .then(() => {
+      res.sendStatus(201);
+    })
+    .catch((err) => {
+      console.log('PUT sheet music error: ', err);
+      res.sendStatus(500);
+    });
+})
+
 router.get('/search/:instrument/:difficulty/:name', rejectUnauthenticated, (req, res) => {
     let name = req.params.name;
     let difficulty = req.params.difficulty;
@@ -38,7 +52,7 @@ router.get('/search/:instrument/:difficulty/:name', rejectUnauthenticated, (req,
                         ($2::instrument is NULL or "instrument" = $2);`;
     queryValues = [difficulty, instrument]
     }
-    
+
     pool.query(queryString, queryValues)
         .then((result) => {
             console.log(result.rows);

@@ -3,13 +3,15 @@ body {
     margin: 0px;
 }
 
+/* Admin Styling */
+
 .adminDashDisplay{
     margin: 50px auto;
-    text-align: center; 
+    text-align: center;
 }
 
 .adminTable {
-    max-width: 70%;
+    max-width: 72%;
     margin: 20px auto;
 }
 
@@ -26,9 +28,9 @@ body {
  }
 
  .adminHeaderLink {
-    color: #fff; 
+    color: #fff;
     font-weight: bolder;
-    font-size: 36px; 
+    font-size: 36px;
     text-decoration: none;
  }
 
@@ -45,7 +47,7 @@ body {
 
 .studentDashDisplay{
     margin: 10px auto;
-    text-align: center; 
+    text-align: center;
 }
 
 .alert {
@@ -53,7 +55,7 @@ body {
     margin: 50px;
 }
 
-.dashBox{
+ .dashBox{
     margin: 5px 10px;
     display: inline-block;
     background: white;
@@ -86,8 +88,54 @@ body {
     /* margin: 20px 10px 10px 10px; */
 }
 
+/* Student Styling */
+.studentDashDisplay{
+    margin: 10px auto;
+    text-align: center;
+}
 
-form {
+.studentDashBox {
+    margin: 5px 10px;
+    display: inline-block;
+    background: white;
+    width: 340px;
+    height: 340px;
+    border-radius: 1%;
+    box-shadow: 1px 1px 4px 0px rgb(109, 108, 108);
+}
+
+.studentDashImages {
+    font-size: 20px;
+    height: 250px;
+    width: 340px;
+    border-radius: 1% 1% 0 0;
+}
+
+.studentDiv {
+    width: 70%;
+    margin: 0 auto;
+    /* text-align: center; */
+}
+
+.studentSearch {
+    background: white;
+    /* width: 340px;
+    height: 340px; */
+    border-radius: 1%;
+    box-shadow: 1px 1px 4px 0px rgb(109, 108, 108);
+    padding: 10px;
+    /* text-align: center; */
+    width: 70%;
+    margin: 0 auto;
+}
+
+.alert {
+    background-color: #ff4545;
+    margin: 50px;
+}
+
+/* Login Styling */
+#login-form {
     background-color: #fc9102;
     width: 20%;
     height: 250px;
@@ -101,9 +149,17 @@ form {
     margin: 10px;
 }
 
+input {
+    margin: 5px;
+    margin-bottom: 10px;
+    border: 1px black solid;
+}
+
+/* Text/header styling */
 .heading{
     text-align: center;
-    font-size: 44px;
+    font-size: 40px;
+    color: #f78504;
     margin: 10px auto;
 }
 
@@ -118,11 +174,6 @@ h3 {
     margin: 0px;
 }
 
-input {
-    margin: 5px;
-    margin-bottom: 10px;
-    border: 1px black solid;
-}
 
 .logout-button {
     margin-top: 10px;
@@ -136,7 +187,7 @@ input {
 }
 
 .log-in, .log-out, .register {
-  background-color: #058beb;
+  background-color: #eb6505;
   border-radius: 4px;
   color: white;
   font-size: 15px;
@@ -145,11 +196,11 @@ input {
   min-width: 80px;
   outline:0;
   cursor: pointer;
-  border: 1px #058beb solid;
+  border: 0px;
 }
 
 .log-in:hover, .log-out:hover, .register:hover {
-  background-color: #058beb;
+  background-color: #e24906;
 }
 
 .logo{
@@ -172,6 +223,6 @@ input {
     padding:0;
     font: inherit;
     outline:0;
-    border-bottom:1px solid #444; 
+    border-bottom:1px solid #444;
     cursor: pointer;
 }
