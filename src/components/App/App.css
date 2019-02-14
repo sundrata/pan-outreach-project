@@ -7,11 +7,11 @@ body {
 
 .adminDashDisplay{
     margin: 50px auto;
-    text-align: center; 
+    text-align: center;
 }
 
 .adminTable {
-    max-width: 70%;
+    max-width: 72%;
     margin: 20px auto;
 }
 
@@ -28,9 +28,9 @@ body {
  }
 
  .adminHeaderLink {
-    color: #fff; 
+    color: #fff;
     font-weight: bolder;
-    font-size: 36px; 
+    font-size: 36px;
     text-decoration: none;
  }
 
@@ -44,6 +44,16 @@ body {
     /* background: red; */
     /* padding: 5px; */
  }
+
+.studentDashDisplay{
+    margin: 10px auto;
+    text-align: center;
+}
+
+.alert {
+    background-color: #ff4545;
+    margin: 50px;
+}
 
  .dashBox{
     margin: 5px 10px;
@@ -81,7 +91,7 @@ body {
 /* Student Styling */
 .studentDashDisplay{
     margin: 10px auto;
-    text-align: center; 
+    text-align: center;
 }
 
 .studentDashBox {
@@ -91,7 +101,7 @@ body {
     width: 340px;
     height: 340px;
     border-radius: 1%;
-    box-shadow: 1px 1px 4px 0px rgb(109, 108, 108);  
+    box-shadow: 1px 1px 4px 0px rgb(109, 108, 108);
 }
 
 .studentDashImages {
@@ -112,10 +122,10 @@ body {
     /* width: 340px;
     height: 340px; */
     border-radius: 1%;
-    box-shadow: 1px 1px 4px 0px rgb(109, 108, 108);  
+    box-shadow: 1px 1px 4px 0px rgb(109, 108, 108);
     padding: 10px;
     /* text-align: center; */
-    width: 70%; 
+    width: 70%;
     margin: 0 auto;
 }
 
@@ -125,8 +135,7 @@ body {
 }
 
 /* Login Styling */
-
-form {
+#login-form {
     background-color: #fc9102;
     width: 20%;
     height: 250px;
@@ -205,4 +214,15 @@ h3 {
     height: 110px;
     width: 100%;
     background-color: #fc9102;
+}
+/* This line makes the "Register" and "Login" buttons look like links */
+.link-button {
+    background:none;
+    color:inherit;
+    border:none;
+    padding:0;
+    font: inherit;
+    outline:0;
+    border-bottom:1px solid #444;
+    cursor: pointer;
 }

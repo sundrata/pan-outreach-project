@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
@@ -52,11 +53,10 @@ class AdminMusic extends Component {
     this.props.dispatch({
       type: 'GET_SHEET_MUSIC'
     });
-
   }
 
   handleClick = (event) => {
-    this.setState({ 
+    this.setState({
       open: false,
     addAlert: true
     });
@@ -118,12 +118,8 @@ class AdminMusic extends Component {
     this.setState({ open: true });
   };
 
-  handleClose = () => {
-    this.setState({ 
-      open: false ,
-      pdfView: false
-    });
-    console.log(this.state.open)
+  handleAddClose = () => {
+    this.setState({ open: false });
   };
 
   editHandleClose = () => {
@@ -166,7 +162,7 @@ class AdminMusic extends Component {
     this.setState({ id: row.id });
     this.setState({ edit: true });
   }
-  
+
   handleSearchChange = (event) => {
     console.log('event was here', this.state)
     this.setState({
@@ -197,24 +193,28 @@ class AdminMusic extends Component {
       searchName: '',
     })
   };
-  
+
   //view pdf handlers
   handlePdf = (row) => {
     console.log('hitting handle click open', row);
     let fileExtension = row.url.split('.').pop();
     console.log(fileExtension);
-    this.setState({ 
-      pdfView: true, 
+    this.setState({
+      pdfView: true,
       url: row.url,
       name: row.name,
-      fileType: fileExtension,     
+      fileType: fileExtension,
     });
+  };
+
+  handleClose = () => {
+    this.setState({ pdfView: false });
   };
 
   render() {
     const isEnabled = this.state.file.length > 0 && this.state.name.length > 0 && this.state.instrument.length > 0 && this.state.difficulty > 0;
     return (
-      // our edit dialog box 
+      // our edit dialog box
       this.state.edit ?
       <>
       <h1 className="heading">
@@ -260,7 +260,7 @@ class AdminMusic extends Component {
               <DialogContentText>
                 Search by Song Name
               </DialogContentText>
-              <TextField onChange={this.handleSearchChange} name='searchName' value={this.state.searchName}> 
+              <TextField onChange={this.handleSearchChange} name='searchName' value={this.state.searchName}>
               </TextField><br></br>
               <Button variant="outlined" color="primary" onClick={this.submitSearch}>Submit Search</Button>
               <Button variant="outlined" color="primary" onClick={this.resetSearch}>Reset Search</Button>
@@ -359,8 +359,8 @@ class AdminMusic extends Component {
               Submit
             </Button>
           </DialogActions>
-          
-        </Dialog> 
+
+        </Dialog>
         </>
         :
 
@@ -370,7 +370,7 @@ class AdminMusic extends Component {
         </h1>
           <center>
             <div>
-              
+
               <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
                 Add New Music
               </Button>
@@ -411,7 +411,7 @@ class AdminMusic extends Component {
               <DialogContentText>
                 Search by Song Name
               </DialogContentText>
-              <TextField onChange={this.handleSearchChange} name='searchName' value={this.state.searchName}> 
+              <TextField onChange={this.handleSearchChange} name='searchName' value={this.state.searchName}>
               </TextField><br></br>
               <Button variant="outlined" color="primary" onClick={this.submitSearch}>Submit Search</Button>
               <Button variant="outlined" color="primary" onClick={this.resetSearch}>Reset Search</Button>
@@ -433,12 +433,12 @@ class AdminMusic extends Component {
           <FileViewer
             fileType= {this.state.fileType}
             filePath={this.state.url} />
-        
+
         </Dialog>
               {/* start add new music */}
               <Dialog
                 open={this.state.open}
-                onClose={this.handleClose}
+                onClose={this.handleAddClose}
                 aria-labelledby="form-dialog-title"
               >
                 <DialogTitle id="form-dialog-title">Add Music</DialogTitle>
@@ -489,17 +489,16 @@ class AdminMusic extends Component {
                   </Select>
 
                 </DialogContent>
-                <form onSubmit={this.submitFile}>
+
                   <input label='upload file' type='file' onChange={this.handleFileUpload} />
-                  {/* <button type='submit'>Send</button> */}
-                </form>
+
                 <DialogActions>
                   <Button onClick={() => this.handleClose()} color="primary">
                     Cancel
-                            </Button>
+                  </Button>
                   <Button disabled={!isEnabled} onClick={() => this.handleClick()} color="primary">
                     Submit
-                            </Button>
+                  </Button>
                 </DialogActions>
               </Dialog>
               {/* ends add new music */}
