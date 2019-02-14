@@ -19,6 +19,11 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
+import FileViewer from 'react-file-viewer';
 
 const mapStateToProps = reduxStore => {
   return {
@@ -39,7 +44,8 @@ class AdminMusic extends Component {
     searchInstrument: '',
     searchDifficulty: 0,
     searchName: '',
-
+    pdfView: false,
+    addAlert: false
   }
 
   componentDidMount() {
@@ -50,7 +56,10 @@ class AdminMusic extends Component {
   }
 
   handleClick = (event) => {
-    this.setState({ open: false });
+    this.setState({ 
+      open: false,
+    addAlert: true
+    });
     // event.preventDefault();
     const formData = new FormData();
     formData.append('file', this.state.file[0]);
@@ -63,6 +72,9 @@ class AdminMusic extends Component {
       }
     }).then(response => {
       console.log('response:', response.data.Location);
+      this.props.dispatch({
+        type: 'ADD_MUSIC_SNACK'
+      })
       this.props.dispatch({
         type: 'GET_SHEET_MUSIC'
       });
@@ -116,9 +128,7 @@ class AdminMusic extends Component {
       ...this.state,
       [event.target.name]: event.target.value,
     });
-
     console.log(this.state.instrument);
-
   }
 
   handleDifficultyChange = (event) => {
@@ -178,12 +188,27 @@ class AdminMusic extends Component {
       searchInstrument: '',
       searchDifficulty: 0,
       searchName: '',
-
     })
-
   };
   
+  //view pdf handlers
+  handlePdf = (row) => {
+    console.log('hitting handle click open', row);
+    let fileExtension = row.url.split('.').pop();
+    console.log(fileExtension);
+    this.setState({ 
+      pdfView: true, 
+      url: row.url,
+      name: row.name,
+      fileType: fileExtension,     
+    });
+  };
+
+  handleClose = () => {
+    this.setState({ pdfView: false });
+  };
   render() {
+    const isEnabled = this.state.file.length > 0 && this.state.name.length > 0 && this.state.instrument.length > 0 && this.state.difficulty > 0;
     return (
       // our edit dialog box 
       this.state.edit ?
@@ -305,6 +330,26 @@ class AdminMusic extends Component {
               </TextField>
               <Button variant="outlined" color="primary" onClick={this.submitSearch}>Submit Search</Button>
               <Button variant="outlined" color="primary" onClick={this.resetSearch}>Reset Search</Button>
+              {/* pdf view handlers */}
+              <Dialog
+          fullScreen
+          open={this.state.pdfView}
+          onClose={this.handleClose}
+        >
+          <AppBar>
+            <Toolbar>
+              <IconButton color="inherit" onClick={this.handleClose} aria-label="Close">
+                <CloseIcon />
+              </IconButton>
+            </Toolbar>
+          </AppBar>
+          <br></br>
+          <br></br>
+          <FileViewer
+            fileType= {this.state.fileType}
+            filePath={this.state.url} />
+        
+        </Dialog>
               {/* start add new music */}
               <Dialog
                 open={this.state.open}
@@ -367,7 +412,7 @@ class AdminMusic extends Component {
                   <Button onClick={this.handleClose} color="primary">
                     Cancel
                             </Button>
-                  <Button onClick={() => this.handleClick()} color="primary">
+                  <Button disabled={!isEnabled} onClick={() => this.handleClick()} color="primary">
                     Submit
                             </Button>
                 </DialogActions>
@@ -382,7 +427,7 @@ class AdminMusic extends Component {
                     <TableCell>Name</TableCell>
                     <TableCell>Instrument</TableCell>
                     <TableCell align="center">Difficulty</TableCell>
-                    <TableCell align="center">URL</TableCell>
+                    <TableCell align="center">.PDF</TableCell>
                     <TableCell align="center">Edit</TableCell>
                     <TableCell align="center">Delete</TableCell>
                   </TableRow>
@@ -393,10 +438,10 @@ class AdminMusic extends Component {
                       <TableRow key={row.id}>
                         <TableCell align="left">{row.name}</TableCell>
                         <TableCell align="left">{row.instrument}</TableCell>
-                        <TableCell align="left">{row.difficulty} </TableCell>
-                        <TableCell align="center">{row.url} </TableCell>
-                        <TableCell align="left"><Button onClick={() => this.editSheetMusic(row)}>Edit</Button></TableCell>
-                        <TableCell align="left"><Button onClick={() => this.deleteSheetMusic(row)}>Delete</Button></TableCell>
+                        <TableCell align="center">{row.difficulty} </TableCell>
+                        <TableCell align="center"><Button onClick={() => this.handlePdf(row)}>View</Button></TableCell>
+                        <TableCell align="center"><Button onClick={() => this.editSheetMusic(row)}>Edit</Button></TableCell>
+                        <TableCell align="center"><Button onClick={() => this.deleteSheetMusic(row)}>Delete</Button></TableCell>
                       </TableRow>
                     )
                   }

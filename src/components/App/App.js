@@ -22,6 +22,7 @@ import StudentLessons from '../StudentLessons/StudentLessons';
 import Split from '../Split/Split';
 import StudentMusic from '../StudentMusic/StudentMusic';
 import StudentNav from '../StudentNav/StudentNav';
+import Snackbar from '../Snackbar/Snackbar'
 
 // MUI/CSS imports
 import './App.css';
@@ -122,10 +123,10 @@ class App extends Component {
                 path="/studentLessons"
                 component={StudentLessons}
               />
-
               {/* If none of the other routes matched, we will show a 404. */}
               <Route render={() => <h1>404</h1>} />
             </Switch>
+            <Snackbar />
           </div>
         </MuiThemeProvider>
       </Router>

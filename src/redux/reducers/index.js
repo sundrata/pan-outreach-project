@@ -6,6 +6,7 @@ import personReducer from './personReducer';
 import sheetMusicReducer from './sheetMusicReducer';
 import lessonReducer from './lessonReducer';
 import categoryReducer from './categoryReducer';
+import snackbars from './snackbarReducer';
 import tenor from './tenorReducer';
 import second from './secondReducer';
 import cello from './celloReducer';
@@ -35,6 +36,7 @@ const rootReducer = combineReducers({
   displayColors, // boolean of whether to display colors or not
   displayNotes, // boolean of whether to display note names or not
   isTouch, // boolean determining if touch device is being used
+  snackbars
 });
 
 export default rootReducer;

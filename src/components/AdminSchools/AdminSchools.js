@@ -15,6 +15,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Switch from '@material-ui/core/Switch';
+import moment from 'moment';
 
 const styles = theme => ({
   root: {
@@ -31,9 +32,9 @@ class AdminSchools extends Component {
   state = {
     id: 0,
     edit: false,
-    username: null,
-    password: null,
-    school_name: null,
+    username: '',
+    password: '',
+    school_name: '',
     open: false,
     hidden: null,
     active: null
@@ -91,13 +92,6 @@ logState = () => {
     this.setState({ open: true });
   };
 
-  handleClose = () => {
-    this.setState({ 
-      open: false,
-      edit: false
-    });
-  };
-
   //edit school dialog funcs
   editSchool = (row) => {
     this.setState({ id: row.id });
@@ -135,7 +129,10 @@ logState = () => {
   };
 
   handleClose = () => {
-    this.setState({ open: false });
+    this.setState({ 
+      open: false,
+      edit: false
+     });
   };
   //handle delete
   deleteSchool = (row) => {
@@ -147,6 +144,8 @@ logState = () => {
     
   }
   render() {
+  
+    const isEnabled = this.state.username.length > 0 && this.state.password.length > 0 && this.state.school_name.length > 0;
     const { hidden } = this.state;
     return (
       this.state.edit ?
@@ -168,7 +167,7 @@ logState = () => {
               label="Username"
               type="text"
               onChange={this.handleNameChange}
-              value=''
+              value={this.state.name}
               fullWidth
             />
             <TextField
@@ -178,7 +177,7 @@ logState = () => {
               label="Password"
               type="text"
               onChange={this.handlePasswordChange}
-              value=''
+              value={this.state.password}
               fullWidth
             />
             <TextField
@@ -188,7 +187,7 @@ logState = () => {
               label="School Name"
               type="text"
               onChange={this.handleSchoolChange}
-              value=''
+              value={this.state.school_name}
               fullWidth
             />
           </DialogContent>          
@@ -262,7 +261,7 @@ logState = () => {
                   <Button onClick={this.handleClose} color="primary">
                     Cancel
                             </Button>
-                  <Button onClick={() => this.handleClick()} color="primary">
+                  <Button disabled={!isEnabled} onClick={() => this.handleClick()} color="primary">
                     Submit
                             </Button>
                 </DialogActions>
@@ -286,7 +285,7 @@ logState = () => {
                       return (
                         <TableRow key={row.id}>
                           <TableCell align="left">{row.school_name}</TableCell>
-                          <TableCell align="left">{row.creation_date}</TableCell>
+                          <TableCell align="left">{moment(row.creation_date).format('MMMM Do YYYY')}</TableCell>
                           <TableCell align="left">
                             <Switch
                               id=''

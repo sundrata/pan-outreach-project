@@ -20,6 +20,16 @@ import Switch from '@material-ui/core/Switch';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
+import FileViewer from 'react-file-viewer';
+import { withSwalInstance } from 'sweetalert2-react';
+import swal from 'sweetalert2';
+const SweetAlert = withSwalInstance(swal);
+
+
 class AdminLessons extends Component {
   state = {
     edit: false, //this state controls whether or not to display edit dialog
@@ -30,7 +40,9 @@ class AdminLessons extends Component {
     file: '', //state for file associated with lesson plan
     category: '', //state for adding new category 
     searchCategory : 0, //state for sorting by category
-    searchName: null //state for searching by name
+    searchName: null, //state for searching by name
+    pdfView: false,
+    addAlert: false,
   }
   //delete lesson plan dispatch
   deleteLesson = (row) => {
@@ -45,12 +57,18 @@ class AdminLessons extends Component {
     this.setState({
       open: false,
       open2: false,
-      edit: false
+      edit: false,
+      pdfView: false,
+      addAlert: false,
+      delAlert: false
     });
   };
   //handlers for adding new lesson plan
   handleClick = () => {
-    this.setState({ open: false });
+    this.setState({ 
+      open: false,
+      addAlert: true
+    });
     // event.preventDefault();
     const formData = new FormData();
     formData.append('file', this.state.file[0]);
@@ -165,7 +183,23 @@ submitSearch = () => {
 
     });
   }
+
+  //pdf handlers
+  handlePdf= (row) => {
+    console.log('hitting handle click open', row);
+    let fileExtension = row.url.split('.').pop();
+    console.log(fileExtension);
+    this.setState({ 
+      pdfView: true, 
+      url: row.url,
+      name: row.name,
+      fileType: fileExtension,     
+    });
+  };
+
+  
   render() {
+    const isEnabled = this.state.name.length > 0 && this.state.file.length > 0 && this.state.category_id > 0;
     return (
       this.state.edit ?
         <Dialog
@@ -254,6 +288,25 @@ submitSearch = () => {
               <Button variant="outlined" color="primary" onClick={this.submitSearch}>Submit Search</Button>
               <Button variant="outlined" color="primary" onClick={this.resetSearch}>Reset Search</Button>
               {/* end sort and search */}
+              {/* pdf box */}
+              <Dialog
+          fullScreen
+          open={this.state.pdfView}
+          onClose={this.handleClose}
+        >
+          <AppBar>
+            <Toolbar>
+              <IconButton color="inherit" onClick={this.handleClose} aria-label="Close">
+                <CloseIcon />
+              </IconButton>
+            </Toolbar>
+          </AppBar>
+          <br></br>
+          <br></br>
+          <FileViewer
+            fileType= {this.state.fileType}
+            filePath={this.state.url} />       
+        </Dialog>
               {/* begin add lesson plan */}
                 <Dialog
                   open={this.state.open}
@@ -299,11 +352,18 @@ submitSearch = () => {
                     <Button onClick={this.handleClose} color="primary">
                       Cancel
                             </Button>
-                    <Button onClick={() => this.handleClick()} color="primary">
+                    <Button disabled={!isEnabled} onClick={() => this.handleClick()} color="primary">
                       Submit
                             </Button>
                   </DialogActions>
                 </Dialog>
+                <SweetAlert
+        show={this.state.addAlert}
+        title="Success"
+        text="Successfuly uploaded new lesson plan"
+        type='success'
+        onConfirm={() => this.setState({ addAlert: false })}
+      />
               </div>
               <div><Button variant="outlined" color="primary" onClick={this.handleCatOpen}>
                 Manage Categories
@@ -365,6 +425,7 @@ submitSearch = () => {
                     <TableRow>
                       <TableCell align="center">Lesson Name</TableCell>
                       <TableCell align="center">Category</TableCell>
+                      <TableCell align="center">.PDF</TableCell>
                       <TableCell align="center">Edit</TableCell>
                       <TableCell align="center">Delete</TableCell>
                     </TableRow>
@@ -375,6 +436,7 @@ submitSearch = () => {
                         <TableRow key={row.id}>
                           <TableCell align="center">{row.name}</TableCell>
                           <TableCell align="center">{row.category_name}</TableCell>
+                          <TableCell align="center"><Button onClick={() => this.handlePdf(row)}>View</Button></TableCell>
                           <TableCell align="center"><Button onClick={() => this.editLesson(row)}>Edit</Button></TableCell>
                           <TableCell align="center"><Button onClick={() => this.deleteLesson(row)}>Delete</Button></TableCell>
                         </TableRow>
