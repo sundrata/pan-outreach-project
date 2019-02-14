@@ -81,9 +81,9 @@ class SheetMusicTable extends Component {
   render() {
     const { classes, sheetMusic } = this.props;
     return (
-      <div>
-        <Paper className={classes.root}>
-          <Table className={classes.table}>
+      <div className={classes.root}>
+        <Paper className='adminTable'>
+          <Table>
             <TableHead>
               <TableRow>
                 <CustomTableCell>Name</CustomTableCell>

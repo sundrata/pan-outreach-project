@@ -149,6 +149,51 @@ logState = () => {
     const { hidden } = this.state;
     return (
       this.state.edit ?
+      <>
+      <h1 className="heading">
+            Schools
+        </h1>
+        <center>
+        <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
+                Add New School
+        </Button>
+        <Paper>
+              <Table className="adminTable">
+                <TableHead>
+                  <TableRow>
+                    <TableCell>School Name</TableCell>
+                    <TableCell>Date Created</TableCell>
+                    <TableCell align="center">Active?</TableCell>
+                    <TableCell align="center">Edit</TableCell>
+                    <TableCell align="center">Delete</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {this.props.reduxStore.personReducer.map((row) => {
+                    if (row.admin === false) {
+                      return (
+                        <TableRow key={row.id}>
+                          <TableCell align="left">{row.school_name}</TableCell>
+                          <TableCell align="left">{moment(row.creation_date).format('MMMM Do YYYY')}</TableCell>
+                          <TableCell align="left">
+                            <Switch
+                              id=''
+                              checked={row.active}
+                              onClick={() => this.handleActive(row)}
+                              value={row.active}
+                              color="primary"
+                            />
+                          </TableCell>
+                          <TableCell align="left"><Button onClick={() => this.editSchool(row)}>Edit</Button></TableCell>
+                          <TableCell align="left"><Button onClick={() => this.deleteSchool(row)}>Delete</Button></TableCell>
+                        </TableRow>
+                      )
+                    }
+                  })}
+                </TableBody>
+              </Table>
+            </Paper>
+        </center>
       <Dialog
           open={this.state.edit}
           onClose={this.handleClose}
@@ -175,7 +220,7 @@ logState = () => {
               margin="dense"
               id="name"
               label="Password"
-              type="text"
+              type="password"
               onChange={this.handlePasswordChange}
               value={this.state.password}
               fullWidth
@@ -195,11 +240,13 @@ logState = () => {
             <Button onClick={() => this.handleClose()} color="primary">
               Cancel
                             </Button>
-            <Button onClick={() => this.editHandleClick()} color="primary">
+            <Button disabled={!isEnabled} onClick={() => this.editHandleClick()} color="primary">
               Submit
                             </Button>
           </DialogActions>         
-        </Dialog> :
+        </Dialog>
+        </>
+        :
       <div>
         
         <div>
@@ -221,7 +268,7 @@ logState = () => {
                 <DialogContent>
                   <DialogContentText>
                     Add a new school
-                            </DialogContentText>
+                  </DialogContentText>
                   {/* Username input for new school */}
                   <TextField
                     autoFocus
@@ -304,7 +351,6 @@ logState = () => {
                 </TableBody>
               </Table>
             </Paper>
-            <button onClick={() => this.logState()}>log state</button>
           </center>
         </div>
       </div>

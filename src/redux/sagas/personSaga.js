@@ -34,6 +34,7 @@ function* postPerson(action) {
 function* deletePerson(action) {
     try {
         yield call(axios.delete, `/api/person/${action.payload}`);
+        yield put({ type: 'DELETE_PERSON_SNACK' });
         yield put({type: 'FETCH_PERSON'});
     } catch(error) {
         console.log(error);

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import SheetMusicTable from './SheetMusicTable';
 import AddSheetMusic from './AddSheetMusic';
+import SearchSheetMusic from './SearchSheetMusic';
 
 class AdminMusic extends Component {
   state = {
@@ -20,6 +21,7 @@ class AdminMusic extends Component {
         <br/>
         <h1>Sheet Music</h1>
         <AddSheetMusic />
+        <SearchSheetMusic />
         <SheetMusicTable />
       </div>
     )

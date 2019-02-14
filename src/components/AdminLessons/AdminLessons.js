@@ -25,10 +25,6 @@ import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import FileViewer from 'react-file-viewer';
-import { withSwalInstance } from 'sweetalert2-react';
-import swal from 'sweetalert2';
-const SweetAlert = withSwalInstance(swal);
-
 
 class AdminLessons extends Component {
   state = {
@@ -80,6 +76,9 @@ class AdminLessons extends Component {
       }
     }).then(response => {
       console.log('response:', response.data.Location);
+      this.props.dispatch({
+        type: 'ADD_LESSON_SNACK'
+      });
       this.props.dispatch({
         type: 'FETCH_LESSON'
       });
@@ -175,6 +174,9 @@ submitSearch = () => {
     }).then(response => {
       console.log('response:', response.data.Location);
       this.props.dispatch({
+        type: 'EDIT_LESSON_SNACK'
+      });
+      this.props.dispatch({
         type: 'FETCH_LESSON'
       });
       // handle your response;
@@ -202,6 +204,66 @@ submitSearch = () => {
     const isEnabled = this.state.name.length > 0 && this.state.file.length > 0 && this.state.category_id > 0;
     return (
       this.state.edit ?
+      <>
+      <h1 className="heading">
+              Lesson Plans
+        </h1>
+            <center>
+                <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
+                  Add Lesson Plan
+                        </Button>
+                        <DialogContentText>
+                Sort by Category
+                </DialogContentText>
+              <Select
+                name='searchCategory'
+                value={this.state.searchCategory}
+                onChange={this.handleSearchChange}
+                inputProps={{
+                  name: 'searchCategory',
+                }}
+              >
+                {this.props.reduxStore.categoryReducer.map((row) => {
+                        return (
+                          <MenuItem value={row.id}>{row.name}</MenuItem>
+                        )
+                      })}
+              </Select>
+              <DialogContentText>
+                Search by Lesson Name
+              </DialogContentText>
+              <TextField onChange={this.handleSearchChange} name='searchName' value={this.state.searchName}>               
+              </TextField><br></br>
+              <Button variant="outlined" color="primary" onClick={this.submitSearch}>Submit Search</Button>
+              <Button variant="outlined" color="primary" onClick={this.resetSearch}>Reset Search</Button><br></br>
+              <Button variant="outlined" color="primary" onClick={this.handleCatOpen}>Manage Categories</Button>
+              <Paper>
+                <Table className="adminTable">
+                  <TableHead>
+                    <TableRow>
+                      <TableCell align="center">Lesson Name</TableCell>
+                      <TableCell align="center">Category</TableCell>
+                      <TableCell align="center">.PDF</TableCell>
+                      <TableCell align="center">Edit</TableCell>
+                      <TableCell align="center">Delete</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {this.props.reduxStore.lessonReducer.map((row) => {
+                      return (
+                        <TableRow key={row.id}>
+                          <TableCell align="center">{row.name}</TableCell>
+                          <TableCell align="center">{row.category_name}</TableCell>
+                          <TableCell align="center"><Button onClick={() => this.handlePdf(row)}>View</Button></TableCell>
+                          <TableCell align="center"><Button onClick={() => this.editLesson(row)}>Edit</Button></TableCell>
+                          <TableCell align="center"><Button onClick={() => this.deleteLesson(row)}>Delete</Button></TableCell>
+                        </TableRow>
+                      )
+                    })}
+                  </TableBody>
+                </Table>
+              </Paper>
+              </center>
         <Dialog
           open={this.state.edit}
           onClose={this.handleClose}
@@ -245,11 +307,12 @@ submitSearch = () => {
             <Button onClick={this.handleClose} color="primary">
               Cancel
                             </Button>
-            <Button onClick={() => this.editHandleClick()} color="primary">
+            <Button disabled={!isEnabled} onClick={() => this.editHandleClick()} color="primary">
               Submit
                             </Button>
           </DialogActions>
         </Dialog>
+        </>
         :
         <div>
           
@@ -357,13 +420,6 @@ submitSearch = () => {
                             </Button>
                   </DialogActions>
                 </Dialog>
-                <SweetAlert
-        show={this.state.addAlert}
-        title="Success"
-        text="Successfuly uploaded new lesson plan"
-        type='success'
-        onConfirm={() => this.setState({ addAlert: false })}
-      />
               </div>
               <div><Button variant="outlined" color="primary" onClick={this.handleCatOpen}>
                 Manage Categories
@@ -445,7 +501,6 @@ submitSearch = () => {
                   </TableBody>
                 </Table>
               </Paper>
-              <button onClick={() => this.logState()}>log state</button>
             </center>
           </div>
         </div>

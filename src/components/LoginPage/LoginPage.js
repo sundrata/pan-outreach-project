@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-// materal ui imports
+// materal ui 
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 
-const styles = theme => ({  
+
+const styles = theme => ({
   container: {
     display: 'flex',
     flexWrap: 'wrap',
@@ -72,7 +73,7 @@ class LoginPage extends Component {
             {this.props.errors.loginMessage}
           </h2>
         )}
-        <form onSubmit={this.login}>
+        <form id="login-form" onSubmit={this.login}>
           <h1 id="formTitle">Login</h1>
           <div>
             <label htmlFor="username">
