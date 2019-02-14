@@ -204,6 +204,66 @@ submitSearch = () => {
     const isEnabled = this.state.name.length > 0 && this.state.file.length > 0 && this.state.category_id > 0;
     return (
       this.state.edit ?
+      <>
+      <h1 className="heading">
+              Lesson Plans
+        </h1>
+            <center>
+                <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
+                  Add Lesson Plan
+                        </Button>
+                        <DialogContentText>
+                Sort by Category
+                </DialogContentText>
+              <Select
+                name='searchCategory'
+                value={this.state.searchCategory}
+                onChange={this.handleSearchChange}
+                inputProps={{
+                  name: 'searchCategory',
+                }}
+              >
+                {this.props.reduxStore.categoryReducer.map((row) => {
+                        return (
+                          <MenuItem value={row.id}>{row.name}</MenuItem>
+                        )
+                      })}
+              </Select>
+              <DialogContentText>
+                Search by Lesson Name
+              </DialogContentText>
+              <TextField onChange={this.handleSearchChange} name='searchName' value={this.state.searchName}>               
+              </TextField><br></br>
+              <Button variant="outlined" color="primary" onClick={this.submitSearch}>Submit Search</Button>
+              <Button variant="outlined" color="primary" onClick={this.resetSearch}>Reset Search</Button><br></br>
+              <Button variant="outlined" color="primary" onClick={this.handleCatOpen}>Manage Categories</Button>
+              <Paper>
+                <Table className="adminTable">
+                  <TableHead>
+                    <TableRow>
+                      <TableCell align="center">Lesson Name</TableCell>
+                      <TableCell align="center">Category</TableCell>
+                      <TableCell align="center">.PDF</TableCell>
+                      <TableCell align="center">Edit</TableCell>
+                      <TableCell align="center">Delete</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {this.props.reduxStore.lessonReducer.map((row) => {
+                      return (
+                        <TableRow key={row.id}>
+                          <TableCell align="center">{row.name}</TableCell>
+                          <TableCell align="center">{row.category_name}</TableCell>
+                          <TableCell align="center"><Button onClick={() => this.handlePdf(row)}>View</Button></TableCell>
+                          <TableCell align="center"><Button onClick={() => this.editLesson(row)}>Edit</Button></TableCell>
+                          <TableCell align="center"><Button onClick={() => this.deleteLesson(row)}>Delete</Button></TableCell>
+                        </TableRow>
+                      )
+                    })}
+                  </TableBody>
+                </Table>
+              </Paper>
+              </center>
         <Dialog
           open={this.state.edit}
           onClose={this.handleClose}
@@ -252,6 +312,7 @@ submitSearch = () => {
                             </Button>
           </DialogActions>
         </Dialog>
+        </>
         :
         <div>
           
