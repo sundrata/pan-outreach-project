@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import AdminNav from '../AdminNav/AdminNav';
 
 const AdminHeader = () => (
@@ -7,7 +8,9 @@ const AdminHeader = () => (
       <AdminNav />
     </div>
       <h1>
-        Pan Outreach Admin Portal
+        <Link className="adminHeaderLink" to="/home">
+          Pan Outreach Admin Portal
+        </Link>
       </h1>
   </header>
 );

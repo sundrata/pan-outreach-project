@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+
+// materal ui imports
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 
-const styles = theme => ({
+const styles = theme => ({  
   container: {
     display: 'flex',
     flexWrap: 'wrap',
@@ -108,20 +110,10 @@ class LoginPage extends Component {
               className="log-in"
               type="submit"
               name="submit"
-              value="Log In"
+              value="Submit"
             />
           </div>
         </form>
-        <center>
-          {/* this register button will be deleted but is necessary for first account setup */}
-          <button
-            type="button"
-            className="link-button"
-            onClick={() => { this.props.dispatch({ type: 'SET_TO_REGISTER_MODE' }) }}
-          >
-            Register
-          </button>
-        </center>
       </div>
     );
   }
