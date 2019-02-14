@@ -75,7 +75,7 @@ class StudentLessons extends Component {
 
   render() {
     return (
-      <center>
+      <div className="studentDiv">
         <h1 className="heading"> Lesson Plans </h1>
         {/* start sort and search */}
         <DialogContentText>
@@ -145,7 +145,7 @@ class StudentLessons extends Component {
             </TableBody>
           </Table>
         </Paper>
-      </center>
+      </div>
     )
   }
 }
