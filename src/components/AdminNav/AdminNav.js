@@ -59,6 +59,12 @@ class AdminNav extends React.Component {
     this.props.history.push(`/${route}`)
   }
 
+
+  handleLogout = () => {
+    this.props.dispatch({ type: 'LOGOUT' })
+    this.props.history.push(`/`)
+  }
+  
   render() {
     // for material ui styling
     const { classes } = this.props;
@@ -102,7 +108,7 @@ class AdminNav extends React.Component {
           <Divider />
 
           {/* LOGOUT LIST ITEM */}
-          <ListItem button key='Logout' onClick={() => this.props.dispatch({ type: 'LOGOUT' })}>
+          <ListItem button key='Logout' onClick={this.handleLogout}>
             <ListItemIcon>
               <LogoutIcon className={classes.icon} />
             </ListItemIcon>

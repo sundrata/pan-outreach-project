@@ -39,10 +39,21 @@ class App extends Component {
 
   render() {
 
+    // conditionally render navigation
+    let Navbar;
+    if (!this.props.user.id) {  // if no user logged in
+      Navbar = null
+    } else if (this.props.user.admin) {  // if admin
+      Navbar = <AdminHeader />
+    } else if (!this.props.user.admin) { // if not admin
+      Navbar = <StudentNav />
+    }
+
     return (
       <Router>
         <div>
-          {this.props.user.admin ? <AdminHeader /> : <StudentNav />}
+          {/* render navbar */}
+          {Navbar}
           <Switch>
             {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
             <Redirect exact from="/" to="/home" />

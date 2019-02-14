@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// import PropTypes from 'prop-types';
-// import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
-// import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
 
-const panlogo = require('./panlogo.png');
-const styles = theme => ({  
+const styles = theme => ({
   container: {
     display: 'flex',
     flexWrap: 'wrap',
@@ -65,7 +61,7 @@ class LoginPage extends Component {
 
     return (
       <div>
-        <div className="loginTitle"><img className="logo" alt="logo" src={panlogo} /></div>
+        <div className="loginTitle"><img className="logo" alt="logo" src="/images/panlogo.png" /></div>
         {this.props.errors.loginMessage && (
           <h2
             className="alert"
@@ -79,7 +75,7 @@ class LoginPage extends Component {
           <div>
             <label htmlFor="username">
               Username:<br></br>
-              <TextField 
+              <TextField
                 required
                 id="login-required"
                 label="Required"
