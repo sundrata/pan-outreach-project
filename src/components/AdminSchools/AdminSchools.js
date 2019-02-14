@@ -15,6 +15,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Switch from '@material-ui/core/Switch';
+import moment from 'moment';
 
 const styles = theme => ({
   root: {
@@ -31,9 +32,9 @@ class AdminSchools extends Component {
   state = {
     id: 0,
     edit: false,
-    username: null,
-    password: null,
-    school_name: null,
+    username: '',
+    password: '',
+    school_name: '',
     open: false,
     hidden: null,
     active: null
@@ -91,13 +92,6 @@ logState = () => {
     this.setState({ open: true });
   };
 
-  handleClose = () => {
-    this.setState({ 
-      open: false,
-      edit: false
-    });
-  };
-
   //edit school dialog funcs
   editSchool = (row) => {
     this.setState({ id: row.id });
@@ -135,7 +129,10 @@ logState = () => {
   };
 
   handleClose = () => {
-    this.setState({ open: false });
+    this.setState({ 
+      open: false,
+      edit: false
+     });
   };
   //handle delete
   deleteSchool = (row) => {
@@ -147,9 +144,56 @@ logState = () => {
     
   }
   render() {
+  
+    const isEnabled = this.state.username.length > 0 && this.state.password.length > 0 && this.state.school_name.length > 0;
     const { hidden } = this.state;
     return (
       this.state.edit ?
+      <>
+      <h1 className="heading">
+            Schools
+        </h1>
+        <center>
+        <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
+                Add New School
+        </Button>
+        <Paper>
+              <Table className="adminTable">
+                <TableHead>
+                  <TableRow>
+                    <TableCell>School Name</TableCell>
+                    <TableCell>Date Created</TableCell>
+                    <TableCell align="center">Active?</TableCell>
+                    <TableCell align="center">Edit</TableCell>
+                    <TableCell align="center">Delete</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {this.props.reduxStore.personReducer.map((row) => {
+                    if (row.admin === false) {
+                      return (
+                        <TableRow key={row.id}>
+                          <TableCell align="left">{row.school_name}</TableCell>
+                          <TableCell align="left">{moment(row.creation_date).format('MMMM Do YYYY')}</TableCell>
+                          <TableCell align="left">
+                            <Switch
+                              id=''
+                              checked={row.active}
+                              onClick={() => this.handleActive(row)}
+                              value={row.active}
+                              color="primary"
+                            />
+                          </TableCell>
+                          <TableCell align="left"><Button onClick={() => this.editSchool(row)}>Edit</Button></TableCell>
+                          <TableCell align="left"><Button onClick={() => this.deleteSchool(row)}>Delete</Button></TableCell>
+                        </TableRow>
+                      )
+                    }
+                  })}
+                </TableBody>
+              </Table>
+            </Paper>
+        </center>
       <Dialog
           open={this.state.edit}
           onClose={this.handleClose}
@@ -168,7 +212,7 @@ logState = () => {
               label="Username"
               type="text"
               onChange={this.handleNameChange}
-              value=''
+              value={this.state.name}
               fullWidth
             />
             <TextField
@@ -176,9 +220,9 @@ logState = () => {
               margin="dense"
               id="name"
               label="Password"
-              type="text"
+              type="password"
               onChange={this.handlePasswordChange}
-              value=''
+              value={this.state.password}
               fullWidth
             />
             <TextField
@@ -188,7 +232,7 @@ logState = () => {
               label="School Name"
               type="text"
               onChange={this.handleSchoolChange}
-              value=''
+              value={this.state.school_name}
               fullWidth
             />
           </DialogContent>          
@@ -196,11 +240,13 @@ logState = () => {
             <Button onClick={() => this.handleClose()} color="primary">
               Cancel
                             </Button>
-            <Button onClick={() => this.editHandleClick()} color="primary">
+            <Button disabled={!isEnabled} onClick={() => this.editHandleClick()} color="primary">
               Submit
                             </Button>
           </DialogActions>         
-        </Dialog> :
+        </Dialog>
+        </>
+        :
       <div>
         
         <div>
@@ -222,7 +268,7 @@ logState = () => {
                 <DialogContent>
                   <DialogContentText>
                     Add a new school
-                            </DialogContentText>
+                  </DialogContentText>
                   {/* Username input for new school */}
                   <TextField
                     autoFocus
@@ -262,7 +308,7 @@ logState = () => {
                   <Button onClick={this.handleClose} color="primary">
                     Cancel
                             </Button>
-                  <Button onClick={() => this.handleClick()} color="primary">
+                  <Button disabled={!isEnabled} onClick={() => this.handleClick()} color="primary">
                     Submit
                             </Button>
                 </DialogActions>
@@ -286,7 +332,7 @@ logState = () => {
                       return (
                         <TableRow key={row.id}>
                           <TableCell align="left">{row.school_name}</TableCell>
-                          <TableCell align="left">{row.creation_date}</TableCell>
+                          <TableCell align="left">{moment(row.creation_date).format('MMMM Do YYYY')}</TableCell>
                           <TableCell align="left">
                             <Switch
                               id=''
@@ -305,7 +351,6 @@ logState = () => {
                 </TableBody>
               </Table>
             </Paper>
-            <button onClick={() => this.logState()}>log state</button>
           </center>
         </div>
       </div>

@@ -4,15 +4,10 @@ import axios from 'axios';
 
 function* getMusic() {
     try {
-
-
         const setMusic = yield axios.get('/api/music/');  // get sheet music
         console.log(`get sheet music`, setMusic.data);
 
         yield dispatch({ type: 'SET_SHEET_MUSIC', payload: setMusic.data });
-       
-
-
     } catch (error) {
         console.log('error in get sheet music:', error);
     }
@@ -38,6 +33,7 @@ function* searchMusic(action) {
 function* deleteMusic(action){
     try{
         yield axios.delete(`/api/music/${action.payload}`);
+        yield dispatch({ type: 'DELETE_MUSIC_SNACK' });
         yield dispatch({ type: 'GET_SHEET_MUSIC'});
     } catch(error) {
         console.log('error deleting music', error);

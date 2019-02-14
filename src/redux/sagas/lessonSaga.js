@@ -41,6 +41,7 @@ function* searchLesson(action) {
 function* deleteLesson(action) {
     try {
         yield call(axios.delete, `/api/lesson/${action.payload}`);
+        yield put({type: 'DELETE_LESSON_SNACK'});
         yield put({type: 'FETCH_LESSON'});
     } catch(error) {
         console.log(error);
@@ -56,6 +57,7 @@ function* updateLesson(action) {
     try{
         yield call(axios.put, `/api/lesson/${action.payload.id}`, action.payload);
         console.log('the payload is:', action.payload)
+        yield put({type: 'EDIT_LESSON_SNACK'});
         yield put({type: 'FETCH_LESSON'});
     } catch(error){
         console.log(error);

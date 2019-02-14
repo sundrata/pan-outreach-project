@@ -22,9 +22,21 @@ import StudentLessons from '../StudentLessons/StudentLessons';
 import Split from '../Split/Split';
 import StudentMusic from '../StudentMusic/StudentMusic';
 import StudentNav from '../StudentNav/StudentNav';
+import Snackbar from '../Snackbar/Snackbar'
 
-// CSS imports
+// MUI/CSS imports
 import './App.css';
+import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
+import { createMuiTheme } from '@material-ui/core/styles';
+
+// setup custom MUI theme
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#fc9102'
+    },
+  },
+});
 
 class App extends Component {
   // loads the user, lessons, & category each time the page loads
@@ -51,70 +63,72 @@ class App extends Component {
 
     return (
       <Router>
-        <div>
-          {/* render navbar */}
-          {Navbar}
-          <Switch>
-            {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
-            <Redirect exact from="/" to="/home" />
+        <MuiThemeProvider theme={theme}>
+          <div>
+            {/* render navbar */}
+            {Navbar}
+            <Switch>
+              {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
+              <Redirect exact from="/" to="/home" />
 
-            <ProtectedRoute
-              exact
-              path="/home"
-              component={Split}
-            />
+              <ProtectedRoute
+                exact
+                path="/home"
+                component={Split}
+              />
 
-            <AdminRoute
-              exact
-              path="/schools"
-              component={AdminSchools}
-            />
-            <AdminRoute
-              exact
-              path="/lessons"
-              component={AdminLessons}
-            />
-            <AdminRoute
-              exact
-              path="/music"
-              component={AdminMusic}
-            />
+              <AdminRoute
+                exact
+                path="/schools"
+                component={AdminSchools}
+              />
+              <AdminRoute
+                exact
+                path="/lessons"
+                component={AdminLessons}
+              />
+              <AdminRoute
+                exact
+                path="/music"
+                component={AdminMusic}
+              />
 
-            <ProtectedRoute
-              exact
-              path="/tenor"
-              component={PanTenor}
-            />
-            <ProtectedRoute
-              exact
-              path="/second"
-              component={PanSecond}
-            />
-            <ProtectedRoute
-              exact
-              path="/cello"
-              component={PanCello}
-            />
-            <ProtectedRoute
-              exact
-              path="/bass"
-              component={PanBass}
-            />
-            <ProtectedRoute
-              exact
-              path="/studentMusic"
-              component={StudentMusic}
-            />
-            <ProtectedRoute
-              exact
-              path="/studentLessons"
-              component={StudentLessons}
-            />
-
-            {/* If none of the other routes matched, we will show a 404. */}
-            <Route render={() => <h1>404</h1>} />
-          </Switch>
-        </div>
+              <ProtectedRoute
+                exact
+                path="/tenor"
+                component={PanTenor}
+              />
+              <ProtectedRoute
+                exact
+                path="/second"
+                component={PanSecond}
+              />
+              <ProtectedRoute
+                exact
+                path="/cello"
+                component={PanCello}
+              />
+              <ProtectedRoute
+                exact
+                path="/bass"
+                component={PanBass}
+              />
+              <ProtectedRoute
+                exact
+                path="/studentMusic"
+                component={StudentMusic}
+              />
+              <ProtectedRoute
+                exact
+                path="/studentLessons"
+                component={StudentLessons}
+              />
+              {/* If none of the other routes matched, we will show a 404. */}
+              <Route render={() => <h1>404</h1>} />
+            </Switch>
+            <Snackbar />
+          </div>
+        </MuiThemeProvider>
       </Router>
     )
   }

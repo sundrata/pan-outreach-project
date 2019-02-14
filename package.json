@@ -19,6 +19,7 @@
     "font-awesome": "^4.7.0",
     "fs": "0.0.1-security",
     "howler": "^2.1.1",
+    "moment": "^2.24.0",
     "multiparty": "^4.2.1",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
@@ -32,7 +33,9 @@
     "react-scripts": "^2.0.3",
     "redux": "^3.7.2",
     "redux-logger": "^3.0.6",
-    "redux-saga": "^0.16.0"
+    "redux-saga": "^0.16.0",
+    "sweetalert": "^2.1.2",
+    "sweetalert2-react": "^0.7.2"
   },
   "scripts": {
     "start": "node server/server.js",

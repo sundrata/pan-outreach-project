@@ -19,6 +19,11 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
+import FileViewer from 'react-file-viewer';
 
 const mapStateToProps = reduxStore => {
   return {
@@ -39,7 +44,8 @@ class AdminMusic extends Component {
     searchInstrument: '',
     searchDifficulty: 0,
     searchName: '',
-
+    pdfView: false,
+    addAlert: false
   }
 
   componentDidMount() {
@@ -50,7 +56,10 @@ class AdminMusic extends Component {
   }
 
   handleClick = (event) => {
-    this.setState({ open: false });
+    this.setState({ 
+      open: false,
+    addAlert: true
+    });
     // event.preventDefault();
     const formData = new FormData();
     formData.append('file', this.state.file[0]);
@@ -63,6 +72,9 @@ class AdminMusic extends Component {
       }
     }).then(response => {
       console.log('response:', response.data.Location);
+      this.props.dispatch({
+        type: 'ADD_MUSIC_SNACK'
+      })
       this.props.dispatch({
         type: 'GET_SHEET_MUSIC'
       });
@@ -89,6 +101,9 @@ class AdminMusic extends Component {
     }).then(response => {
       console.log('response:', response.data.Location);
       this.props.dispatch({
+        type: 'EDIT_MUSIC_SNACK'
+      })
+      this.props.dispatch({
         type: 'GET_SHEET_MUSIC'
       });
       // handle your response;
@@ -104,7 +119,11 @@ class AdminMusic extends Component {
   };
 
   handleClose = () => {
-    this.setState({ open: false });
+    this.setState({ 
+      open: false ,
+      pdfView: false
+    });
+    console.log(this.state.open)
   };
 
   editHandleClose = () => {
@@ -116,9 +135,7 @@ class AdminMusic extends Component {
       ...this.state,
       [event.target.name]: event.target.value,
     });
-
     console.log(this.state.instrument);
-
   }
 
   handleDifficultyChange = (event) => {
@@ -178,15 +195,106 @@ class AdminMusic extends Component {
       searchInstrument: '',
       searchDifficulty: 0,
       searchName: '',
-
     })
-
   };
   
+  //view pdf handlers
+  handlePdf = (row) => {
+    console.log('hitting handle click open', row);
+    let fileExtension = row.url.split('.').pop();
+    console.log(fileExtension);
+    this.setState({ 
+      pdfView: true, 
+      url: row.url,
+      name: row.name,
+      fileType: fileExtension,     
+    });
+  };
+
   render() {
+    const isEnabled = this.state.file.length > 0 && this.state.name.length > 0 && this.state.instrument.length > 0 && this.state.difficulty > 0;
     return (
       // our edit dialog box 
       this.state.edit ?
+      <>
+      <h1 className="heading">
+            Sheet Music
+        </h1>
+          <center>
+            <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
+              Add New Music
+            </Button>
+            <DialogContentText>
+                Sort by Instrument
+                </DialogContentText>
+              <Select
+                name='searchInstrument'
+                value={this.state.searchInstrument}
+                onChange={this.handleSearchChange}
+                inputProps={{
+                  name: 'searchInstrument',
+                }}
+              >
+                <MenuItem value={'Tenor'}>Tenor</MenuItem>
+                <MenuItem value={'Seconds'}>Seconds</MenuItem>
+                <MenuItem value={'Cello'}>Cello</MenuItem>
+                <MenuItem value={'Bass'}>Bass</MenuItem>
+              </Select>
+              <DialogContentText>
+                Sort by Difficulty
+                </DialogContentText>
+              <Select
+                name='searchDifficulty'
+                value={this.state.searchDifficulty}
+                onChange={this.handleSearchChange}
+                inputProps={{
+                  name: 'searchDifficulty',
+                }}
+              >
+                <MenuItem value={1}>1</MenuItem>
+                <MenuItem value={2}>2</MenuItem>
+                <MenuItem value={3}>3</MenuItem>
+                <MenuItem value={4}>4</MenuItem>
+                <MenuItem value={5}>5</MenuItem>
+              </Select>
+              <DialogContentText>
+                Search by Song Name
+              </DialogContentText>
+              <TextField onChange={this.handleSearchChange} name='searchName' value={this.state.searchName}> 
+              </TextField><br></br>
+              <Button variant="outlined" color="primary" onClick={this.submitSearch}>Submit Search</Button>
+              <Button variant="outlined" color="primary" onClick={this.resetSearch}>Reset Search</Button>
+              {/* pdf view handlers */}
+              <Paper>
+              <Table className="adminTable">
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Name</TableCell>
+                    <TableCell>Instrument</TableCell>
+                    <TableCell align="center">Difficulty</TableCell>
+                    <TableCell align="center">.PDF</TableCell>
+                    <TableCell align="center">Edit</TableCell>
+                    <TableCell align="center">Delete</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {this.props.reduxStore.sheetMusicReducer.map((row) => {
+                    return (
+                      <TableRow key={row.id}>
+                        <TableCell align="left">{row.name}</TableCell>
+                        <TableCell align="left">{row.instrument}</TableCell>
+                        <TableCell align="center">{row.difficulty} </TableCell>
+                        <TableCell align="center"><Button onClick={() => this.handlePdf(row)}>View</Button></TableCell>
+                        <TableCell align="center"><Button onClick={() => this.editSheetMusic(row)}>Edit</Button></TableCell>
+                        <TableCell align="center"><Button onClick={() => this.deleteSheetMusic(row)}>Delete</Button></TableCell>
+                      </TableRow>
+                    )
+                  }
+                  )}
+                </TableBody>
+              </Table>
+            </Paper>
+          </center>
         <Dialog
           open={this.state.edit}
           onClose={this.handleClose}
@@ -247,12 +355,14 @@ class AdminMusic extends Component {
             <Button onClick={this.editHandleClose} color="primary">
               Cancel
             </Button>
-            <Button onClick={() => this.editHandleClick()} color="primary">
+            <Button disabled={!isEnabled} onClick={() => this.editHandleClick()} color="primary">
               Submit
             </Button>
           </DialogActions>
           
-        </Dialog> :
+        </Dialog> 
+        </>
+        :
 
         <div>
           <h1 className="heading">
@@ -302,9 +412,29 @@ class AdminMusic extends Component {
                 Search by Song Name
               </DialogContentText>
               <TextField onChange={this.handleSearchChange} name='searchName' value={this.state.searchName}> 
-              </TextField>
+              </TextField><br></br>
               <Button variant="outlined" color="primary" onClick={this.submitSearch}>Submit Search</Button>
               <Button variant="outlined" color="primary" onClick={this.resetSearch}>Reset Search</Button>
+              {/* pdf view handlers */}
+              <Dialog
+          fullScreen
+          open={this.state.pdfView}
+          onClose={this.handleClose}
+        >
+          <AppBar>
+            <Toolbar>
+              <IconButton color="inherit" onClick={() => this.handleClose()} aria-label="Close">
+                <CloseIcon />
+              </IconButton>
+            </Toolbar>
+          </AppBar>
+          <br></br>
+          <br></br>
+          <FileViewer
+            fileType= {this.state.fileType}
+            filePath={this.state.url} />
+        
+        </Dialog>
               {/* start add new music */}
               <Dialog
                 open={this.state.open}
@@ -364,10 +494,10 @@ class AdminMusic extends Component {
                   {/* <button type='submit'>Send</button> */}
                 </form>
                 <DialogActions>
-                  <Button onClick={this.handleClose} color="primary">
+                  <Button onClick={() => this.handleClose()} color="primary">
                     Cancel
                             </Button>
-                  <Button onClick={() => this.handleClick()} color="primary">
+                  <Button disabled={!isEnabled} onClick={() => this.handleClick()} color="primary">
                     Submit
                             </Button>
                 </DialogActions>
@@ -382,7 +512,7 @@ class AdminMusic extends Component {
                     <TableCell>Name</TableCell>
                     <TableCell>Instrument</TableCell>
                     <TableCell align="center">Difficulty</TableCell>
-                    <TableCell align="center">URL</TableCell>
+                    <TableCell align="center">.PDF</TableCell>
                     <TableCell align="center">Edit</TableCell>
                     <TableCell align="center">Delete</TableCell>
                   </TableRow>
@@ -393,10 +523,10 @@ class AdminMusic extends Component {
                       <TableRow key={row.id}>
                         <TableCell align="left">{row.name}</TableCell>
                         <TableCell align="left">{row.instrument}</TableCell>
-                        <TableCell align="left">{row.difficulty} </TableCell>
-                        <TableCell align="center">{row.url} </TableCell>
-                        <TableCell align="left"><Button onClick={() => this.editSheetMusic(row)}>Edit</Button></TableCell>
-                        <TableCell align="left"><Button onClick={() => this.deleteSheetMusic(row)}>Delete</Button></TableCell>
+                        <TableCell align="center">{row.difficulty} </TableCell>
+                        <TableCell align="center"><Button onClick={() => this.handlePdf(row)}>View</Button></TableCell>
+                        <TableCell align="center"><Button onClick={() => this.editSheetMusic(row)}>Edit</Button></TableCell>
+                        <TableCell align="center"><Button onClick={() => this.deleteSheetMusic(row)}>Delete</Button></TableCell>
                       </TableRow>
                     )
                   }
