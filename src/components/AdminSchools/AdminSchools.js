@@ -175,7 +175,7 @@ logState = () => {
               margin="dense"
               id="name"
               label="Password"
-              type="text"
+              type="password"
               onChange={this.handlePasswordChange}
               value={this.state.password}
               fullWidth
@@ -305,7 +305,6 @@ logState = () => {
                 </TableBody>
               </Table>
             </Paper>
-            <button onClick={() => this.logState()}>log state</button>
           </center>
         </div>
       </div>

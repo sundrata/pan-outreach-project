@@ -440,7 +440,6 @@ submitSearch = () => {
                   </TableBody>
                 </Table>
               </Paper>
-              <button onClick={() => this.logState()}>log state</button>
             </center>
           </div>
         </div>

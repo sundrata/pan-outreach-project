@@ -119,7 +119,11 @@ class AdminMusic extends Component {
   };
 
   handleClose = () => {
-    this.setState({ open: false });
+    this.setState({ 
+      open: false ,
+      pdfView: false
+    });
+    console.log(this.state.open)
   };
 
   editHandleClose = () => {
@@ -207,9 +211,6 @@ class AdminMusic extends Component {
     });
   };
 
-  handleClose = () => {
-    this.setState({ pdfView: false });
-  };
   render() {
     const isEnabled = this.state.file.length > 0 && this.state.name.length > 0 && this.state.instrument.length > 0 && this.state.difficulty > 0;
     return (
@@ -341,7 +342,7 @@ class AdminMusic extends Component {
         >
           <AppBar>
             <Toolbar>
-              <IconButton color="inherit" onClick={this.handleClose} aria-label="Close">
+              <IconButton color="inherit" onClick={() => this.handleClose()} aria-label="Close">
                 <CloseIcon />
               </IconButton>
             </Toolbar>
@@ -412,7 +413,7 @@ class AdminMusic extends Component {
                   {/* <button type='submit'>Send</button> */}
                 </form>
                 <DialogActions>
-                  <Button onClick={this.handleClose} color="primary">
+                  <Button onClick={() => this.handleClose()} color="primary">
                     Cancel
                             </Button>
                   <Button disabled={!isEnabled} onClick={() => this.handleClick()} color="primary">
