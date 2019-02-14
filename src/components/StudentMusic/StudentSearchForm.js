@@ -120,8 +120,8 @@ class StudentSearchForm extends Component {
 
         <FormControl className={classes.formControl}>
           <InputLabel shrink htmlFor="searchName">
-            Name of Song
-            </InputLabel>
+            Song Title
+          </InputLabel>
           <TextField
             onChange={this.handleSearchChange}
             name='searchName'
@@ -130,7 +130,7 @@ class StudentSearchForm extends Component {
           >
           </TextField>
         </FormControl>
-
+        
         <Button variant="outlined" color="primary" onClick={this.submitSearch}>Submit Search</Button>
         {' '}
         <Button variant="outlined" color="primary" onClick={this.resetSearch}>Reset Search</Button>
