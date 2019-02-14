@@ -32,6 +32,7 @@ class RegisterPage extends Component {
   render() {
     return (
       <div>
+        <div className="loginTitle"><img className="logo" alt="logo" src="/images/panlogo.png" /></div>
         {this.props.errors.registrationMessage && (
           <h2
             className="alert"
