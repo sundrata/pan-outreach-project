@@ -5,7 +5,7 @@ body {
 
 .adminDashDisplay{
     margin: 50px auto;
-    text-align: center; 
+    text-align: center;
 }
 
 .adminTable {
@@ -26,9 +26,9 @@ body {
  }
 
  .adminHeaderLink {
-    color: #fff; 
+    color: #fff;
     font-weight: bolder;
-    font-size: 36px; 
+    font-size: 36px;
     text-decoration: none;
  }
 
@@ -45,7 +45,7 @@ body {
 
 .studentDashDisplay{
     margin: 10px auto;
-    text-align: center; 
+    text-align: center;
 }
 
 .alert {
@@ -86,7 +86,7 @@ body {
     /* margin: 20px 10px 10px 10px; */
 }
 
-form {
+/* form {
     background-color: #fc9102;
     width: 20%;
     height: 250px;
@@ -94,7 +94,7 @@ form {
     padding: 25px;
     border-radius: 2px;
     text-align: center;
-}
+} */
 
 #formTitle{
     margin: 10px;
@@ -171,6 +171,6 @@ input {
     padding:0;
     font: inherit;
     outline:0;
-    border-bottom:1px solid #444; 
+    border-bottom:1px solid #444;
     cursor: pointer;
 }

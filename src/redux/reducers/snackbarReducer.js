@@ -8,11 +8,13 @@ const snackbarReducer = (state = { open: false, message: '' }, action) => {
         return { open: true, message: 'Sheet Music Succesfully Deleted' };
       case 'ADD_MUSIC_SNACK':
         return { open: true, message: 'Sheet Music Succesfully Added' };
+      case 'EDIT_MUSIC_SNACK':
+        return { open: true, message: 'Sheet Music Successfully Updated' };
       case 'HIDE_SNACK':
-        return { open: false, message: '' };  
+        return { open: false, message: '' };
       default:
         return state;
     }
   }
-  
+
   export default snackbarReducer;
