@@ -41,7 +41,8 @@ class AdminLessons extends Component {
     category: '', //state for adding new category 
     searchCategory : 0, //state for sorting by category
     searchName: null, //state for searching by name
-    pdfView: false
+    pdfView: false,
+    addAlert: false,
   }
   //delete lesson plan dispatch
   deleteLesson = (row) => {
@@ -58,7 +59,8 @@ class AdminLessons extends Component {
       open2: false,
       edit: false,
       pdfView: false,
-      addAlert: false
+      addAlert: false,
+      delAlert: false
     });
   };
   //handlers for adding new lesson plan
@@ -67,7 +69,6 @@ class AdminLessons extends Component {
       open: false,
       addAlert: true
     });
-    
     // event.preventDefault();
     const formData = new FormData();
     formData.append('file', this.state.file[0]);
@@ -194,6 +195,7 @@ submitSearch = () => {
 
   
   render() {
+    const isEnabled = this.state.name.length > 0 && this.state.file.length > 0 && this.state.category_id > 0;
     return (
       this.state.edit ?
         <Dialog
@@ -346,7 +348,7 @@ submitSearch = () => {
                     <Button onClick={this.handleClose} color="primary">
                       Cancel
                             </Button>
-                    <Button onClick={() => this.handleClick()} color="primary">
+                    <Button disabled={!isEnabled} onClick={() => this.handleClick()} color="primary">
                       Submit
                             </Button>
                   </DialogActions>

@@ -21,9 +21,9 @@ import PanBass from '../PanBass/PanBass';
 import StudentLessons from '../StudentLessons/StudentLessons';
 import Split from '../Split/Split';
 import StudentMusic from '../StudentMusic/StudentMusic';
-import StudentNav from '../StudentNav/StudentNav'
+import StudentNav from '../StudentNav/StudentNav';
 import './App.css';
-
+import Snackbar from '../Snackbar/Snackbar'
 class App extends Component {
   componentDidMount () {
     this.props.dispatch({type: 'FETCH_USER'})
@@ -112,6 +112,7 @@ class App extends Component {
             <Route render={() => <h1>404</h1>} />
 
           </Switch>
+          <Snackbar />
           <Footer />
         </div>
       </Router>

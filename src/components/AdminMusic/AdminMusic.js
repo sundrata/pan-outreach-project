@@ -25,10 +25,6 @@ import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import FileViewer from 'react-file-viewer';
 
-import { withSwalInstance } from 'sweetalert2-react';
-import swal from 'sweetalert2';
-const SweetAlert = withSwalInstance(swal);
-
 const mapStateToProps = reduxStore => {
   return {
     reduxStore
@@ -76,6 +72,9 @@ class AdminMusic extends Component {
       }
     }).then(response => {
       console.log('response:', response.data.Location);
+      this.props.dispatch({
+        type: 'ADD_MUSIC_SNACK'
+      })
       this.props.dispatch({
         type: 'GET_SHEET_MUSIC'
       });
@@ -129,9 +128,7 @@ class AdminMusic extends Component {
       ...this.state,
       [event.target.name]: event.target.value,
     });
-
     console.log(this.state.instrument);
-
   }
 
   handleDifficultyChange = (event) => {
@@ -208,6 +205,7 @@ class AdminMusic extends Component {
     this.setState({ pdfView: false });
   };
   render() {
+    const isEnabled = this.state.file.length > 0 && this.state.name.length > 0 && this.state.instrument.length > 0 && this.state.difficulty > 0;
     return (
       // our edit dialog box 
       this.state.edit ?
@@ -411,19 +409,12 @@ class AdminMusic extends Component {
                   <Button onClick={this.handleClose} color="primary">
                     Cancel
                             </Button>
-                  <Button onClick={() => this.handleClick()} color="primary">
+                  <Button disabled={!isEnabled} onClick={() => this.handleClick()} color="primary">
                     Submit
                             </Button>
                 </DialogActions>
               </Dialog>
               {/* ends add new music */}
-              <SweetAlert
-        show={this.state.addAlert}
-        title="Success"
-        text="Successfuly uploaded sheet music"
-        type='success'
-        onConfirm={() => this.setState({ addAlert: false })}
-      />
             </div>
             {/* add table */}
             <Paper>

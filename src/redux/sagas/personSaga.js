@@ -27,6 +27,7 @@ function* fetchPerson() {
 
 function* postPerson(action) {
     yield call(axios.post, '/api/person', action.payload);
+    yield put({ type: 'ADD_PERSON_SNACK' });
     yield put({ type: 'FETCH_PERSON' });
 }
 
@@ -43,6 +44,7 @@ function* updatePerson(action) {
     try{
         yield call(axios.put, `/api/person/${action.payload.id}`, action.payload);
         console.log('the payload is:', action.payload)
+        yield put({ type: 'EDIT_PERSON_SNACK' });
         yield put({type: 'FETCH_PERSON'});
     } catch(error){
         console.log(error);
