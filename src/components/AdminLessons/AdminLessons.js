@@ -8,18 +8,14 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import { withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import Switch from '@material-ui/core/Switch';
-
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
-
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -34,7 +30,7 @@ class AdminLessons extends Component {
     name: '',//state for new/edit lesson plan name
     category_id: 0,//state for new/edit lesson plan category
     file: '', //state for file associated with lesson plan
-    category: '', //state for adding new category 
+    category: '', //state for adding new category
     searchCategory : 0, //state for sorting by category
     searchName: null, //state for searching by name
     pdfView: false,
@@ -44,7 +40,7 @@ class AdminLessons extends Component {
   deleteLesson = (row) => {
     this.props.dispatch({ type: 'DELETE_LESSON', payload: row.id })
   }
-  //add lesson plan dialog state 
+  //add lesson plan dialog state
   handleClickOpen = () => {
     this.setState({ open: true });
   };
@@ -61,7 +57,7 @@ class AdminLessons extends Component {
   };
   //handlers for adding new lesson plan
   handleClick = () => {
-    this.setState({ 
+    this.setState({
       open: false,
       addAlert: true
     });
@@ -191,15 +187,15 @@ submitSearch = () => {
     console.log('hitting handle click open', row);
     let fileExtension = row.url.split('.').pop();
     console.log(fileExtension);
-    this.setState({ 
-      pdfView: true, 
+    this.setState({
+      pdfView: true,
       url: row.url,
       name: row.name,
-      fileType: fileExtension,     
+      fileType: fileExtension,
     });
   };
 
-  
+
   render() {
     const isEnabled = this.state.name.length > 0 && this.state.file.length > 0 && this.state.category_id > 0;
     return (
@@ -232,7 +228,7 @@ submitSearch = () => {
               <DialogContentText>
                 Search by Lesson Name
               </DialogContentText>
-              <TextField onChange={this.handleSearchChange} name='searchName' value={this.state.searchName}>               
+              <TextField onChange={this.handleSearchChange} name='searchName' value={this.state.searchName}>
               </TextField><br></br>
               <Button variant="outlined" color="primary" onClick={this.submitSearch}>Submit Search</Button>
               <Button variant="outlined" color="primary" onClick={this.resetSearch}>Reset Search</Button><br></br>
@@ -315,7 +311,7 @@ submitSearch = () => {
         </>
         :
         <div>
-          
+
           <div>
             <h1 className="heading">
               Lesson Plans
@@ -346,7 +342,7 @@ submitSearch = () => {
               <DialogContentText>
                 Search by Lesson Name
               </DialogContentText>
-              <TextField onChange={this.handleSearchChange} name='searchName' value={this.state.searchName}>               
+              <TextField onChange={this.handleSearchChange} name='searchName' value={this.state.searchName}>
               </TextField><br></br>
               <Button variant="outlined" color="primary" onClick={this.submitSearch}>Submit Search</Button>
               <Button variant="outlined" color="primary" onClick={this.resetSearch}>Reset Search</Button>
@@ -368,7 +364,7 @@ submitSearch = () => {
           <br></br>
           <FileViewer
             fileType= {this.state.fileType}
-            filePath={this.state.url} />       
+            filePath={this.state.url} />
         </Dialog>
               {/* begin add lesson plan */}
                 <Dialog

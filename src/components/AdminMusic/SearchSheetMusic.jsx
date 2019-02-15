@@ -28,7 +28,6 @@ const styles = theme => ({
 
 class StudentSearchForm extends Component {
   state = {
-    id: 0,
     searchInstrument: '',
     searchDifficulty: 0,
     searchName: '',
@@ -54,19 +53,14 @@ class StudentSearchForm extends Component {
         name: this.state.searchName
       }
     });
-    this.setState({
-      searchName: ''
-    });
   };
 
-  // resets the search values to ''
+  // reset search values
   resetSearch = () => {
     this.props.dispatch({
       type: 'GET_SHEET_MUSIC'
     })
-
     this.setState({
-      id: 0,
       searchInstrument: '',
       searchDifficulty: 0,
       searchName: '',
