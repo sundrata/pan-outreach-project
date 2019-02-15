@@ -6,7 +6,9 @@ import TextField from '@material-ui/core/TextField'
 import Dialog from '@material-ui/core/Dialog'
 import DialogActions from '@material-ui/core/DialogActions'
 import DialogContent from '@material-ui/core/DialogContent'
+import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle'
+import Switch from '@material-ui/core/Switch';
 
 const styles = theme => ({
   container: {
@@ -32,6 +34,7 @@ class AddSheetMusic extends Component {
     open: true,
     school_name: this.props.school.school_name,
     username: this.props.school.username,
+    admin: this.props.school.admin,
     password: '',
     id: this.props.school.id,
   }
@@ -41,6 +44,7 @@ class AddSheetMusic extends Component {
       school_name: '',
       username: '',
       password: '',
+      admin: '',
       id: '',
     })
     this.props.toggleEditMode()
@@ -49,6 +53,12 @@ class AddSheetMusic extends Component {
   handleInputChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value,
+    })
+  }
+
+  handleAdminChange = (event) => {
+    this.setState({
+      admin: !this.state.admin,
     })
   }
 
@@ -91,12 +101,23 @@ class AddSheetMusic extends Component {
               <TextField
                 required
                 type="password"
-                label="Password"
+                label="New Password"
                 name="password"
                 className={classes.textField}
                 value={this.state.password}
                 onChange={this.handleInputChange}
                 margin="normal"
+              />
+              <br/>
+              <DialogContentText>
+                Admin Privileges
+              </DialogContentText>
+              <Switch
+                id='admin-switch'
+                checked={this.state.admin}
+                value={this.state.admin}
+                color="secondary"
+                onChange={this.handleAdminChange}
               />
             </DialogContent>
             <DialogActions>
