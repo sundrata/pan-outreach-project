@@ -55,9 +55,10 @@ router.put('/:id', rejectUnauthenticated, function(req, res){
     const id = req.params.id;
     console.log('hit put');
     const person = req.body; // This the data we sent
+    const password = encryptLib.encryptPassword(person.password);
     const query = `UPDATE "person" SET "username" = $2, "password" = $3, "school_name" = $4 WHERE id = $1;`
     console.log('yeahah:', req.body);
-    pool.query(query, [id, person.username, person.password, person.school_name])
+    pool.query(query, [id, person.username, password, person.school_name])
     .then((result)=>{
         console.log(result);
         res.sendStatus(201);
