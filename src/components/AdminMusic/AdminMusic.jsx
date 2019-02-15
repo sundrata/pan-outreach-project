@@ -5,9 +5,6 @@ import AddSheetMusic from './AddSheetMusic';
 import SearchSheetMusic from './SearchSheetMusic';
 
 class AdminMusic extends Component {
-  state = {
-
-  }
 
   componentDidMount() {
     this.props.dispatch({
