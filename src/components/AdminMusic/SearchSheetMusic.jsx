@@ -26,7 +26,7 @@ const styles = theme => ({
   },
 });
 
-class StudentSearchForm extends Component {
+class SearchSheetMusic extends Component {
   state = {
     instrument: '',
     difficulty: 0,
@@ -67,7 +67,7 @@ class StudentSearchForm extends Component {
     // for material ui
     const { classes } = this.props;
     return (
-      <div className="studentSearch">
+      <div className="adminSearch">
         <h3>Search Music</h3>
 
         <FormControl className={classes.formControl}>
@@ -92,7 +92,7 @@ class StudentSearchForm extends Component {
         <FormControl className={classes.formControl}>
           <InputLabel shrink htmlFor="difficulty">
             Difficulty
-            </InputLabel>
+          </InputLabel>
           <Select
             name='difficulty'
             value={this.state.difficulty}
@@ -130,4 +130,4 @@ class StudentSearchForm extends Component {
   };
 };
 
-export default connect()(withStyles(styles)(StudentSearchForm));
+export default connect()(withStyles(styles)(SearchSheetMusic));
