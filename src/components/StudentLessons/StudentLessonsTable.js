@@ -2,14 +2,18 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 
 // material ui imports
-import Button from '@material-ui/core/Button';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+// icon imports 
+import ViewIcon from '@material-ui/icons/PersonalVideo'
+// table & buttons 
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-
+// PDF Viewer
 import FileViewer from 'react-file-viewer';
 import Dialog from '@material-ui/core/Dialog';
 import AppBar from '@material-ui/core/AppBar';
@@ -17,7 +21,39 @@ import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 
-class StudentMusicTable extends Component {
+const CustomTableCell = withStyles(theme => ({
+  head: {
+    backgroundColor: '#fc9102',
+    color: theme.palette.common.white,
+  },
+  body: {
+    fontSize: 14,
+  },
+}))(TableCell);
+
+const styles = theme => ({
+  root: {
+    width: '100%',
+    marginTop: theme.spacing.unit * 3,
+    overflowX: 'auto',
+  },
+  table: {
+    minWidth: 500,
+  },
+  row: {
+    '&:nth-of-type(odd)': {
+      backgroundColor: theme.palette.background.default,
+    },
+  },
+  clickCell: {
+    cursor: 'pointer',
+    '&:hover': {
+      backgroundColor: theme.palette.grey[200],
+    },
+  },
+});
+
+class StudentLessonsTable extends Component {
   state = {
     open: false, //state for view pdf
     fileType: ''
@@ -41,29 +77,35 @@ class StudentMusicTable extends Component {
   };
 
   render() {
+    const { classes, lessonReducer } = this.props;
+
     return (
-      <>
-      {/* table */}
-        <Paper>
-          <Table className="adminTable">
+      <div className={classes.root}>
+        <Paper className='adminTable'>
+          <Table>
             <TableHead>
               <TableRow>
-                <TableCell align="left">Lesson Name</TableCell>
-                <TableCell align="left">Category</TableCell>
-                <TableCell align="left">View</TableCell>
+                <CustomTableCell>Lesson Name</CustomTableCell>
+                <CustomTableCell align="right">Category</CustomTableCell>
+                <CustomTableCell align="right">View</CustomTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {this.props.reduxStore.lessonReducer.map((row) => {
-                return (
-                  <TableRow key={row.id}>
-                    <TableCell align="left">{row.name}</TableCell>
-                    <TableCell align="left">{row.category_name}</TableCell>
-                    {/* view lesson plan */}
-                    <TableCell align="left"><Button onClick={() => this.handleClickOpen(row)}>View</Button></TableCell>
-                  </TableRow>
-                )
-              })}
+              {lessonReducer.map(row => (
+                <TableRow className={classes.row} key={row.id}>
+                  <CustomTableCell component="th" scope="row">
+                    {row.name}
+                  </CustomTableCell>
+                  <CustomTableCell align="right">{row.category_name}</CustomTableCell>
+                  <CustomTableCell
+                    align="right"
+                    className={classes.clickCell}
+                    onClick={() => this.handleClickOpen(row)}
+                  >
+                    <ViewIcon />
+                  </CustomTableCell>
+                </TableRow>
+              ))}
             </TableBody>
           </Table>
         </Paper>
@@ -85,15 +127,19 @@ class StudentMusicTable extends Component {
             fileType={this.state.fileType}
             filePath={this.state.url} />
         </Dialog>
-      </>
+      </div>
     )
   };
 };
 
+StudentLessonsTable.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
 const mapStateToProps = (reduxStore) => {
   return {
-    reduxStore
+    lessonReducer: reduxStore.lessonReducer
   }
 }
 
-export default connect(mapStateToProps)(StudentMusicTable);
+export default connect(mapStateToProps)(withStyles(styles)(StudentLessonsTable));
