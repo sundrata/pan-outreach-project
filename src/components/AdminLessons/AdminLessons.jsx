@@ -3,21 +3,21 @@ import { connect } from 'react-redux';
 
 // component imports
 import AddLessons from './AddLessons';
+import ManageCategory from './ManageCategory';
+import SearchLessons from './SearchLessons';
 import LessonsTable from './LessonsTable';
 
 class AdminLessons extends Component {
-  state = {
-
-  }
-
   render() {
     return (
       <div>
         <br />
         <h1>Lesson Plans</h1>
         <AddLessons />
+        <ManageCategory />
+        <br />
+        <SearchLessons />
         <LessonsTable />
-        
       </div>
     )
   }

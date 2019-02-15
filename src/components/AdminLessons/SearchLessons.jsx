@@ -26,11 +26,10 @@ const styles = theme => ({
   },
 });
 
-class SearchSheetMusic extends Component {
+class SearchLessons extends Component {
   state = {
-    searchInstrument: '',
-    searchDifficulty: 0,
-    searchName: '',
+    searchCategory: 0, //state for sorting by category
+    searchName: null, //state for searching by name
   };
 
   // changes the values of the input fields
@@ -68,62 +67,47 @@ class SearchSheetMusic extends Component {
   };
   render() {
     // for material ui
-    const { classes } = this.props;
+    const { classes, categoryReducer } = this.props;
     return (
       <div className="adminSearch">
-        <h3>Search Music</h3>
-
-        <FormControl className={classes.formControl}>
-          <InputLabel shrink htmlFor="searchInstrument">
-            Instrument
-          </InputLabel>
-          <Select
-            name='searchInstrument'
-            value={this.state.searchInstrument}
-            onChange={this.handleSearchChange}
-            inputProps={{
-              name: 'searchInstrument',
-            }}
-          >
-            <MenuItem value={'Tenor'}>Tenor</MenuItem>
-            <MenuItem value={'Seconds'}>Seconds</MenuItem>
-            <MenuItem value={'Cello'}>Cello</MenuItem>
-            <MenuItem value={'Bass'}>Bass</MenuItem>
-          </Select>
-        </FormControl>
-
-        <FormControl className={classes.formControl}>
-          <InputLabel shrink htmlFor="searchDifficulty">
-            Difficulty
-          </InputLabel>
-          <Select
-            name='searchDifficulty'
-            value={this.state.searchDifficulty}
-            onChange={this.handleSearchChange}
-            inputProps={{
-              name: 'searchDifficulty',
-            }}
-          >
-            <MenuItem value={1}>1</MenuItem>
-            <MenuItem value={2}>2</MenuItem>
-            <MenuItem value={3}>3</MenuItem>
-            <MenuItem value={4}>4</MenuItem>
-            <MenuItem value={5}>5</MenuItem>
-          </Select>
-        </FormControl>
+        <h3>Search Lessons</h3>
 
         <FormControl className={classes.formControl}>
           <InputLabel shrink htmlFor="searchName">
-            Name of Song
-            </InputLabel>
-          <TextField
-            onChange={this.handleSearchChange}
-            name='searchName'
+            Lesson Name
+          </InputLabel>
+          <TextField 
+            onChange={this.handleSearchChange} 
+            name='searchName' 
             value={this.state.searchName}
             className={classes.textField}
           >
           </TextField>
         </FormControl>
+
+        <FormControl className={classes.formControl}>
+          <InputLabel shrink htmlFor="searchDifficulty">
+            Category
+          </InputLabel>
+          <Select
+            name='searchCategory'
+            value={this.state.searchCategory}
+            onChange={this.handleSearchChange}
+            inputProps={{
+              name: 'searchCategory',
+            }}
+          >
+            {categoryReducer.map(row => (
+              <MenuItem 
+                value={row.id} 
+                key={row.id}
+              >
+                {row.name}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+
         <br />
         <Button variant="outlined" color="primary" onClick={this.submitSearch}>Submit Search</Button>
         {' '}
@@ -133,4 +117,8 @@ class SearchSheetMusic extends Component {
   };
 };
 
-export default connect()(withStyles(styles)(SearchSheetMusic));
+const mapStateToProps = reduxStore => ({
+  categoryReducer: reduxStore.categoryReducer
+});
+
+export default connect(mapStateToProps)(withStyles(styles)(SearchLessons));

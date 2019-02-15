@@ -88,7 +88,7 @@ class StudentSearchForm extends Component {
           >
             {this.props.reduxStore.categoryReducer.map((row) => {
               return (
-                <MenuItem value={row.id}>{row.name}</MenuItem>
+                <MenuItem value={row.id} key={row.id}>{row.name}</MenuItem>
               )
             })}
           </Select>
