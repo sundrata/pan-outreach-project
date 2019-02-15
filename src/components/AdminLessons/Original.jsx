@@ -31,7 +31,7 @@ class AdminLessons extends Component {
     category_id: 0,//state for new/edit lesson plan category
     file: '', //state for file associated with lesson plan
     category: '', //state for adding new category
-    searchCategory : 0, //state for sorting by category
+    searchCategory: 0, //state for sorting by category
     searchName: null, //state for searching by name
     pdfView: false,
     addAlert: false,
@@ -126,24 +126,24 @@ class AdminLessons extends Component {
     this.setState({ id: row.id });
     this.setState({ edit: true });
   }
-//sort and search handlers
-handleSearchChange = (event) => {
-  console.log('event was here', this.state)
-  this.setState({
-    ...this.state,
-    [event.target.name]: event.target.value
-  });
-}
+  //sort and search handlers
+  handleSearchChange = (event) => {
+    console.log('event was here', this.state)
+    this.setState({
+      ...this.state,
+      [event.target.name]: event.target.value
+    });
+  }
 
-submitSearch = () => {
-  this.props.dispatch({
-    type: 'SEARCH_LESSON', payload: {category: this.state.searchCategory, name: this.state.searchName}
-  });
-  this.setState({
-    searchCategory: 0,
-    searchName : ''
-  });
-}
+  submitSearch = () => {
+    this.props.dispatch({
+      type: 'SEARCH_LESSON', payload: { category: this.state.searchCategory, name: this.state.searchName }
+    });
+    this.setState({
+      searchCategory: 0,
+      searchName: ''
+    });
+  }
 
   resetSearch = () => {
     this.props.dispatch({
@@ -183,7 +183,7 @@ submitSearch = () => {
   }
 
   //pdf handlers
-  handlePdf= (row) => {
+  handlePdf = (row) => {
     console.log('hitting handle click open', row);
     let fileExtension = row.url.split('.').pop();
     console.log(fileExtension);
@@ -200,114 +200,114 @@ submitSearch = () => {
     const isEnabled = this.state.name.length > 0 && this.state.file.length > 0 && this.state.category_id > 0;
     return (
       this.state.edit ?
-      <>
-      <h1 className="heading">
-              Lesson Plans
-        </h1>
-            <center>
-                <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
-                  Add Lesson Plan
-                        </Button>
-                        <DialogContentText>
-                Sort by Category
+        <>
+          <h1 className="heading">
+            Lesson Plans
+          </h1>
+          <center>
+            <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
+              Add Lesson Plan
+                </Button>
+            <DialogContentText>
+              Sort by Category
                 </DialogContentText>
-              <Select
-                name='searchCategory'
-                value={this.state.searchCategory}
-                onChange={this.handleSearchChange}
-                inputProps={{
-                  name: 'searchCategory',
-                }}
-              >
-                {this.props.reduxStore.categoryReducer.map((row) => {
-                        return (
-                          <MenuItem value={row.id}>{row.name}</MenuItem>
-                        )
-                      })}
-              </Select>
-              <DialogContentText>
-                Search by Lesson Name
-              </DialogContentText>
-              <TextField onChange={this.handleSearchChange} name='searchName' value={this.state.searchName}>
-              </TextField><br></br>
-              <Button variant="outlined" color="primary" onClick={this.submitSearch}>Submit Search</Button>
-              <Button variant="outlined" color="primary" onClick={this.resetSearch}>Reset Search</Button><br></br>
-              <Button variant="outlined" color="primary" onClick={this.handleCatOpen}>Manage Categories</Button>
-              <Paper>
-                <Table className="adminTable">
-                  <TableHead>
-                    <TableRow>
-                      <TableCell align="center">Lesson Name</TableCell>
-                      <TableCell align="center">Category</TableCell>
-                      <TableCell align="center">.PDF</TableCell>
-                      <TableCell align="center">Edit</TableCell>
-                      <TableCell align="center">Delete</TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {this.props.reduxStore.lessonReducer.map((row) => {
-                      return (
-                        <TableRow key={row.id}>
-                          <TableCell align="center">{row.name}</TableCell>
-                          <TableCell align="center">{row.category_name}</TableCell>
-                          <TableCell align="center"><Button onClick={() => this.handlePdf(row)}>View</Button></TableCell>
-                          <TableCell align="center"><Button onClick={() => this.editLesson(row)}>Edit</Button></TableCell>
-                          <TableCell align="center"><Button onClick={() => this.deleteLesson(row)}>Delete</Button></TableCell>
-                        </TableRow>
-                      )
-                    })}
-                  </TableBody>
-                </Table>
-              </Paper>
-              </center>
-        <Dialog
-          open={this.state.edit}
-          onClose={this.handleClose}
-          aria-labelledby="form-dialog-title"
-        >
-          <DialogTitle id="form-dialog-title">Edit Lesson Plan</DialogTitle>
-          <DialogContent>
-            {/* Lesson Plan Name input */}
-            <TextField
-              autoFocus
-              margin="dense"
-              id="newUsername"
-              label="Plan Name"
-              type="text"
-              onChange={this.handleName}
-              value={this.state.name}
-              fullWidth
-            />
-            {/* select lesson plan category */}
-            <DialogContentText>Select Category: <span><Select
-              value={this.state.category_id}
-              onChange={this.handleCategory}
-              label="Category"
+            <Select
+              name='searchCategory'
+              value={this.state.searchCategory}
+              onChange={this.handleSearchChange}
               inputProps={{
-                name: 'category',
+                name: 'searchCategory',
               }}
-            > <option value="none" default disabled>
-                Select Category
-              </option>
+            >
               {this.props.reduxStore.categoryReducer.map((row) => {
                 return (
                   <MenuItem value={row.id}>{row.name}</MenuItem>
                 )
               })}
-            </Select></span></DialogContentText>
-            <form onSubmit={this.submitFile}>
-            <input label='upload file' type='file' onChange={this.handleFileUpload} />
-          </form>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={this.handleClose} color="primary">
-              Cancel
+            </Select>
+            <DialogContentText>
+              Search by Lesson Name
+              </DialogContentText>
+            <TextField onChange={this.handleSearchChange} name='searchName' value={this.state.searchName}>
+            </TextField><br></br>
+            <Button variant="outlined" color="primary" onClick={this.submitSearch}>Submit Search</Button>
+            <Button variant="outlined" color="primary" onClick={this.resetSearch}>Reset Search</Button><br></br>
+            <Button variant="outlined" color="primary" onClick={this.handleCatOpen}>Manage Categories</Button>
+            <Paper>
+              <Table className="adminTable">
+                <TableHead>
+                  <TableRow>
+                    <TableCell align="center">Lesson Name</TableCell>
+                    <TableCell align="center">Category</TableCell>
+                    <TableCell align="center">.PDF</TableCell>
+                    <TableCell align="center">Edit</TableCell>
+                    <TableCell align="center">Delete</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {this.props.reduxStore.lessonReducer.map((row) => {
+                    return (
+                      <TableRow key={row.id}>
+                        <TableCell align="center">{row.name}</TableCell>
+                        <TableCell align="center">{row.category_name}</TableCell>
+                        <TableCell align="center"><Button onClick={() => this.handlePdf(row)}>View</Button></TableCell>
+                        <TableCell align="center"><Button onClick={() => this.editLesson(row)}>Edit</Button></TableCell>
+                        <TableCell align="center"><Button onClick={() => this.deleteLesson(row)}>Delete</Button></TableCell>
+                      </TableRow>
+                    )
+                  })}
+                </TableBody>
+              </Table>
+            </Paper>
+          </center>
+          <Dialog
+            open={this.state.edit}
+            onClose={this.handleClose}
+            aria-labelledby="form-dialog-title"
+          >
+            <DialogTitle id="form-dialog-title">Edit Lesson Plan</DialogTitle>
+            <DialogContent>
+              {/* Lesson Plan Name input */}
+              <TextField
+                autoFocus
+                margin="dense"
+                id="newUsername"
+                label="Plan Name"
+                type="text"
+                onChange={this.handleName}
+                value={this.state.name}
+                fullWidth
+              />
+              {/* select lesson plan category */}
+              <DialogContentText>Select Category: <span><Select
+                value={this.state.category_id}
+                onChange={this.handleCategory}
+                label="Category"
+                inputProps={{
+                  name: 'category',
+                }}
+              > <option value="none" default disabled>
+                  Select Category
+              </option>
+                {this.props.reduxStore.categoryReducer.map((row) => {
+                  return (
+                    <MenuItem value={row.id}>{row.name}</MenuItem>
+                  )
+                })}
+              </Select></span></DialogContentText>
+              <form onSubmit={this.submitFile}>
+                <input label='upload file' type='file' onChange={this.handleFileUpload} />
+              </form>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={this.handleClose} color="primary">
+                Cancel
                             </Button>
-            <Button disabled={!isEnabled} onClick={() => this.editHandleClick()} color="primary">
-              Submit
+              <Button disabled={!isEnabled} onClick={() => this.editHandleClick()} color="primary">
+                Submit
                             </Button>
-          </DialogActions>
-        </Dialog>
+            </DialogActions>
+          </Dialog>
         </>
         :
         <div>
@@ -321,52 +321,52 @@ submitSearch = () => {
               <div >
                 <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
                   Add Lesson Plan
-                        </Button>
-                        <DialogContentText>
-                Sort by Category
+                </Button>
+                <DialogContentText>
+                  Sort by Category
                 </DialogContentText>
-              <Select
-                name='searchCategory'
-                value={this.state.searchCategory}
-                onChange={this.handleSearchChange}
-                inputProps={{
-                  name: 'searchCategory',
-                }}
-              >
-                {this.props.reduxStore.categoryReducer.map((row) => {
-                        return (
-                          <MenuItem value={row.id}>{row.name}</MenuItem>
-                        )
-                      })}
-              </Select>
-              <DialogContentText>
-                Search by Lesson Name
-              </DialogContentText>
-              <TextField onChange={this.handleSearchChange} name='searchName' value={this.state.searchName}>
-              </TextField><br></br>
-              <Button variant="outlined" color="primary" onClick={this.submitSearch}>Submit Search</Button>
-              <Button variant="outlined" color="primary" onClick={this.resetSearch}>Reset Search</Button>
-              {/* end sort and search */}
-              {/* pdf box */}
-              <Dialog
-          fullScreen
-          open={this.state.pdfView}
-          onClose={this.handleClose}
-        >
-          <AppBar>
-            <Toolbar>
-              <IconButton color="inherit" onClick={this.handleClose} aria-label="Close">
-                <CloseIcon />
-              </IconButton>
-            </Toolbar>
-          </AppBar>
-          <br></br>
-          <br></br>
-          <FileViewer
-            fileType= {this.state.fileType}
-            filePath={this.state.url} />
-        </Dialog>
-              {/* begin add lesson plan */}
+                <Select
+                  name='searchCategory'
+                  value={this.state.searchCategory}
+                  onChange={this.handleSearchChange}
+                  inputProps={{
+                    name: 'searchCategory',
+                  }}
+                >
+                  {this.props.reduxStore.categoryReducer.map((row) => {
+                    return (
+                      <MenuItem value={row.id}>{row.name}</MenuItem>
+                    )
+                  })}
+                </Select>
+                <DialogContentText>
+                  Search by Lesson Name
+                </DialogContentText>
+                <TextField onChange={this.handleSearchChange} name='searchName' value={this.state.searchName}>
+                </TextField><br></br>
+                <Button variant="outlined" color="primary" onClick={this.submitSearch}>Submit Search</Button>
+                <Button variant="outlined" color="primary" onClick={this.resetSearch}>Reset Search</Button>
+                {/* end sort and search */}
+                {/* pdf box */}
+                <Dialog
+                  fullScreen
+                  open={this.state.pdfView}
+                  onClose={this.handleClose}
+                >
+                  <AppBar>
+                    <Toolbar>
+                      <IconButton color="inherit" onClick={this.handleClose} aria-label="Close">
+                        <CloseIcon />
+                      </IconButton>
+                    </Toolbar>
+                  </AppBar>
+                  <br></br>
+                  <br></br>
+                  <FileViewer
+                    fileType={this.state.fileType}
+                    filePath={this.state.url} />
+                </Dialog>
+                {/* begin add lesson plan */}
                 <Dialog
                   open={this.state.open}
                   onClose={this.handleClose}
@@ -386,7 +386,8 @@ submitSearch = () => {
                       fullWidth
                     />
                     {/* select lesson plan category */}
-                    <DialogContentText>Select Category: <span><Select
+                    <DialogContentText>Select Category: <span>
+                      <Select
                       value={this.state.category_id}
                       onChange={this.handleCategory}
                       label="Category"
@@ -403,9 +404,9 @@ submitSearch = () => {
                       })}
                     </Select></span></DialogContentText>
                     <form onSubmit={this.submitFile}>
-                  <input label='upload file' type='file' onChange={this.handleFileUpload} />
-                  {/* <button type='submit'>Send</button> */}
-                </form>
+                      <input label='upload file' type='file' onChange={this.handleFileUpload} />
+                      {/* <button type='submit'>Send</button> */}
+                    </form>
                   </DialogContent>
                   <DialogActions>
                     <Button onClick={this.handleClose} color="primary">

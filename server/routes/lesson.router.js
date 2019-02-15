@@ -69,9 +69,9 @@ router.put('/:id', rejectUnauthenticated, function(req, res){
     const id = req.params.id;
     console.log('hit put');
     const lesson = req.body; // This the data we sent
-    const query = `UPDATE "lesson_plan" SET "name" = $2, "category_id" = $3, "url" = $4 WHERE id = $1;`
+    const query = `UPDATE "lesson_plan" SET "name" = $2, "category_id" = $3 WHERE id = $1;`
     console.log('yeahah:', req.body);
-    pool.query(query, [id, lesson.name, lesson.category_id, lesson.url])
+    pool.query(query, [id, lesson.name, lesson.category_id])
     .then((result)=>{
         console.log(result);
         res.sendStatus(201);
