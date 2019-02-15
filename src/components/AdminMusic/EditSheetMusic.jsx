@@ -82,7 +82,7 @@ class EditSheetMusic extends Component {
                 margin="normal"
               />
               <br />
-              <FormControl className={classes.formControl}>
+              <FormControl className={classes.formControl} required>
                 <InputLabel htmlFor="instrument-simple">Instrument</InputLabel>
                 <Select
                   value={this.state.instrument}
@@ -99,7 +99,7 @@ class EditSheetMusic extends Component {
                 </Select>
               </FormControl>
               <br />
-              <FormControl className={classes.formControl}>
+              <FormControl className={classes.formControl} required>
                 <InputLabel htmlFor="difficulty-simple">Difficulty</InputLabel>
                 <Select
                   value={this.state.difficulty}

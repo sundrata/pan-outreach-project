@@ -127,9 +127,10 @@ class AddSheetMusic extends Component {
                 margin="normal"
               />
               <br />
-              <FormControl className={classes.formControl}>
+              <FormControl className={classes.formControl} required>
                 <InputLabel htmlFor="instrument-simple">Instrument</InputLabel>
                 <Select
+                  required
                   value={this.state.instrument}
                   onChange={this.handleInputChange}
                   inputProps={{
@@ -144,7 +145,7 @@ class AddSheetMusic extends Component {
                 </Select>
               </FormControl>
               <br />
-              <FormControl className={classes.formControl}>
+              <FormControl className={classes.formControl} required>
                 <InputLabel htmlFor="difficulty-simple">Difficulty</InputLabel>
                 <Select
                   value={this.state.difficulty}
