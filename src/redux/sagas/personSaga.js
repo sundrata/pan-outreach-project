@@ -53,11 +53,19 @@ function* updatePerson(action) {
 function* updateActive(action) {
     try{
         yield call(axios.put, `/api/person/active/${action.payload.id}`, action.payload);
-        console.log('payload is:', action.payload);
         yield put({type: 'FETCH_PERSON'});
     } catch(error){
         console.log('error on updateActive:', error);
     }
+}
+
+function* updateAdmin(action) {
+  try {
+    yield call(axios.put, `/api/person/admin/${action.payload.id}`, action.payload);
+    yield put({ type: 'FETCH_PERSON' });
+  } catch (error) {
+    console.log('error on updateActive:', error);
+  }
 }
 
 function* personSaga() {
@@ -66,6 +74,7 @@ function* personSaga() {
     yield takeEvery('DELETE_PERSON', deletePerson);
     yield takeEvery('UPDATE_PERSON', updatePerson);
     yield takeEvery('UPDATE_ACTIVE', updateActive);
+    yield takeEvery('UPDATE_ADMIN', updateAdmin);
 }
 
 export default personSaga;

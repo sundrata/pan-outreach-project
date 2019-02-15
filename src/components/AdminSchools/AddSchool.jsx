@@ -6,8 +6,10 @@ import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
 import Dialog from '@material-ui/core/Dialog'
 import DialogActions from '@material-ui/core/DialogActions'
+import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogContent from '@material-ui/core/DialogContent'
 import DialogTitle from '@material-ui/core/DialogTitle'
+import Switch from '@material-ui/core/Switch';
 
 const Container = styled.div`
  text-align: center;
@@ -38,6 +40,7 @@ class AddSheetMusic extends Component {
     username: '',
     password: '',
     school_name: '',
+    admin: '',
   }
 
   handleClickOpen = () => {
@@ -52,12 +55,19 @@ class AddSheetMusic extends Component {
       username: '',
       password: '',
       school_name: '',
+      admin: false,
     })
   }
 
   handleInputChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value,
+    })
+  }
+
+  handleAdminChange = (event) => {
+    this.setState({
+      admin: !this.state.admin,
     })
   }
 
@@ -114,6 +124,17 @@ class AddSheetMusic extends Component {
                 value={this.state.password}
                 onChange={this.handleInputChange}
                 margin="normal"
+              />
+              <br />
+              <DialogContentText>
+                Admin Privileges
+              </DialogContentText>
+              <Switch
+                id='admin-switch'
+                checked={this.state.admin}
+                value={this.state.admin}
+                color="secondary"
+                onChange={this.handleAdminChange}
               />
             </DialogContent>
             <DialogActions>

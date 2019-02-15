@@ -72,6 +72,10 @@ class SchoolTable extends Component {
     this.props.dispatch({ type: 'UPDATE_ACTIVE', payload: row })
   }
 
+  toggleAdmin = (row) => {
+    this.props.dispatch({ type: 'UPDATE_ADMIN', payload: row })
+  }
+
   render() {
     const { classes, schools } = this.props;
     return (
@@ -82,8 +86,9 @@ class SchoolTable extends Component {
               <TableRow>
                 <CustomTableCell>School Name</CustomTableCell>
                 <CustomTableCell align="right">Username</CustomTableCell>
-                <CustomTableCell align="right">Created</CustomTableCell>
-                <CustomTableCell align="right">Active</CustomTableCell>
+                <CustomTableCell align="right">Date Created</CustomTableCell>
+                <CustomTableCell align="right">Active Account</CustomTableCell>
+                <CustomTableCell align="right">Admin Privileges</CustomTableCell>
                 <CustomTableCell align="right">Edit</CustomTableCell>
                 <CustomTableCell align="right">Delete</CustomTableCell>
               </TableRow>
@@ -100,6 +105,14 @@ class SchoolTable extends Component {
                       checked={row.active}
                       value={row.active}
                       color="primary"
+                    />
+                  </CustomTableCell>
+                  <CustomTableCell align="right" className={classes.clickCell} onClick={() => this.toggleAdmin(row)}>
+                    <Switch
+                      id='admin-switch'
+                      checked={row.admin}
+                      value={row.admin}
+                      color="secondary"
                     />
                   </CustomTableCell>
                   <CustomTableCell align="right" className={classes.clickCell} onClick={() => this.handleEdit(row)}><EditIcon /></CustomTableCell>
