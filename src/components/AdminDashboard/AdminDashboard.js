@@ -18,7 +18,7 @@ const AdminDashboard = () => (
     <div className="dashBox">
       <img className="dashImages" alt="schools" src="/images/school.jpg" /> <br></br>
       <Link to="/schools">
-        <button className="dashButtons">Schools</button>
+        <button className="dashButtons">Users</button>
       </Link>
     </div>
   </div>
