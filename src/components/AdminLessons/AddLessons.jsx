@@ -62,8 +62,9 @@ class AddLesson extends Component {
       addAlert: false,
     });
   };
+
   //handlers for adding new lesson plan
-  handleClick = () => {
+  handleSubmit = () => {
     this.setState({
       open: false,
       addAlert: true
@@ -91,7 +92,7 @@ class AddLesson extends Component {
 
     });
   }
-  // add name to lesson 
+  // add name to lesson
   handleName = (event) => {
     this.setState({
       ...this.state,
@@ -105,7 +106,7 @@ class AddLesson extends Component {
       category_id: event.target.value,
     });
   }
-  // upload file 
+  // upload file
   handleFileUpload = (event) => {
     this.setState({ file: event.target.files });
   };
@@ -190,10 +191,10 @@ class AddLesson extends Component {
                     name: 'category',
                     id: 'category-simple'
                   }}
-                > 
+                >
                   {categoryReducer.map((row) => (
-                      <MenuItem 
-                        value={row.id} 
+                      <MenuItem
+                        value={row.id}
                         key={row.id}
                       >
                         {row.name}
@@ -204,7 +205,7 @@ class AddLesson extends Component {
               <br />
               <input label='upload file' type='file' onChange={this.handleFileUpload} />
             </DialogContent>
-            
+
             <DialogActions>
               <Button onClick={this.handleClose} color="primary">
                 Cancel
