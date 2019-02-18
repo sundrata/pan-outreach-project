@@ -16,6 +16,13 @@
   left: 780px;
 }
 
+@media only screen and (max-width: 2388px) {
+[class*="switch-div-tenor"] {
+  position: absolute;
+  left: 900px;
+  }
+}
+
 .note-text {
   font-size: 50px;
   fill: black;
