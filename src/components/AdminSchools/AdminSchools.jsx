@@ -15,7 +15,7 @@ class AdminSchools extends Component {
     return (
       <div>
         <br />
-        <h1>Schools</h1>
+        <h1>Users</h1>
         <AddSchool />
         <SchoolTable />
       </div>

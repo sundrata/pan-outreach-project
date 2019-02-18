@@ -76,7 +76,7 @@ class AddSheetMusic extends Component {
             open={this.state.open}
             onClose={this.handleClose}
           >
-            <DialogTitle id="form-dialog-title">Edit School</DialogTitle>
+            <DialogTitle id="form-dialog-title">Edit User</DialogTitle>
             <DialogContent>
               <TextField
                 required

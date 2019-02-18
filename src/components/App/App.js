@@ -45,6 +45,7 @@ class App extends Component {
     this.props.dispatch({ type: 'FETCH_PERSON' })
     this.props.dispatch({ type: 'FETCH_LESSON' })
     this.props.dispatch({ type: 'FETCH_CATEGORY' })
+    this.props.dispatch({ type: 'GET_SHEET_MUSIC'});
     // true if touch device, otherwise false
     this.props.dispatch({ type: 'IS_TOUCH_DEVICE', payload: (('ontouchstart' in window) || (navigator.msMaxTouchPoints > 0)) })
   }

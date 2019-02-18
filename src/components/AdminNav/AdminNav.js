@@ -64,7 +64,7 @@ class AdminNav extends React.Component {
     this.props.dispatch({ type: 'LOGOUT' })
     this.props.history.push(`/`)
   }
-  
+
   render() {
     // for material ui styling
     const { classes } = this.props;
@@ -101,7 +101,7 @@ class AdminNav extends React.Component {
             <ListItemIcon>
               <School className={classes.icon} />
             </ListItemIcon>
-            <ListItemText primary='Schools' />
+            <ListItemText primary='Users' />
           </ListItem>
 
           {/* DIVIDER */}

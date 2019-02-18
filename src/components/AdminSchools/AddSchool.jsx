@@ -83,7 +83,7 @@ class AddSheetMusic extends Component {
         <Container>
           <div>
             <Button variant="outlined" color="primary" className={classes.button} onClick={this.handleClickOpen}>
-              Add New School
+              Add New User
             </Button>
           </div>
         </Container>
@@ -93,7 +93,7 @@ class AddSheetMusic extends Component {
             open={this.state.open}
             onClose={this.handleClose}
           >
-            <DialogTitle id="form-dialog-title">New School</DialogTitle>
+            <DialogTitle id="form-dialog-title">New User</DialogTitle>
             <DialogContent>
               <TextField
                 required
