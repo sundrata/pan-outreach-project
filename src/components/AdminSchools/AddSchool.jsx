@@ -97,8 +97,8 @@ class AddSheetMusic extends Component {
             <DialogContent>
               <TextField
                 required
-                label="School Name"
-                name="school_name"
+                label="School/Name"
+                name="School_name"
                 className={classes.textField}
                 value={this.state.school_name}
                 onChange={this.handleInputChange}

@@ -84,7 +84,7 @@ class SchoolTable extends Component {
           <Table>
             <TableHead>
               <TableRow>
-                <CustomTableCell>School Name</CustomTableCell>
+                <CustomTableCell>School/Name</CustomTableCell>
                 <CustomTableCell align="right">Username</CustomTableCell>
                 <CustomTableCell align="right">Date Created</CustomTableCell>
                 <CustomTableCell align="right">Active Account</CustomTableCell>
