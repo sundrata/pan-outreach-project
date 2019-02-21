@@ -98,7 +98,7 @@ class AddSheetMusic extends Component {
               <TextField
                 required
                 label="School/Name"
-                name="School_name"
+                name="school_name"
                 className={classes.textField}
                 value={this.state.school_name}
                 onChange={this.handleInputChange}
@@ -124,17 +124,6 @@ class AddSheetMusic extends Component {
                 value={this.state.password}
                 onChange={this.handleInputChange}
                 margin="normal"
-              />
-              <br />
-              <DialogContentText>
-                Admin Privileges
-              </DialogContentText>
-              <Switch
-                id='admin-switch'
-                checked={this.state.admin}
-                value={this.state.admin}
-                color="secondary"
-                onChange={this.handleAdminChange}
               />
             </DialogContent>
             <DialogActions>

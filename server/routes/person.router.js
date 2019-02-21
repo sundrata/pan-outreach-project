@@ -24,8 +24,8 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 router.post('/', rejectUnauthenticated, (req, res) => {
     const person = req.body;
     const password = encryptLib.encryptPassword(req.body.password);
-  const queryText = `INSERT INTO "person" ("username", "password", "school_name", "admin", "creation_date") VALUES ($1, $2, $3, $4, current_date);`;
-    pool.query(queryText, [person.username, password, person.school_name, person.admin])
+  const queryText = `INSERT INTO "person" ("username", "password", "school_name", "creation_date") VALUES ($1, $2, $3, current_date);`;
+    pool.query(queryText, [person.username, password, person.school_name])
     .then((result) => {
         res.send(result.rows);
     }).catch((error) => {
