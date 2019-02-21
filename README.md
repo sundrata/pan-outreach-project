@@ -33,16 +33,14 @@ CREATE TABLE "sheet_music" (
 	"instrument" instrument,
 	"difficulty" difficulty,
 	"name" varchar(200)
-);```
+);
 
-```SQL
+
 CREATE TABLE "category" (
 	"id" SERIAL PRIMARY KEY,
 	"name" varchar(200)
-);```
+);
 
-
-```SQL
 CREATE TABLE "lesson_plan" (
     "id" SERIAL PRIMARY KEY,
     "url" varchar(200),
