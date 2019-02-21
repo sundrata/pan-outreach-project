@@ -14,9 +14,13 @@ import InvalidClearance from '../InvalidClearance/InvalidClearance'
 // by checking req.isAuthenticated for authentication
 // and by checking req.user for authorization
 
+
+
+
 const ProtectedRoute = (props) => {
   // Using destructuring, this takes ComponentToProtect from component
   // prop and grabs all other props to pass them along to Route
+  
   const {
     // Alias prop 'component' as 'ComponentToProtect'
     component: ComponentToProtect,
@@ -27,8 +31,8 @@ const ProtectedRoute = (props) => {
 
   let ComponentToShow;
 
-  if(user.admin) {
-    // if the user is logged in (only logged in users have ids)
+  if(user.admin === true && user.admin.active === true) {
+    // if the admin boolean is true & the
     // show the component that is protected
     ComponentToShow = ComponentToProtect;
   } else if (user.admin === false) {

@@ -11,11 +11,15 @@ passport.deserializeUser((id, done) => {
   pool.query('SELECT * FROM person WHERE id = $1', [id]).then((result) => {
     // Handle Errors
     const user = result && result.rows && result.rows[0];
-
+    const active = result.rows[0].active;
     if (!user) {
       // user not found
       done(null, false, { message: 'Incorrect credentials.' });
-    } else {
+    } 
+    // else if(user && active === false) {
+    //   done(null, false, { message: 'Account susepended, see administrator' });
+    // }
+    else {
       // user found
       delete user.password; // remove password so it doesn't get sent
       done(null, user);
