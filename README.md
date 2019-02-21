@@ -1,10 +1,10 @@
 # Pan Outreach - (Group Project For Prime Academy)
-This version uses React, Redux, Express, Passport, and PostgreSQL (a full list of dependencies can be found in `package.json`).
+This repo contains the complete project code for a Prime Academy group project client, Pan Outreach. Four developement students created a virtual steel drum simulation as well as a centralized lesson material portal. This version uses React, Redux, Express, Passport, and PostgreSQL (a full list of dependencies can be found in `package.json`).
 
 ## Prerequisites
 
 Before you get started, make sure you have the following software installed on your computer:
-
+- An IDE [VSCode is recommended](https://code.visualstudio.com/)
 - [Node.js](https://nodejs.org/en/)
 - [PostrgeSQL](https://www.postgresql.org/)
 - [Nodemon](https://nodemon.io/)
@@ -117,8 +117,3 @@ This code is also heavily commented. We recommend reading through the comments, 
  * **Vang Xiong** - *Initial work* - (https://github.com/vxiong029)
  * **Anders Ryden** - *Initial work* - (https://github.com/rydena021)
  * **John Worley** - *Initial work* - (https://github.com/JohnAWorley)
-
-
-## Update Documentation
-
-Customize this ReadMe and the code comments in this project to read less like a starter repo and more like a project. Here is an example: https://gist.github.com/PurpleBooth/109311bb0361f32d87a2
