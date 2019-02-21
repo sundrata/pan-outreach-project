@@ -22,9 +22,9 @@ CREATE TABLE "person" (
     "creation_date" DATE,
     "active" BOOLEAN default true,
     "school_name" VARCHAR(500)
-);```
+);
 
-```SQL
+
 CREATE TYPE instrument AS ENUM ('Tenor', 'Seconds', 'Cello', 'Bass');
 CREATE TYPE difficulty AS ENUM ('1', '2', '3', '4', '5');
 CREATE TABLE "sheet_music" (
