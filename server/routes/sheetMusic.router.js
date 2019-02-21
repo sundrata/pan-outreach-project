@@ -5,7 +5,7 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 
 router.get('/', rejectUnauthenticated, (req, res) => {
     console.log('sheet music get hit');
-    const queryString =`SELECT * from "sheet_music" ORDER BY "id" ASC;`;
+    const queryString =`SELECT * from "sheet_music" ORDER BY "id" DESC;`;
     pool.query(queryString)
         .then((result) => {
             console.log(result.rows);

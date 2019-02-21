@@ -10,11 +10,10 @@ import LessonsTable from './LessonsTable';
 class AdminLessons extends Component {
 
   componentDidMount() {
-    this.props.dispatch({
-      type: 'FETCH_LESSON'
-    });
+    this.props.dispatch({ type: 'FETCH_LESSON' });
+    this.props.dispatch({ type: 'FETCH_CATEGORY' })
   }
-
+  
   render() {
     return (
       <div>
