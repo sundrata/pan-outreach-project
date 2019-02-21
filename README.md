@@ -46,7 +46,8 @@ CREATE TABLE "lesson_plan" (
     "url" varchar(200),
     "name" varchar(200),
     "category_id" integer REFERENCES category(id)
-);```
+);
+```
 
 If you would like to name your database something else, you will need to change `pan_outreach` to the name of your new database name in `server/modules/pool.js`
 
